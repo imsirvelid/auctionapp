@@ -1,0 +1,19 @@
+i {
+  margin-left: 10px;
+  font-size: 1.7em;
+}
+
+.first {
+  margin: 0;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+a {
+  width: 1.73em;
+  height: 1.73em;
+  text-decoration: none;
+  color: white;
+}

@@ -1,0 +1,84 @@
+.black-navbar {
+  width: 100%;
+  height: auto;
+  padding: 10px 0px;
+  background-color: #252525;
+}
+
+.white-navbar {
+  margin-top: 15px;
+}
+
+.container-75 {
+  width: 55%;
+  margin: 41px auto;
+}
+
+.navbar-container {
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 75%;
+}
+
+.navbar-container p {
+  color: white;
+}
+
+.div-right {
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.div-right a:hover {
+  cursor: pointer;
+}
+
+.navbar-logo {
+  width: 30%;
+  font-family: "Lato";
+  font-size: 24px;
+  color: #8367d8;
+  letter-spacing: 0.84px;
+  align-items: center;
+}
+
+.navbar-logo i {
+  font-size: 24px;
+}
+
+.navbar-search-input {
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 3px 3px #e0e0e0;
+  width: 40%;
+  padding: 0 5px;
+  align-items: center;
+}
+
+.navbar-search-input input {
+  width: 95%;
+  outline: none;
+  color: rgb(120, 120, 120);
+  background-color: #ffffff;
+}
+
+.navbar-routes {
+  width: 30%;
+  font-family: "Lato";
+  font-size: 16px;
+  color: #252525;
+  align-items: center;
+  letter-spacing: 0.56px;
+}
+
+.navbar-routes a {
+  margin-left: 20px;
+  color: #252525;
+}
+
+.navbar-routes a:hover {
+  color: #8367D8;
+}

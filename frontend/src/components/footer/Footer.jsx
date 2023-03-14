@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../button/Button";
 import SocialMediaCard from "../social-media-card/SocialMediaCard";
 import Input from "../text-input/Input";
+import { Link } from "react-router-dom";
 import "./footer.css";
 
 function Footer() {
@@ -11,9 +12,15 @@ function Footer() {
         <div className="ul-block">
           <p className="item-title">AUCTION</p>
           <ul>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">Privacy and Policy</a></li>
+            <li>
+            <Link to='/about'>About Us</Link>
+            </li>
+            <li>
+              <a href="/about">Terms and Conditions</a>
+            </li>
+            <li>
+              <a href="/about">Privacy and Policy</a>
+            </li>
           </ul>
         </div>
         <div className="ul-block">

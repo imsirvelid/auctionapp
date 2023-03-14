@@ -16,10 +16,10 @@ function Footer() {
             <Link to='/about'>About Us</Link>
             </li>
             <li>
-              <a href="/about">Terms and Conditions</a>
+              <Link to="/terms-and-conditions">Terms and Conditions</Link>
             </li>
             <li>
-              <a href="/about">Privacy and Policy</a>
+              <Link to="/privacy-policy">Privacy and Policy</Link>
             </li>
           </ul>
         </div>

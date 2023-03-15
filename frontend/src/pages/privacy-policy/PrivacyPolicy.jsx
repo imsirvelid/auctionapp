@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationCard from "../../components/navigation-card/NavigationCard";
-import "./privacypolicy.css";
+import "./PrivacyPolicy.css";
 
 function PrivacyPolicy() {
   return (

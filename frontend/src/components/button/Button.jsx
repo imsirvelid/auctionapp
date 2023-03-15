@@ -1,6 +1,6 @@
 import React from 'react';
 import symbolsGoDefault from '../../assets/img/symbols-go-default.png';
-import "./button.css";
+import "./Button.css";
 
 function Button() {
   return (

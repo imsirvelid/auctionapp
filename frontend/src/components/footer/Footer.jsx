@@ -33,7 +33,7 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div className="ul-block wider" style={{ "display": "none"}}>
+        <div className="ul-block wider" style={{ "visibility": "hidden"}}>
           <p className="item-title">NEWSLETTER</p>
           <ul>
             <li>

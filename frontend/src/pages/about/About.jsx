@@ -2,7 +2,7 @@ import React from "react";
 import aboutMainImg from "../../assets/img/about_main.jpg";
 import aboutSecondImg from "../../assets/img/about_1.jpg";
 import aboutThirdImg from "../../assets/img/about_2.jpg";
-import "./about.css";
+import "./About.css";
 import NavigationCard from "../../components/navigation-card/NavigationCard";
 
 function About() {

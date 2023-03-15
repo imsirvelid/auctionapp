@@ -3,7 +3,7 @@ import Button from "../button/Button";
 import SocialMediaCard from "../social-media-card/SocialMediaCard";
 import Input from "../text-input/Input";
 import { Link } from "react-router-dom";
-import "./footer.css";
+import "./Footer.css";
 
 function Footer() {
   return (

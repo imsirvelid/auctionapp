@@ -11,40 +11,44 @@ function Footer() {
       <div className="footer-container">
         <div className="ul-block">
           <p className="item-title">AUCTION</p>
-          <ul>
-            <li>
-            <Link to='/about'>About Us</Link>
+          <ul className="footer-ul-item">
+            <li className="footer-li-item">
+              <Link to="/about">About Us</Link>
             </li>
-            <li>
+            <li className="footer-li-item">
               <Link to="/terms-and-conditions">Terms and Conditions</Link>
             </li>
-            <li>
+            <li className="footer-li-item">
               <Link to="/privacy-policy">Privacy and Policy</Link>
             </li>
           </ul>
         </div>
         <div className="ul-block">
           <p className="item-title">GET IN TOUCH</p>
-          <ul>
-            <li>Call Us at +123 797-567-2535</li>
-            <li>support@auction.com</li>
-            <li>
+          <ul className="footer-ul-item">
+            <li className="footer-li-item">Call Us at +123 797-567-2535</li>
+            <li className="footer-li-item">support@auction.com</li>
+            <li className="footer-li-item">
               <SocialMediaCard />
             </li>
           </ul>
         </div>
-        <div className="ul-block wider" style={{ "visibility": "hidden"}}>
+        <div className="ul-block wider" style={{}}>
           <p className="item-title">NEWSLETTER</p>
-          <ul>
-            <li>
+          <ul className="footer-ul-item">
+            <li className="footer-li-item">
               Enter your email address and get notified about new products. We
               hate spam!
             </li>
-            <li>
+            <li className="footer-li-item">
               {" "}
               <div className="simple-form">
                 {" "}
-                <Input /> <Button />{" "}
+                <Input />{" "}
+                <Button
+                  text="GO"
+                  symbol={<i className="fa-solid fa-angle-right"></i>}
+                />{" "}
               </div>{" "}
             </li>
           </ul>

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -44,6 +44,6 @@ public class User {
     private String imageUrl;
 
     @OneToMany(mappedBy = "user")
-    private List<Product> products;
+    private List<ProductEntity> products;
 
 }

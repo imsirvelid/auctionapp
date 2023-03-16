@@ -2,7 +2,7 @@ import React from "react";
 import Button from "components/button/Button";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import Input from "components/text-input/Input";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import "components/footer/Footer.css";
 
 function Footer() {
@@ -33,7 +33,7 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div className="ul-block wider" style={{}}>
+        <div className="ul-block wider">
           <p className="item-title">NEWSLETTER</p>
           <ul className="footer-ul-item">
             <li className="footer-li-item">
@@ -41,15 +41,13 @@ function Footer() {
               hate spam!
             </li>
             <li className="footer-li-item">
-              {" "}
               <div className="simple-form">
-                {" "}
-                <Input />{" "}
+                <Input />
                 <Button
                   text="GO"
                   symbol={<i className="fa-solid fa-angle-right"></i>}
-                />{" "}
-              </div>{" "}
+                />
+              </div>
             </li>
           </ul>
         </div>

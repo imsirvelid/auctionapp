@@ -4,10 +4,10 @@ import "components/navigation-card/NavigationCard.css";
 function NavigationCard({ name, link, subLink }) {
   return (
     <div className="current-location">
-      <div style={{ display: "flex" }}>
-        <p style={{ "fontWeight": "500" }}>{name}</p>
-        <p style={{ "fontWeight": "100", "marginLeft": "auto" }}>
-          {link}/<span style={{ "fontWeight": "500", "marginLeft": "10px" }}>{subLink}</span>
+      <div className="current-location-flexdiv">
+        <p>{name}</p>
+        <p className="right-p-link">
+          {link}/<span className="sublink-span">{subLink}</span>
         </p>
       </div>
     </div>

@@ -6,11 +6,12 @@ import About from "pages/about/About";
 import TermsAndConditions from "pages/terms-and-conditions/TermsAndConditions";
 import PrivacyPolicy from "pages/privacy-policy/PrivacyPolicy";
 
+
 function App() {
   return (
     <Router>
       <Navbar />
-      <div>
+      <div className="App">
         <Routes>
           <Route path="/" exact element={<h1>Test</h1>} />
           <Route path="/about" element={<About />} />

@@ -13,7 +13,7 @@ function About() {
         <h1 id="about-title">About Us</h1>
         <div className="content">
           <div className="text-content">
-            <p>
+            <p className="about-p">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               lobortis, quam ut faucibus bibendum, nisl leo tincidunt risus, nec
               fringilla est justo in nisl. Ut elementum pellentesque

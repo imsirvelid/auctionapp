@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../button/Button";
-import SocialMediaCard from "../social-media-card/SocialMediaCard";
-import Input from "../text-input/Input";
+import Button from "components/button/Button";
+import SocialMediaCard from "components/social-media-card/SocialMediaCard";
+import Input from "components/text-input/Input";
 import { Link } from "react-router-dom";
-import "./Footer.css";
+import "components/footer/Footer.css";
 
 function Footer() {
   return (

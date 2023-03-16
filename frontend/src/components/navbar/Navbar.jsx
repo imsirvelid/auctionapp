@@ -1,6 +1,6 @@
 import React from "react";
-import SocialMediaCard from "../social-media-card/SocialMediaCard";
-import "./Navbar.css";
+import SocialMediaCard from "components/social-media-card/SocialMediaCard";
+import "components/navbar/Navbar.css";
 
 function Navbar() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import "./NavigationCard.css";
+import "components/navigation-card/NavigationCard.css";
 
 function NavigationCard({ name, link, subLink }) {
   return (

@@ -10,7 +10,7 @@ function About() {
     <>
       <NavigationCard name="About Us" link="SHOP" subLink="About Us" />
       <div className="container">
-        <h1 id="about-title">About Us</h1>
+        <h1 className="about-title">About Us</h1>
         <div className="content">
           <div className="text-content">
             <p className="about-p">

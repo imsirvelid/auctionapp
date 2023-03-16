@@ -42,6 +42,7 @@ footer {
 
 .wider {
   width: 40%;
+  visibility: hidden;
 }
 
 .item-title {

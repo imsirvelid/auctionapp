@@ -1,11 +1,15 @@
 spring:
-    mode: JPA
     datasource:
-        url: jdbc:postgresql://localhost:5432/test
+        url: jdbc:postgresql://localhost:5432/auctionapp
         username: velid
         password: password
     jpa:
-        show-sql: true
         properties:
+            dialect:
+                hibernate: org.hibernate.dialect.PostgreSQLDialect
             hibernate:
+                show-sql: true
                 format_sql: true
+                globally_quoted_identifiers: true
+        hibernate:
+            ddl-auto: update

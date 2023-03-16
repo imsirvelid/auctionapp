@@ -18,12 +18,12 @@ function Navbar() {
       <div className="white-navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <i className="fa-solid fa-hammer"></i>
+            <i className="fa-solid fa-hammer" />
             AUCTION
           </div>
           <div className="navbar-search-input" style={{ "visibility": "hidden"}}>
             <input type="text" placeholder="Try enter: Shoes" />{" "}
-            <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+            <i className="fa-sharp fa-solid fa-magnifying-glass" />
           </div>
           <div className="navbar-routes">
             <a href="/about">HOME</a>

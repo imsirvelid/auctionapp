@@ -42,11 +42,11 @@ function About() {
           </div>
           <div className="images">
             <div className="main-picture">
-              <img src={aboutMainImg} alt=""></img>
+              <img src={aboutMainImg} alt="about-main" />
             </div>
             <div className="sub-images">
-              <img src={aboutSecondImg} alt=""></img>
-              <img src={aboutThirdImg} alt=""></img>
+              <img src={aboutSecondImg} alt="about-second" />
+              <img src={aboutThirdImg} alt="about-third" />
             </div>
           </div>
         </div>

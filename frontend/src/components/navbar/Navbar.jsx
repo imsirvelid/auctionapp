@@ -21,8 +21,8 @@ function Navbar() {
             <i className="fa-solid fa-hammer" />
             AUCTION
           </div>
-          <div className="navbar-search-input" style={{ "visibility": "hidden"}}>
-            <input type="text" placeholder="Try enter: Shoes" />{" "}
+          <div className="navbar-search-input">
+            <input type="text" placeholder="Try enter: Shoes" />
             <i className="fa-sharp fa-solid fa-magnifying-glass" />
           </div>
           <div className="navbar-routes">

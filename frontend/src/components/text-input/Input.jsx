@@ -1,12 +1,13 @@
 import React from "react";
 import "components/text-input/Input.css";
 
-function Input() {
+function Input(props) {
   return (
     <input
-      className="email-input-field"
+      className="custom-input-field"
       type="text"
-      placeholder="Your email address"
+      placeholder={props.placeholder}
+      style={{ width: `${props.width}`}}
     />
   );
 }

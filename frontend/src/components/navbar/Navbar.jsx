@@ -1,6 +1,9 @@
 import React from "react";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "components/navbar/Navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Input from "../text-input/Input";
 
 function Navbar() {
   return (
@@ -22,8 +25,8 @@ function Navbar() {
             AUCTION
           </div>
           <div className="navbar-search-input">
-            <input type="text" placeholder="Try enter: Shoes" />
-            <i className="fa-sharp fa-solid fa-magnifying-glass" />
+            <Input width="95%" placeholder="Try enter: Shoes" ></Input>
+            <FontAwesomeIcon className="search-icon" icon={ faSearch } />
           </div>
           <div className="navbar-routes">
             <a href="/about">HOME</a>

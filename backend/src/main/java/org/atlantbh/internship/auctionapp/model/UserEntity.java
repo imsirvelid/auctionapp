@@ -1,7 +1,17 @@
 package org.atlantbh.internship.auctionapp.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User {
@@ -32,4 +42,8 @@ public class User {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
+
 }

@@ -1,0 +1,11 @@
+spring:
+    mode: JPA
+    datasource:
+        url: jdbc:postgresql://localhost:5432/test
+        username: velid
+        password: password
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true

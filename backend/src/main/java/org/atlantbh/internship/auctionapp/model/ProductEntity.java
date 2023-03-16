@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "product")
 public class Product {
 
     @Id
@@ -19,7 +21,7 @@ public class Product {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "name")
@@ -36,7 +38,7 @@ public class Product {
 
     @Column(name = "end_date")
     private LocalDateTime endDate;
-    
+
     @Column(name = "status")
     private STATUS status;
 }

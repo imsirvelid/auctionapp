@@ -1,0 +1,10 @@
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 53px;
+}
+
+.product-item {
+  flex: 1 0 19%;
+  margin: 5px;
+}

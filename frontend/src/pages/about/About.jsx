@@ -10,10 +10,10 @@ function About() {
     <>
       <NavigationCard name="About Us" link="SHOP" subLink="About Us" />
       <div className="container">
-        <h1 id="about-title">About Us</h1>
+        <h1 className="about-title">About Us</h1>
         <div className="content">
           <div className="text-content">
-            <p>
+            <p className="about-p">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               lobortis, quam ut faucibus bibendum, nisl leo tincidunt risus, nec
               fringilla est justo in nisl. Ut elementum pellentesque
@@ -42,11 +42,11 @@ function About() {
           </div>
           <div className="images">
             <div className="main-picture">
-              <img src={aboutMainImg} alt=""></img>
+              <img src={aboutMainImg} alt="about-main" />
             </div>
             <div className="sub-images">
-              <img src={aboutSecondImg} alt=""></img>
-              <img src={aboutThirdImg} alt=""></img>
+              <img src={aboutSecondImg} alt="about-second" />
+              <img src={aboutThirdImg} alt="about-third" />
             </div>
           </div>
         </div>

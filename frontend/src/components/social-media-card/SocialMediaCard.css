@@ -1,17 +1,17 @@
-i {
+.i-social-media {
   margin-left: 10px;
   font-size: 1.7em;
 }
 
 .first {
   margin: 0;
-}
+} 
 
-i:hover {
+.social-media-card i:hover {
   cursor: pointer;
 }
 
-a {
+.social-media-card a {
   width: 1.73em;
   height: 1.73em;
   text-decoration: none;

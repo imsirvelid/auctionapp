@@ -1,14 +1,9 @@
-import React from 'react';
-import symbolsGoDefault from '../../assets/img/symbols-go-default.png';
-import "./Button.css";
+import React from "react";
+import "components/button/Button.css";
 
-function Button() {
+function Button(props) {
   return (
-    <>
-      <button>
-        <img src={symbolsGoDefault} alt="" />
-      </button>
-    </>
+      <button className="button primary">{props.children}</button>
   );
 }
 

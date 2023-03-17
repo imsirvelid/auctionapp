@@ -1,12 +1,18 @@
-ul {
+.footer-ul-item {
   list-style-type: none;
+  height: auto;
   margin: 0;
   padding: 0;
 }
 
-li {
+.footer-li-item {
   margin: 0;
   margin-bottom: 13px;
+}
+
+.footer-li-item a{
+  text-decoration: none;
+  color: #FFFFFF;
 }
 
 footer {
@@ -31,10 +37,12 @@ footer {
 
 .ul-block {
   width: 30%;
+  height: auto;
 }
 
 .wider {
   width: 40%;
+  /*visibility: hidden;*/
 }
 
 .item-title {

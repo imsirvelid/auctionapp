@@ -1,5 +1,8 @@
 import React from "react";
-import SocialMediaCard from "../social-media-card/SocialMediaCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Input from "components/text-input/Input";
+import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
 
 function Navbar() {
@@ -18,12 +21,12 @@ function Navbar() {
       <div className="white-navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <i className="fa-solid fa-hammer"></i>
+            <i className="fa-solid fa-hammer" />
             AUCTION
           </div>
-          <div className="navbar-search-input" style={{ "visibility": "hidden"}}>
-            <input type="text" placeholder="Try enter: Shoes" />{" "}
-            <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+          <div className="navbar-search-input">
+            <Input width="95%" placeholder="Try enter: Shoes" ></Input>
+            <FontAwesomeIcon className="search-icon" icon={ faSearch } />
           </div>
           <div className="navbar-routes">
             <a href="/about">HOME</a>

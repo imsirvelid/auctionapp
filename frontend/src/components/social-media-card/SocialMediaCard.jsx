@@ -1,5 +1,5 @@
 import React from "react";
-import "components/social-media-card/SocialMediaCard.css";
+import "./SocialMediaCard.css";
 
 function SocialMediaCard() {
   return (

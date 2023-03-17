@@ -1,5 +1,5 @@
 import React from "react";
-import NavigationCard from "../../components/navigation-card/NavigationCard";
+import NavigationCard from "components/navigation-card/NavigationCard";
 
 function TermsAndConditions() {
   return (

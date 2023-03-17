@@ -1,4 +1,4 @@
-package org.atlantbh.internship.auctionapp.service;
+package org.atlantbh.internship.auctionapp.service.api;
 
 import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
 import org.atlantbh.internship.auctionapp.model.ProductEntity;

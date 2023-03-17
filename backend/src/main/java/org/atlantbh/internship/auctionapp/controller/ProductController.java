@@ -1,8 +1,7 @@
 package org.atlantbh.internship.auctionapp.controller;
 
 import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
-import org.atlantbh.internship.auctionapp.model.ProductEntity;
-import org.atlantbh.internship.auctionapp.service.ProductService;
+import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

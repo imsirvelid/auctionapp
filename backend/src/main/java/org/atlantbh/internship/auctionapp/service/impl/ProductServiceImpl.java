@@ -4,15 +4,11 @@ import org.atlantbh.internship.auctionapp.dto.Mapper.ProductMapper;
 import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
 import org.atlantbh.internship.auctionapp.model.ProductEntity;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
-import org.atlantbh.internship.auctionapp.service.ProductService;
+import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

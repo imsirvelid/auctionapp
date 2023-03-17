@@ -1,5 +1,7 @@
 package org.atlantbh.internship.auctionapp.dto.Product;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import org.atlantbh.internship.auctionapp.model.STATUS;
 import org.atlantbh.internship.auctionapp.model.UserEntity;
@@ -20,5 +22,7 @@ public class ProductResponse {
     private LocalDateTime created;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private String thumbnailUrl;
+    @Enumerated(EnumType.STRING)
     private STATUS status;
 }

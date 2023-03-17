@@ -39,6 +39,9 @@ public class ProductEntity {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
+
     @Column(name = "status")
     private STATUS status;
 }

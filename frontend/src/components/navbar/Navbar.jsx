@@ -1,9 +1,9 @@
 import React from "react";
-import SocialMediaCard from "components/social-media-card/SocialMediaCard";
-import "components/navbar/Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import Input from "../text-input/Input";
+import Input from "components/text-input/Input";
+import SocialMediaCard from "components/social-media-card/SocialMediaCard";
+import "./Navbar.css";
 
 function Navbar() {
   return (

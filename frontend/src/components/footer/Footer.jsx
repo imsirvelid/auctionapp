@@ -1,9 +1,9 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import Button from "components/button/Button";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import Input from "components/text-input/Input";
-import {Link} from "react-router-dom";
-import "components/footer/Footer.css";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -43,10 +43,7 @@ function Footer() {
             <li className="footer-li-item">
               <div className="simple-form">
                 <Input />
-                <Button
-                  text="GO"
-                  symbol={<i className="fa-solid fa-angle-right"></i>}
-                />
+                <Button>GO <i className="fa-solid fa-angle-right"></i></Button>
               </div>
             </li>
           </ul>

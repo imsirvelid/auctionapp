@@ -43,7 +43,7 @@ function Footer() {
             <li className="footer-li-item">
               <div className="simple-form">
                 <Input />
-                <Button>GO <i className="fa-solid fa-angle-right"></i></Button>
+                <Button type="primary">GO <i className="fa-solid fa-angle-right"></i></Button>
               </div>
             </li>
           </ul>

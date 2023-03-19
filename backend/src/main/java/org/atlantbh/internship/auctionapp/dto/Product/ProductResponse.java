@@ -19,6 +19,7 @@ public class ProductResponse {
     private Long userId;
     private String name;
     private String details;
+    private Double startingPrice;
     private LocalDateTime created;
     private LocalDateTime startDate;
     private LocalDateTime endDate;

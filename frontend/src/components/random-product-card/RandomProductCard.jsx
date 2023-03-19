@@ -14,7 +14,7 @@ function RandomProductCard(props) {
         <Button type="default">BID NOW <i className="fa-solid fa-angle-right"></i></Button>
       </div>
       <div className="random-product-img">
-        <img src={props.product.thumbnailUrl} />
+        <img src={props.product.thumbnailUrl} alt="product-img" />
       </div>
     </div>
   );

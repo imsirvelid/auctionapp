@@ -1,4 +1,3 @@
-import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import RandomProductCard from "components/random-product-card/RandomProductCard";
 import TabView from "components/tab-view/TabView";
 import React, { useState, useEffect } from "react";

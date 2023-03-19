@@ -5,18 +5,21 @@ import React, { useState, useEffect } from "react";
 
 import { getRandomProduct } from "api/Product";
 import "./Landing.css";
+import NewArrivals from "components/tab-new-arrivals/NewArrivals";
 
 function Landing() {
   var tabs = [
     {
       id: 1,
       title: "New Arrivals",
-      selected: false,
+      selected: true,
+      component: <NewArrivals></NewArrivals>
     },
     {
       id: 2,
       title: "Last Chance",
-      selected: true,
+      selected: false,
+      component: null
     },
   ];
   const [ randomProduct, setRandomProduct ] = useState();

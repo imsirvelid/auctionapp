@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
-import {getLatestProducts, getRandomProduct} from "api/Product";
+import {getLatestProducts} from "api/Product";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function LastChance() {
@@ -22,7 +22,7 @@ function LastChance() {
     if (end || !initial)
       return;
     const res = await getLatestProducts(page, "endDate");
-    if (res.length == 0)
+    if (res.length === 0)
       setEnd(true);
     console.log("RES IS: ", res);
     setProductList([...productList, ...res]);

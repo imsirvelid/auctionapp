@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
-import {getLatestProducts, getRandomProduct} from "api/Product";
+import {getLatestProducts} from "api/Product";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function NewArrivals() {
@@ -9,7 +9,9 @@ function NewArrivals() {
   const [page, setPage] = useState(1);
   const [end, setEnd] = useState(false);
   const [initial, setInitial] = useState(false);
+
   useEffect(() => {
+    console.log("useEffect runned");
     const getLatest = async () => {
       const res = await getLatestProducts(0);
       setProductList(res);
@@ -22,7 +24,7 @@ function NewArrivals() {
     if (end || !initial)
       return;
     const res = await getLatestProducts(page);
-    if (res.length == 0)
+    if (res.length === 0)
       setEnd(true);
     setProductList([...productList, ...res]);
     setPage(page + 1);

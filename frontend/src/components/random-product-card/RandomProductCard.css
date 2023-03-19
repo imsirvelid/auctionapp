@@ -1,0 +1,35 @@
+.random-product-card {
+  display: flex;
+  width: 100%;
+}
+
+.random-product-content {
+  height: auto;
+  margin: auto;
+  width: 40%;
+}
+
+.random-product-img {
+  width: 60%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.random-product-img img {
+  max-height: 480px;
+  max-width: auto;
+}
+
+.purple-text {
+  font-size: 24px;
+  color: #8367d8;
+  letter-spacing: 0.84px;
+}
+
+.random-product-name {
+  font-size: 46px;
+  color: #252525;
+  letter-spacing: 1.61px;
+}

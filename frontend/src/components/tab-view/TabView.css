@@ -1,0 +1,31 @@
+.tab-view-header {
+  width: 100%;
+  border-bottom: 3px solid #ececec;
+  display: flex;
+  gap: 31px;
+}
+
+.tab-view-option {
+  font-size: 28px;
+  color: #252525;
+  letter-spacing: 0.98px;
+  margin: 0;
+  height: 100%;
+}
+
+.tvo-selected {
+  border-bottom: 3px solid #8367D8;;
+}
+
+.tab-view-option:hover {
+  cursor: pointer;
+  border-bottom: 3px solid #8367D8;
+  opacity: 0.7;
+}
+
+.infinite-scroll {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 53px;
+}

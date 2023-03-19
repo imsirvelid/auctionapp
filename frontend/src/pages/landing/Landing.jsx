@@ -1,68 +1,56 @@
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
-import React from "react";
+import RandomProductCard from "components/random-product-card/RandomProductCard";
+import TabView from "components/tab-view/TabView";
+import React, { useState, useEffect } from "react";
 
+import { getRandomProduct } from "api/Product";
 import "./Landing.css";
 
 function Landing() {
+  var tabs = [
+    {
+      id: 1,
+      title: "New Arrivals",
+      selected: false,
+    },
+    {
+      id: 2,
+      title: "Last Chance",
+      selected: true,
+    },
+  ];
+  const [ randomProduct, setRandomProduct ] = useState();
+  useEffect(() => {
+    var random = async () => {
+      const res = await getRandomProduct();
+      setRandomProduct(res);
+    }
+    if (!randomProduct)
+      random();
+  });
+
   return (
     <div className="container">
+      <div className="main-content-landing">
+        <div className="landing-categories">
+          <p className="categories-title">CATEGORIES</p>
+          <p className="category-box-p">Fashion</p>
+          <p className="category-box-p">Accessories</p>
+          <p className="category-box-p">Computers</p>
+          <p className="category-box-p">Cars</p>
+          <p className="category-box-p">Hardware</p>
+          <p className="category-box-p">Electronics</p>
+          <p className="category-box-p">Jewlery</p>
+          <p className="category-box-p">Sportware</p>
+          <p className="category-box-p">Art</p>
+          <p className="category-box-p-other">Other categories</p>
+        </div>
+        <div className="random-product-landing">
+          {randomProduct && <RandomProductCard product={randomProduct}></RandomProductCard>}
+        </div>
+      </div>
       <div className="tab-container">
-      <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://shop.imel.ba/wp-content/uploads/2022/10/Z14V0023L.jpg"
-          productTitle="Macbook Pro 16"
-          startsFrom="1695.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          productTitle="Nike Air force 1"
-          startsFrom="149.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://static.wikia.nocookie.net/marveldatabase/images/8/8b/Time_Gem_from_Doctor_Strange_Vol_5_3_001.jpg"
-          productTitle="Time stone"
-          startsFrom="1494520.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://images.unsplash.com/photo-1663564305613-c40450f29903?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          productTitle="Patek Phillipe Nautilus"
-          startsFrom="25512.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://shop.imel.ba/wp-content/uploads/2022/10/Z14V0023L.jpg"
-          productTitle="Macbook Pro 16"
-          startsFrom="1695.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          productTitle="Nike Air force 1"
-          startsFrom="149.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://static.wikia.nocookie.net/marveldatabase/images/8/8b/Time_Gem_from_Doctor_Strange_Vol_5_3_001.jpg"
-          productTitle="Time stone"
-          startsFrom="1494520.25"
-        />
-        </div>
-        <div className="product-item">
-        <ProductGridCard
-          thumbnailUrl="https://images.unsplash.com/photo-1663564305613-c40450f29903?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          productTitle="Patek Phillipe Nautilus"
-          startsFrom="25512.25"
-        />
-        </div>
+        <TabView tabs={tabs}></TabView>        
       </div>
     </div>
   );

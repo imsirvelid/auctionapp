@@ -14,13 +14,14 @@ function Landing() {
       id: 1,
       title: "New Arrivals",
       selected: true,
-      component: <NewArrivals />
+      component: <NewArrivals key={1}/>
     },
     {
       id: 2,
+      key: 2,
       title: "Last Chance",
       selected: false,
-      component: <LastChance />
+      component: <LastChance key={2}/>
     },
   ];
   const [ randomProduct, setRandomProduct ] = useState();

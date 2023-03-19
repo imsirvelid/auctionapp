@@ -23,8 +23,7 @@
 }
 
 .product-grid-card {
-  width: auto;
-  max-width: 260px;
+  width: 100%;
 }
 
 .product-grid-card:hover {

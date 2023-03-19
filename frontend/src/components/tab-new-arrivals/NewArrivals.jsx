@@ -8,16 +8,18 @@ function NewArrivals() {
   const [productList, setProductList] = useState([]);
   const [page, setPage] = useState(1);
   const [end, setEnd] = useState(false);
+  const [initial, setInitial] = useState(false);
   useEffect(() => {
     const getLatest = async () => {
       const res = await getLatestProducts(0);
       setProductList(res);
     };
     getLatest();
+    setInitial(true);
   }, []);
 
   var fetchData = async () => {
-    if (end)
+    if (end || !initial)
       return;
     const res = await getLatestProducts(page);
     if (res.length == 0)

@@ -8,21 +8,25 @@ function LastChance() {
   const [productList, setProductList] = useState([]);
   const [page, setPage] = useState(1);
   const [end, setEnd] = useState(false);
+  const [initial, setInitial] = useState(false);
   useEffect(() => {
     const getLatest = async () => {
-      const res = await getLatestProducts(0, "end_date");
+      const res = await getLatestProducts(0, "endDate");
       setProductList(res);
     };
     getLatest();
+    setInitial(true);
   }, []);
 
   var fetchData = async () => {
-    if (end)
+    if (end || !initial)
       return;
-    const res = await getLatestProducts(page, "end_date");
+    const res = await getLatestProducts(page, "endDate");
     if (res.length == 0)
       setEnd(true);
+    console.log("RES IS: ", res);
     setProductList([...productList, ...res]);
+    console.log(productList);
     setPage(page + 1);
   }
   return (
@@ -31,7 +35,6 @@ function LastChance() {
       dataLength={productList.length}
       next={fetchData}
       hasMore={!end}
-      loader={<h4>Loading...</h4>}
     >
       {productList
         ? productList.map((product) => (

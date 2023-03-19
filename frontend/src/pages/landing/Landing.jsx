@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { getRandomProduct } from "api/Product";
 import "./Landing.css";
 import NewArrivals from "components/tab-new-arrivals/NewArrivals";
+import LastChance from "components/tab-last-chance/LastChance";
 
 function Landing() {
   var tabs = [
@@ -13,13 +14,13 @@ function Landing() {
       id: 1,
       title: "New Arrivals",
       selected: true,
-      component: <NewArrivals></NewArrivals>
+      component: <NewArrivals />
     },
     {
       id: 2,
       title: "Last Chance",
       selected: false,
-      component: null
+      component: <LastChance />
     },
   ];
   const [ randomProduct, setRandomProduct ] = useState();

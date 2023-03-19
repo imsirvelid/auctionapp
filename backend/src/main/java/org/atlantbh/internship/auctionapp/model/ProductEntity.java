@@ -30,6 +30,9 @@ public class ProductEntity {
     @Column(name = "details")
     private String details;
 
+    @Column(name = "starting_price")
+    private Double startingPrice;
+
     @Column(name = "created")
     private LocalDateTime created;
 

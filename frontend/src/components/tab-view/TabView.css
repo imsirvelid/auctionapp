@@ -27,5 +27,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 53px;
+  gap: 4%;
+  width: 100%;
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface ProductService {
-    public List<ProductResponse> getAll(int page);
+    public List<ProductResponse> getAll(int page, String sortBy);
     public ProductResponse getRandom();
 }

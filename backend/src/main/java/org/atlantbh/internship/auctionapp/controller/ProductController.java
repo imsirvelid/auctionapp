@@ -22,9 +22,9 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping(value = "/products", params = { "page" })
-    public ResponseEntity<List<ProductResponse>> getProducts(@RequestParam int page){
-        return ResponseEntity.ok(productService.getAll(page));
+    @GetMapping(value = "/products", params = { "page", "sort"})
+    public ResponseEntity<List<ProductResponse>> getProducts(@RequestParam int page, @RequestParam String sort){
+        return ResponseEntity.ok(productService.getAll(page, sort));
     }
 
     @GetMapping(value = "/products/random")

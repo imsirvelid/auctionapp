@@ -23,12 +23,17 @@ public class ProductServiceImpl implements ProductService {
     ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     @Override
-    public List<ProductResponse> getAll(int page) {
-        Pageable paging = PageRequest.of(page, 2, Sort.by("created").descending());
+    public List<ProductResponse> getAll(int page, String sortBy) {
+        Pageable paging = null;
+        // This is a bit clunky, will fix later
+        if (sortBy.equals("endDate")){
+            paging = PageRequest.of(page, 4, Sort.by(sortBy).ascending());
+        }
+        else
+            paging = PageRequest.of(page, 4, Sort.by(sortBy).descending());
         List<ProductEntity> entites = new ArrayList<>();
         productRepository.findAll(paging).forEach(entites::add);
         List<ProductResponse> response = entites.stream().map(productMapper::fromEntity).collect(Collectors.toList());
-        Collections.sort(response, (a, b) -> b.getCreated().compareTo(a.getCreated()));
         return response;
     }
 

@@ -11,7 +11,6 @@ function NewArrivals() {
   const [initial, setInitial] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect runned");
     const getLatest = async () => {
       const res = await getLatestProducts(0);
       setProductList(res);

@@ -37,7 +37,6 @@
 
 .navbar-logo {
   width: 30%;
-  font-family: "Lato";
   font-size: 24px;
   color: #8367d8;
   letter-spacing: 0.84px;
@@ -50,7 +49,7 @@
 
 .navbar-search-input {
   display: flex;
-  /*visibility: hidden;*/
+  visibility: hidden;
   border-radius: 3px;
   border: 1px solid #e0e0e0;
   box-shadow: 3px 3px #e0e0e0;
@@ -69,7 +68,6 @@
 .navbar-routes a {
   width: 30%;
   text-decoration: none;
-  font-family: "Lato";
   font-size: 16px;
   color: #252525;
   align-items: center;

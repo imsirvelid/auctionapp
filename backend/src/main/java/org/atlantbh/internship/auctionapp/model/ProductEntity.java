@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,4 +48,7 @@ public class ProductEntity {
 
     @Column(name = "status")
     private STATUS status;
+
+    @OneToMany(mappedBy = "product")
+    private List<ImageEntity> images;
 }

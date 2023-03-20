@@ -1,7 +1,8 @@
-import Button from "components/button/Button";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import "./RandomProductCard.css";
-
+import Button from "components/button/Button";
 function RandomProductCard(props) {
   return (
     <div className="random-product-card">
@@ -11,7 +12,7 @@ function RandomProductCard(props) {
         <p>
           {props.product.details}
         </p>
-        <Button type="default">BID NOW <i className="fa-solid fa-angle-right"></i></Button>
+        <Button type="default">BID NOW <FontAwesomeIcon icon={ faAngleRight } /></Button>
       </div>
       <div className="random-product-img">
         <img src={props.product.thumbnailUrl} alt="product-img" />

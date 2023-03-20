@@ -70,7 +70,6 @@
 .navbar-routes a {
   width: 30%;
   text-decoration: none;
-  font-family: "Lato";
   font-size: 16px;
   color: #252525;
   align-items: center;
@@ -87,6 +86,6 @@
 }
 
 .navbar-routes {
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 

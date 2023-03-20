@@ -18,8 +18,9 @@
 }
 
 .random-product-img img {
-  max-height: 480px;
-  max-width: auto;
+  object-fit: fill;
+  height: 480px;
+  width: 480px;
 }
 
 .purple-text {

@@ -24,7 +24,6 @@ function LastChance() {
     const res = await getLatestProducts(page, "endDate");
     if (res.length === 0)
       setEnd(true);
-    console.log("RES IS: ", res);
     setProductList([...productList, ...res]);
     console.log(productList);
     setPage(page + 1);

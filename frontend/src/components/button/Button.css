@@ -22,6 +22,6 @@
   font-size: 18px;
 }
 
-button:hover {
+.button:hover {
   cursor: pointer;
 }

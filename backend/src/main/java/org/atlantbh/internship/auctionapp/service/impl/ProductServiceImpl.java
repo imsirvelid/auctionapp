@@ -31,10 +31,10 @@ public class ProductServiceImpl implements ProductService {
         }
         else
             paging = PageRequest.of(page, 4, Sort.by(sortBy).descending());
-        List<ProductEntity> entites = new ArrayList<>();
-        productRepository.findAll(paging).forEach(entites::add);
-        List<ProductResponse> response = entites.stream().map(productMapper::fromEntity).collect(Collectors.toList());
-        return response;
+        List<ProductResponse> entites = productRepository.getProductsWithThumbnails(paging);
+        //productRepository.getProductsWithThumbnails(paging).forEach(entites::add);
+        //List<ProductResponse> response = entites.stream().map(productMapper::fromEntity).collect(Collectors.toList());
+        return entites;
     }
 
     @Override

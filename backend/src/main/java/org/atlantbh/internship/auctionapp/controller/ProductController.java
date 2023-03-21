@@ -31,5 +31,5 @@ public class ProductController {
     public ResponseEntity<ProductResponse> getRandomProduct() {
         return ResponseEntity.ok(productService.getRandom());
     }
-    
+
 }

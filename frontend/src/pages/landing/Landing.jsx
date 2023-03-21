@@ -6,6 +6,7 @@ import { getRandomProduct } from "api/Product";
 import "./Landing.css";
 import NewArrivals from "components/tab-new-arrivals/NewArrivals";
 import LastChance from "components/tab-last-chance/LastChance";
+import { getParentCategories } from "api/Category";
 
 function Landing() {
   var tabs = [
@@ -24,13 +25,22 @@ function Landing() {
     },
   ];
   const [ randomProduct, setRandomProduct ] = useState();
+  const [ categories, setCategories] = useState();
   useEffect(() => {
     var random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);
     }
+
+    var getCategories = async () => {
+      const res = await getParentCategories();
+      console.log("Evo ih: ", res);
+      setCategories(res);
+    }
     if (!randomProduct)
       random();
+    if (!categories)
+      getCategories();
   });
 
   return (
@@ -38,15 +48,9 @@ function Landing() {
       <div className="main-content-landing">
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
-          <p className="category-box-p">Fashion</p>
-          <p className="category-box-p">Accessories</p>
-          <p className="category-box-p">Computers</p>
-          <p className="category-box-p">Cars</p>
-          <p className="category-box-p">Hardware</p>
-          <p className="category-box-p">Electronics</p>
-          <p className="category-box-p">Jewlery</p>
-          <p className="category-box-p">Sportware</p>
-          <p className="category-box-p">Art</p>
+          { categories && categories.map((category) => (
+            <p className="category-box-p" key={category.id}>{category.name}</p>
+          ))}
           <p className="category-box-p-other">Other categories</p>
         </div>
         <div className="random-product-landing">

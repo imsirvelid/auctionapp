@@ -1,0 +1,19 @@
+.i-social-media {
+  margin-left: 10px;
+  font-size: 1.7em;
+}
+
+.first {
+  margin: 0;
+} 
+
+.social-media-card i:hover {
+  cursor: pointer;
+}
+
+.social-media-card a {
+  width: 1.73em;
+  height: 1.73em;
+  text-decoration: none;
+  color: white;
+}

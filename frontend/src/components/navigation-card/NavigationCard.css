@@ -1,0 +1,21 @@
+.current-location {
+  width: 75%;
+  margin: 37px auto;
+  font-size: 18px;
+  padding: 19px;
+  background: #FAFAFA;
+}
+
+.sublink-span {
+  font-weight: 500;
+  margin-left: 11px;
+}
+
+.right-p-link {
+  margin-left: auto;
+  font-weight: 100;
+}
+
+.current-location-flexdiv {
+  display: flex;
+}

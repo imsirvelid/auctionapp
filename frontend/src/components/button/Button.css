@@ -1,0 +1,21 @@
+.button {
+  border: 3px solid #8367d8;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px 17px;
+}
+
+.primary {
+  background-color: inherit;
+  font-size: 18px;
+  color: #d8d8d8;
+  letter-spacing: 0.63px;
+}
+
+.primary i {
+  font-size: 18px;
+}
+
+button:hover {
+  cursor: pointer;
+}

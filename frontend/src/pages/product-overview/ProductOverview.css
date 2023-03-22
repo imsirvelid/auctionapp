@@ -1,13 +1,32 @@
 .product-overview {
   display: flex;
+  gap: 5%;
 }
 
 .product-overview-images {
   background-color: gray;
-  width: 50%;
+  width: 45%;
 }
 
 .product-overview-info {
-  background-color: aliceblue;
+  color: #9b9b9b;
+  letter-spacing: 0.56px;
   width: 50%;
+}
+
+.product-overview-bid-info {
+  margin: 27px 0;
+}
+
+.product-overview-info p {
+  margin: 11px 0px;
+}
+
+.purple-span {
+  color: #8367D8;;
+  letter-spacing: 0.56px;
+}
+
+.product-overview-starts-from {
+  font-size: 24px;
 }

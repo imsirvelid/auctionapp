@@ -55,12 +55,12 @@ function Landing() {
         </div>
         <div className="random-product-landing">
           {randomProduct && (
-            <RandomProductCard product={randomProduct}></RandomProductCard>
+            <RandomProductCard product={randomProduct} />
           )}
         </div>
       </div>
       <div className="tab-container">
-        <TabView tabs={tabs}></TabView>
+        <TabView tabs={tabs} />
       </div>
     </div>
   );

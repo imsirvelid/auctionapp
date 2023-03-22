@@ -40,7 +40,7 @@ function NewArrivals() {
       {productList
         ? productList.map((product) => (
             <div className="product-item" key={product.id}>
-              <Link to="/product">
+              <Link to={"/product/" + product.id}>
               <ProductGridCard
                 thumbnailUrl={product.thumbnailUrl}
                 productTitle={product.name}

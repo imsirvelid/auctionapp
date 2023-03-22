@@ -19,7 +19,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/product" element={<ProductOverview />} />
+          <Route path="/product/:id" element={<ProductOverview />} />
         </Routes>
       </div>
       <Footer />

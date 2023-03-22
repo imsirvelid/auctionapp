@@ -6,6 +6,7 @@ import About from "pages/about/About";
 import TermsAndConditions from "pages/terms-and-conditions/TermsAndConditions";
 import PrivacyPolicy from "pages/privacy-policy/PrivacyPolicy";
 import Landing from "pages/landing/Landing";
+import ProductOverview from "pages/product-overview/ProductOverview";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             element={<TermsAndConditions />}
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/product" element={<ProductOverview />} />
         </Routes>
       </div>
       <Footer />

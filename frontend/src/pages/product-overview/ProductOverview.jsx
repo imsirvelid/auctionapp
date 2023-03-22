@@ -3,6 +3,9 @@ import LastChance from "components/tab-last-chance/LastChance";
 import NewArrivals from "components/tab-new-arrivals/NewArrivals";
 import TabView from "components/tab-view/TabView";
 import "./ProductOverview.css";
+import ReactImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+
 function ProductOverview() {
   var tabs = [
     {
@@ -26,10 +29,27 @@ function ProductOverview() {
       ),
     },
   ];
+
+  var images = [
+    {
+      original: 'https://picsum.photos/id/1018/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1018/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1015/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1015/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1019/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1019/250/150/',
+    },
+  ];
   return (
     <div className="container">
       <div className="product-overview">
-        <div className="product-overview-images">test</div>
+        <div className="product-overview-images">
+          <ReactImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false}/>
+        </div>
         <div className="product-overview-info">
           <h2 className="product-overview-title">
             BIYLACLESEN Womens 3-in-1 Snowboard Jacker Winter Coats

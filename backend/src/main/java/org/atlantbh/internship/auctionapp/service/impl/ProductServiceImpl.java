@@ -32,8 +32,6 @@ public class ProductServiceImpl implements ProductService {
         else
             paging = PageRequest.of(page, 4, Sort.by(sortBy).descending());
         List<ProductResponse> entites = productRepository.getProductsWithThumbnails(paging);
-        //productRepository.getProductsWithThumbnails(paging).forEach(entites::add);
-        //List<ProductResponse> response = entites.stream().map(productMapper::fromEntity).collect(Collectors.toList());
         return entites;
     }
 
@@ -45,5 +43,10 @@ public class ProductServiceImpl implements ProductService {
         Random rand = new Random();
         int i = rand.nextInt(response.size());
         return response.get(i);
+    }
+
+    @Override
+    public ProductResponse getById(Long id) {
+        return productMapper.fromEntity(productRepository.findById(id).get());
     }
 }

@@ -3,10 +3,12 @@ package org.atlantbh.internship.auctionapp.dto.Product;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
+import org.atlantbh.internship.auctionapp.model.ImageEntity;
 import org.atlantbh.internship.auctionapp.model.STATUS;
 import org.atlantbh.internship.auctionapp.model.UserEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +26,7 @@ public class ProductResponse {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String thumbnailUrl;
+    private List<String> images;
     @Enumerated(EnumType.STRING)
     private STATUS status;
 }

@@ -13,19 +13,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Long>, PagingAndSortingRepository<ProductEntity, Long> {
 
-    @Query("select new org.atlantbh.internship.auctionapp.dto.Product.ProductResponse(pe.id, pe.user.id, pe.name, pe.details, pe.startingPrice, pe.created, pe.startDate, pe.endDate, ie.imageUrl, pe.status) from ProductEntity pe left join ImageEntity ie on pe.id = ie.product.id")
-    public List<ProductResponse> getProductsWithThumbnails(Pageable pageable);
+    @Query("select new org.atlantbh.internship.auctionapp.dto.Product.ProductResponse(pe.id, pe.user.id, pe.name, pe.details, pe.startingPrice, pe.created, pe.startDate, pe.endDate, ie.imageUrl, null, pe.status) from ProductEntity pe left join ImageEntity ie on pe.id = ie.product.id")
+    List<ProductResponse> getProductsWithThumbnails(Pageable pageable);
 
 }
-/*
-* private Long userId;
-    private String name;
-    private String details;
-    private Double startingPrice;
-    private LocalDateTime created;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private String thumbnailUrl;
-    @Enumerated(EnumType.STRING)
-    private STATUS status;
-* */

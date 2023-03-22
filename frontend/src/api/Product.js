@@ -13,3 +13,8 @@ export const getRandomProduct = async () => {
   const data = await axios.get(URL + "/random");
   return data.data;
 }
+
+export const getProductById = async(id) => {
+  const data = await axios.get(BASE_URL + "/product/" + id)
+  return data.data;
+}

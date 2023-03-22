@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TabView from "components/tab-view/TabView";
 import "./ProductOverview.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "components/image-gallery/ImageGallery";
+import { getProductById } from "api/Product";
+import { useParams } from "react-router-dom";
 
 function ProductOverview() {
+  const params = useParams();
+  console.log(params);
+  /*useEffect(() => {
+    const getProduct = async() => {
+      const res = await getProductById();
+    }
+  });*/
   var tabs = [
     {
       id: 1,
@@ -30,14 +39,17 @@ function ProductOverview() {
 
   var images = [
     {
+      key: 1,
       original: 'https://picsum.photos/id/1018/1000/600/',
       thumbnail: 'https://picsum.photos/id/1018/250/150/',
     },
     {
+      key: 2,
       original: 'https://picsum.photos/id/1015/1000/600/',
       thumbnail: 'https://picsum.photos/id/1015/250/150/',
     },
     {
+      key: 3,
       original: 'https://picsum.photos/id/1019/1000/600/',
       thumbnail: 'https://picsum.photos/id/1019/250/150/',
     },

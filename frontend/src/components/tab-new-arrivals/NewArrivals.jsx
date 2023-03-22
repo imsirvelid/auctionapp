@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import {getLatestProducts} from "api/Product";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 function NewArrivals() {
   const [productList, setProductList] = useState([]);
@@ -39,12 +40,14 @@ function NewArrivals() {
       {productList
         ? productList.map((product) => (
             <div className="product-item" key={product.id}>
+              <Link to="/product">
               <ProductGridCard
                 thumbnailUrl={product.thumbnailUrl}
                 productTitle={product.name}
                 startsFrom={product.startingPrice}
                 key={product.id}
               />
+              </Link>
             </div>
           ))
         : false}

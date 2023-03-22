@@ -9,19 +9,21 @@ function ProductOverview() {
       id: 1,
       title: "Details",
       selected: true,
-      component: <NewArrivals key={1} />,
+      component: <p>Details about random product</p>,
     },
     {
       id: 2,
       title: "Seller information",
       selected: false,
-      component: <LastChance key={2} />,
+      component: <p>Seller informations</p>,
     },
     {
       id: 3,
       title: "Customer reviews",
       selected: false,
-      component: <LastChance key={2} />,
+      component: (
+        <p>Customer reviews, lorem ipsum dolor sit amet condesectur enit</p>
+      ),
     },
   ];
   return (
@@ -29,22 +31,24 @@ function ProductOverview() {
       <div className="product-overview">
         <div className="product-overview-images">test</div>
         <div className="product-overview-info">
-          <p className="product-overview-title">
+          <h2 className="product-overview-title">
             BIYLACLESEN Womens 3-in-1 Snowboard Jacker Winter Coats
-          </p>
+          </h2>
           <p className="product-overview-starts-from">
-            Starts from <span>$50</span>
+            Starts from <span className="purple-span">$50</span>
           </p>
           <div className="product-overview-bid-info">
             <p>
-              Highest bid: <span>$55</span>
+              Highest bid: <span className="purple-span">$55</span>
             </p>
             <p>
-              Number of bids: <span>1</span>
+              Number of bids: <span className="purple-span">1</span>
             </p>
             <p>
-              Time left: <span>10 Weeks 6 Days</span>
+              Time left: <span className="purple-span">10 Weeks 6 Days</span>
             </p>
+          </div>
+          <div className="tab-container">
             <TabView tabs={tabs} />
           </div>
         </div>

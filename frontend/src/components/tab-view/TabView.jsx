@@ -12,7 +12,7 @@ function TabView(props) {
         {true ? (
           tabs.map((tab) => (
             <p
-              className={`tab-view-option ${
+              className={`tab-view-option ${props.optionSize} ${
                 tab.id === currentTab ? "tvo-selected" : ""
               }`}
               key={tab.id}

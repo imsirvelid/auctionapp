@@ -60,7 +60,7 @@ function Landing() {
         </div>
       </div>
       <div className="tab-container">
-        <TabView tabs={tabs} />
+        <TabView tabs={tabs} optionSize="option-size-normal" />
       </div>
     </div>
   );

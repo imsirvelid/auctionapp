@@ -1,10 +1,8 @@
 import React from "react";
-import LastChance from "components/tab-last-chance/LastChance";
-import NewArrivals from "components/tab-new-arrivals/NewArrivals";
 import TabView from "components/tab-view/TabView";
 import "./ProductOverview.css";
-import ReactImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "components/image-gallery/ImageGallery";
 
 function ProductOverview() {
   var tabs = [
@@ -48,7 +46,7 @@ function ProductOverview() {
     <div className="container">
       <div className="product-overview">
         <div className="product-overview-images">
-          <ReactImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false}/>
+          <ImageGallery images={images}/>
         </div>
         <div className="product-overview-info">
           <h2 className="product-overview-title">

@@ -18,7 +18,7 @@ function LastChance() {
     setInitial(true);
   }, []);
 
-  var fetchData = async () => {
+  const fetchData = async () => {
     if (end || !initial)
       return;
     const res = await getLatestProducts(page, "endDate");

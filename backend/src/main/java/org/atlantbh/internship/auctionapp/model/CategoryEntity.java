@@ -1,6 +1,7 @@
 package org.atlantbh.internship.auctionapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CategoryEntity {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
     @Column(name = "name")
     private String name;
 

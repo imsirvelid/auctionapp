@@ -1,6 +1,7 @@
 package org.atlantbh.internship.auctionapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @NoArgsConstructor
@@ -20,9 +21,11 @@ public class ImageEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
+    @NotBlank
     @Column(name = "url")
     private String imageUrl;
 
+    @NotBlank
     @Column(name = "featured")
     private Boolean featured;
 }

@@ -4,19 +4,19 @@ import "./TabView.css";
 
 function TabView(props) {
   const tabs = props.tabs;
-  const [currentTab, setCurrentTab] = useState(tabs[0].id);
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <>
       <div className="tab-view-header">
         {true ? (
-          tabs.map((tab) => (
+          tabs.map((tab, index) => (
             <p
               className={`tab-view-option ${
-                tab.id === currentTab ? "tvo-selected" : ""
+                index === currentTab ? "tvo-selected" : ""
               }`}
               key={tab.id}
-              onClick={() => setCurrentTab(tab.id)}
+              onClick={() => setCurrentTab(index)}
             >
               {tab.title}
             </p>
@@ -25,9 +25,7 @@ function TabView(props) {
           <></>
         )}
       </div>
-      {tabs.map((tab) => (
-        tab.id === currentTab && tab.component
-      ))}
+      {tabs[currentTab].component}
     </>
   );
 }

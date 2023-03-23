@@ -25,7 +25,6 @@ function LastChance() {
     if (res.length === 0)
       setEnd(true);
     setProductList([...productList, ...res]);
-    console.log(productList);
     setPage(page + 1);
   }
   return (

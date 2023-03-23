@@ -43,7 +43,7 @@ public class ProductEntity {
     private LocalDateTime endDate;
 
     @Column(name = "status")
-    private STATUS status;
+    private Status status;
 
     @OneToMany(mappedBy = "product")
     private List<ImageEntity> images;

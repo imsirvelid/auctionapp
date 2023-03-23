@@ -3,7 +3,7 @@ package org.atlantbh.internship.auctionapp.dto.Product;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.atlantbh.internship.auctionapp.model.STATUS;
+import org.atlantbh.internship.auctionapp.model.Status;
 
 import java.time.LocalDateTime;
 
@@ -24,5 +24,5 @@ public class ProductResponse {
     private LocalDateTime endDate;
     private String thumbnailUrl;
     @Enumerated(EnumType.STRING)
-    private STATUS status;
+    private Status status;
 }

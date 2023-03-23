@@ -37,11 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getRandom() {
-        List<ProductEntity> entites = new ArrayList<>();
-        productRepository.findAll().forEach(entites::add);
-        List<ProductResponse> response = entites.stream().map(productMapper::fromEntity).collect(Collectors.toList());
-        Random rand = new Random();
-        int i = rand.nextInt(response.size());
-        return response.get(i);
+        var random = productRepository.findOneRandom();
+        return productMapper.fromEntity(random);
     }
 }

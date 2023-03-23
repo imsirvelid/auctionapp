@@ -51,7 +51,4 @@ public class UserEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @OneToMany(mappedBy = "user")
-    private List<ProductEntity> products;
-
 }

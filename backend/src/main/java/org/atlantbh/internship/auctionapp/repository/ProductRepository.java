@@ -16,4 +16,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
     @Query("select new org.atlantbh.internship.auctionapp.dto.Product.ProductResponse(pe.id, pe.user.id, pe.name, pe.details, pe.startingPrice, pe.created, pe.startDate, pe.endDate, ie.imageUrl, pe.status) from ProductEntity pe left join ImageEntity ie on pe.id = ie.product.id")
     public List<ProductResponse> getProductsWithThumbnails(Pageable pageable);
 
+    @Query("select pe from ProductEntity pe order by random() limit 1")
+    ProductEntity findOneRandom();
+
 }

@@ -36,9 +36,7 @@ function Landing() {
       const res = await getParentCategories();
       setCategories(res);
     };
-    if (!randomProduct) random();
-    if (!categories) getCategories();
-  });
+  }, []);
 
   return (
     <div className="container">

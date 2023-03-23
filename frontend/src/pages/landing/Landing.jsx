@@ -36,6 +36,8 @@ function Landing() {
       const res = await getParentCategories();
       setCategories(res);
     };
+    random();
+    getCategories();
   }, []);
 
   return (

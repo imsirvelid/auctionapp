@@ -3,6 +3,7 @@ package org.atlantbh.internship.auctionapp.service.impl;
 import org.atlantbh.internship.auctionapp.dto.Mapper.ProductMapper;
 import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
 import org.atlantbh.internship.auctionapp.model.ProductEntity;
+import org.atlantbh.internship.auctionapp.repository.BidRepository;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.mapstruct.factory.Mappers;
@@ -20,6 +21,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    BidRepository bidRepository;
+
     ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     @Override
@@ -47,6 +52,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getById(Long id) {
+        var bids = bidRepository.findById(1L);
+        bids.ifPresent(bid -> System.out.println(bids.get()));
         return productMapper.fromEntity(productRepository.findById(id).get());
     }
 }

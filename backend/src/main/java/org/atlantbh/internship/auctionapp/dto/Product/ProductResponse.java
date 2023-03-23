@@ -28,6 +28,8 @@ public class ProductResponse {
     private LocalDateTime endDate;
     private String thumbnailUrl;
     private List<String> images;
+    private Double maxBid;
+    private Integer totalBid;
     @Enumerated(EnumType.STRING)
     private STATUS status;
 

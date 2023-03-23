@@ -1,6 +1,5 @@
 package org.atlantbh.internship.auctionapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@ToString
+//@ToString
 @Table(name = "product")
 public class ProductEntity {
 
@@ -50,5 +49,10 @@ public class ProductEntity {
     private STATUS status;
 
     @OneToMany(mappedBy = "product")
+    private List<BidEntity> bids;
+
+    @OneToMany(mappedBy = "product")
     private List<ImageEntity> images;
+
+
 }

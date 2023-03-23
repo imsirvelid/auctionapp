@@ -25,7 +25,7 @@ function Landing() {
     },
   ];
   const [randomProduct, setRandomProduct] = useState();
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     var random = async () => {
       const res = await getRandomProduct();
@@ -45,12 +45,11 @@ function Landing() {
       <div className="main-content-landing">
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
-          {categories &&
-            categories.map((category) => (
-              <p className="category-box-p" key={category.id}>
-                {category.name}
-              </p>
-            ))}
+          {categories.map((category) => (
+            <p className="category-box-p" key={category.id}>
+              {category.name}
+            </p>
+          ))}
           <p className="category-box-p-other">Other categories</p>
         </div>
         <div className="random-product-landing">

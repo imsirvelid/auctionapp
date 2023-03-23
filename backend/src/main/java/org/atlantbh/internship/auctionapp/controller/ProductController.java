@@ -1,7 +1,5 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.apache.coyote.Response;
-import org.atlantbh.internship.auctionapp.dto.Category.CategoryResponse;
 import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;

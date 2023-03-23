@@ -1,10 +1,7 @@
 package org.atlantbh.internship.auctionapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor

@@ -17,15 +17,3 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
     public List<ProductResponse> getProductsWithThumbnails(Pageable pageable);
 
 }
-/*
-* private Long userId;
-    private String name;
-    private String details;
-    private Double startingPrice;
-    private LocalDateTime created;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private String thumbnailUrl;
-    @Enumerated(EnumType.STRING)
-    private STATUS status;
-* */

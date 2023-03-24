@@ -1,4 +1,4 @@
-package org.atlantbh.internship.auctionapp.model;
+package org.atlantbh.internship.auctionapp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

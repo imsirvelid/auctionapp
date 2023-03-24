@@ -1,7 +1,7 @@
-package org.atlantbh.internship.auctionapp.dto.Mapper;
+package org.atlantbh.internship.auctionapp.model.Mapper;
 
-import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
-import org.atlantbh.internship.auctionapp.model.ProductEntity;
+import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
+import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

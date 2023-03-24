@@ -1,9 +1,9 @@
 package org.atlantbh.internship.auctionapp.service.api;
 
-import org.atlantbh.internship.auctionapp.dto.Category.CategoryResponse;
+import org.atlantbh.internship.auctionapp.entity.CategoryEntity;
 
 import java.util.List;
 
 public interface CategoryService {
-    public List<CategoryResponse> getParentCategories();
+    List<CategoryEntity> getParentCategories();
 }

@@ -1,4 +1,4 @@
-package org.atlantbh.internship.auctionapp.dto.Category;
+package org.atlantbh.internship.auctionapp.model.Category;
 
 import lombok.*;
 

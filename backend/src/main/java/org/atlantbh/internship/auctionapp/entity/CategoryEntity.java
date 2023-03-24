@@ -1,10 +1,8 @@
-package org.atlantbh.internship.auctionapp.model;
+package org.atlantbh.internship.auctionapp.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +28,6 @@ public class CategoryEntity {
     @JoinColumn(name = "parent_category_id")
     private CategoryEntity parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
-    private List<CategoryEntity> childCategories;
+    
+
 }

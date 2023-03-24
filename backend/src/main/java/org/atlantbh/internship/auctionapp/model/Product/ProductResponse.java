@@ -1,9 +1,9 @@
-package org.atlantbh.internship.auctionapp.dto.Product;
+package org.atlantbh.internship.auctionapp.model.Product;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.atlantbh.internship.auctionapp.model.Status;
+import org.atlantbh.internship.auctionapp.entity.Status;
 
 import java.time.LocalDateTime;
 

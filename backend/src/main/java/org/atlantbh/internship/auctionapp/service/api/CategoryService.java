@@ -1,6 +1,6 @@
 package org.atlantbh.internship.auctionapp.service.api;
 
-import org.atlantbh.internship.auctionapp.dto.Category.CategoryResponse;
+import org.atlantbh.internship.auctionapp.model.Category.CategoryResponse;
 
 import java.util.List;
 

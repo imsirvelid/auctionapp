@@ -1,7 +1,7 @@
 package org.atlantbh.internship.auctionapp.repository;
 
-import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
-import org.atlantbh.internship.auctionapp.model.ProductEntity;
+import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
+import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

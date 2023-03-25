@@ -1,12 +1,9 @@
-package org.atlantbh.internship.auctionapp.dto.Product;
+package org.atlantbh.internship.auctionapp.model.Product;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.atlantbh.internship.auctionapp.model.ImageEntity;
-import org.atlantbh.internship.auctionapp.model.STATUS;
-import org.atlantbh.internship.auctionapp.model.UserEntity;
+import org.atlantbh.internship.auctionapp.entity.STATUS;
 
 import java.time.LocalDateTime;
 import java.util.List;

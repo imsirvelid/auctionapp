@@ -1,7 +1,7 @@
 package org.atlantbh.internship.auctionapp.repository;
 
-import org.atlantbh.internship.auctionapp.dto.Category.CategoryResponse;
-import org.atlantbh.internship.auctionapp.model.CategoryEntity;
+import org.atlantbh.internship.auctionapp.model.Category.CategoryResponse;
+import org.atlantbh.internship.auctionapp.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

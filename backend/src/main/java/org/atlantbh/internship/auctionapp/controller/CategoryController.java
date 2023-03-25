@@ -1,6 +1,6 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.atlantbh.internship.auctionapp.dto.Category.CategoryResponse;
+import org.atlantbh.internship.auctionapp.model.Category.CategoryResponse;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

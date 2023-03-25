@@ -1,6 +1,8 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
+import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +17,19 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @GetMapping(value = "", params = { "page", "sort"})
-    public ResponseEntity<List<ProductResponse>> getProducts(@RequestParam int page, @RequestParam String sort){
-        return ResponseEntity.ok(productService.getAll(page, sort));
+    public ProductController(final ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping(params = { "page", "sort", "order"})
+    public ResponseEntity<List<Product>> getProducts(@RequestParam int page, @RequestParam String sort, @RequestParam String order){
+        return ResponseEntity.ok(productService.getAll(new PageParams(4, page), new SortParams(order, sort)));
     }
 
     @GetMapping(value = "/random")
-    public ResponseEntity<ProductResponse> getRandomProduct() {
+    public ResponseEntity<Product> getRandomProduct() {
         return ResponseEntity.ok(productService.getRandom());
     }
 

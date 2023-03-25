@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(final CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping(value = "/parent")
     public ResponseEntity<List<CategoryEntity>> getParentCategories(){

@@ -1,41 +1,37 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
-import org.atlantbh.internship.auctionapp.model.Mapper.ProductMapper;
-import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
+import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    ProductRepository productRepository;
-    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
-    @Override
-    public List<ProductResponse> getAll(int page, String sortBy) {
-        Pageable paging = null;
-        // This is a bit clunky, will fix later
-        if (sortBy.equals("endDate")){
-            paging = PageRequest.of(page, 4, Sort.by(sortBy).ascending());
-        }
-        else
-            paging = PageRequest.of(page, 4, Sort.by(sortBy).descending());
-        List<ProductResponse> entites = productRepository.getProductsWithThumbnails(paging);
-        return entites;
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(final ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
-    public ProductResponse getRandom() {
-        var random = productRepository.findOneRandom();
-        return productMapper.fromEntity(random);
+    public List<Product> getAll(PageParams pageParams, SortParams sortParams) {
+        Pageable paging = PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort());
+        return productRepository.getProductsWithThumbnails(paging);
+    }
+
+    @Override
+    public Product getRandom() {
+        return productRepository.findOneRandom().toDomainModel();
     }
 }

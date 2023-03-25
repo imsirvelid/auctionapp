@@ -1,10 +1,12 @@
 package org.atlantbh.internship.auctionapp.service.api;
 
-import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
+import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.model.Product;
 
 import java.util.List;
 
 public interface ProductService {
-    public List<ProductResponse> getAll(int page, String sortBy);
-    public ProductResponse getRandom();
+    List<Product> getAll(PageParams pageParams, SortParams sortParams);
+    Product getRandom();
 }

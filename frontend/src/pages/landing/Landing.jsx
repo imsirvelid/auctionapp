@@ -9,7 +9,7 @@ import LastChance from "components/tab-last-chance/LastChance";
 import {getParentCategories} from "api/Category";
 
 function Landing() {
-  var tabs = [
+  const tabs = [
     {
       id: 1,
       title: "New Arrivals",
@@ -27,12 +27,12 @@ function Landing() {
   const [randomProduct, setRandomProduct] = useState();
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    var random = async () => {
+    const random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);
     };
 
-    var getCategories = async () => {
+    const getCategories = async () => {
       const res = await getParentCategories();
       setCategories(res);
     };
@@ -53,7 +53,7 @@ function Landing() {
           <p className="category-box-p-other">Other categories</p>
         </div>
         <div className="random-product-landing">
-          {randomProduct && (
+          {(
             <RandomProductCard product={randomProduct}></RandomProductCard>
           )}
         </div>

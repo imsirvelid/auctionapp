@@ -37,8 +37,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        var bids = bidRepository.findById(1L);
-        bids.ifPresent(bid -> System.out.println(bids.get()));
         return productRepository.findById(id).get().toDomainModel();
     }
 }

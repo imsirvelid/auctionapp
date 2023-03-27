@@ -11,23 +11,20 @@ function LastChance() {
   const [initial, setInitial] = useState(false);
   useEffect(() => {
     const getLatest = async () => {
-      const res = await getLatestProducts(0, "endDate");
+      const res = await getLatestProducts(0, "endDate", "desc");
       setProductList(res);
     };
     getLatest();
     setInitial(true);
   }, []);
 
-  var fetchData = async () => {
-    if (end || !initial)
-      return;
-    const res = await getLatestProducts(page, "endDate");
-    if (res.length === 0)
-      setEnd(true);
+  const fetchData = async () => {
+    if (end || !initial) return;
+    const res = await getLatestProducts(page, "endDate", "desc");
+    if (res.length === 0) setEnd(true);
     setProductList([...productList, ...res]);
-    console.log(productList);
     setPage(page + 1);
-  }
+  };
   return (
     <InfiniteScroll
       className="infinite-scroll"
@@ -35,18 +32,15 @@ function LastChance() {
       next={fetchData}
       hasMore={!end}
     >
-      {productList
-        ? productList.map((product) => (
-            <div className="product-item" key={product.id}>
-              <ProductGridCard
-                thumbnailUrl={product.thumbnailUrl}
-                productTitle={product.name}
-                startsFrom={product.startingPrice}
-                key={product.id}
-              />
-            </div>
-          ))
-        : false}
+      {productList.map((product) => (
+        <div className="product-item" key={product.id}>
+          <ProductGridCard
+            thumbnailUrl={product.thumbnailUrl}
+            productTitle={product.name}
+            startsFrom={product.startingPrice}
+          />
+        </div>
+      ))}
     </InfiniteScroll>
   );
 }

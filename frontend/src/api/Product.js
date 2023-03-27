@@ -2,17 +2,19 @@ import axios from "axios";
 
 import {BASE_URL} from "./Commons";
 
-export const getLatestProducts = async (page, sortBy = "created") => {
-  const fetchData = await axios.get(BASE_URL + "/products?page=" + page + "&sort=" + sortBy);
+const URL = BASE_URL + "/products";
+
+export const getLatestProducts = async (page, sortBy, orderBy) => {
+  const fetchData = await axios.get(URL, { params: { page: page, sort: sortBy, order: orderBy }});
   return fetchData.data;
 };
 
 export const getRandomProduct = async () => {
-  const data = await axios.get(BASE_URL + "/products/random");
+  const data = await axios.get(URL + "/random");
   return data.data;
 }
 
 export const getProductById = async(id) => {
-  const data = await axios.get(BASE_URL + "/product/" + id)
+  const data = await axios.get(URL + "/" + id)
   return data.data;
 }

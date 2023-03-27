@@ -1,12 +1,13 @@
-package org.atlantbh.internship.auctionapp.model.Product;
+package org.atlantbh.internship.auctionapp.model;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.atlantbh.internship.auctionapp.entity.STATUS;
+import org.atlantbh.internship.auctionapp.entity.Status;
+import org.atlantbh.internship.auctionapp.entity.UserEntity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,25 +15,22 @@ import java.util.List;
 @Setter
 @ToString
 @Data
-public class ProductResponse {
+public class Product {
     private Long id;
-    private Long userId;
+    private User user;
     private String name;
     private String details;
-    private Double startingPrice;
+    private BigDecimal startingPrice;
     private LocalDateTime created;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String thumbnailUrl;
-    private List<String> images;
-    private Double maxBid;
-    private Integer totalBid;
     @Enumerated(EnumType.STRING)
-    private STATUS status;
+    private Status status;
 
-    public ProductResponse(Long id, Long userId, String name, String details, Double startingPrice, LocalDateTime created, LocalDateTime startDate, LocalDateTime endDate, String thumbnailUrl, STATUS status) {
+    public Product(Long id, UserEntity userEntity, String name, String details, BigDecimal startingPrice, LocalDateTime created, LocalDateTime startDate, LocalDateTime endDate, String thumbnailUrl, Status status) {
         this.id = id;
-        this.userId = userId;
+        this.user = userEntity.toDomainModel();
         this.name = name;
         this.details = details;
         this.startingPrice = startingPrice;
@@ -40,7 +38,6 @@ public class ProductResponse {
         this.startDate = startDate;
         this.endDate = endDate;
         this.thumbnailUrl = thumbnailUrl;
-        this.images = null;
         this.status = status;
     }
 }

@@ -2,7 +2,9 @@ import axios from "axios";
 
 import {BASE_URL} from "./Commons";
 
-export const getParentCategories = async (page, sortBy = "created") => {
-  const fetchData = await axios.get(BASE_URL + "/categories/parent");
+const URL = BASE_URL + "/categories"
+
+export const getParentCategories = async () => {
+  const fetchData = await axios.get(URL + "/parent");
   return fetchData.data;
 };

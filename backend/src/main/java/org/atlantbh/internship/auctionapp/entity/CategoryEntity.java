@@ -3,8 +3,6 @@ package org.atlantbh.internship.auctionapp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,6 +26,4 @@ public class CategoryEntity {
     @JoinColumn(name = "parent_category_id")
     private CategoryEntity parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
-    private List<CategoryEntity> childCategories;
 }

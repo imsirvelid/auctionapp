@@ -1,38 +1,39 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.atlantbh.internship.auctionapp.model.Product.ProductResponse;
-import org.atlantbh.internship.auctionapp.service.api.CategoryService;
+import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @GetMapping(value = "/products", params = { "page", "sort"})
-    public ResponseEntity<List<ProductResponse>> getProducts(@RequestParam int page, @RequestParam String sort){
-        return ResponseEntity.ok(productService.getAll(page, sort));
+    public ProductController(final ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping(value = "/product/{id}")
-    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id) {
+    @GetMapping(value = "{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getById(id));
     }
 
-    @GetMapping(value = "/products/random")
-    public ResponseEntity<ProductResponse> getRandomProduct() {
+    @GetMapping(params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams){
+        return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
+    }
+
+    @GetMapping(value = "/random")
+    public ResponseEntity<Product> getRandomProduct() {
         return ResponseEntity.ok(productService.getRandom());
     }
 

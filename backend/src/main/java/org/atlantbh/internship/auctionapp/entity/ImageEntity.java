@@ -1,5 +1,4 @@
 package org.atlantbh.internship.auctionapp.entity;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,13 +15,13 @@ public class ImageEntity {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "featured")
+    private Boolean featured;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
     @Column(name = "url")
     private String imageUrl;
-
-    @Column(name = "featured")
-    private Boolean featured;
 }

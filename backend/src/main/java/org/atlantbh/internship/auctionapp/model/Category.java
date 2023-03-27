@@ -1,4 +1,4 @@
-package org.atlantbh.internship.auctionapp.model.Category;
+package org.atlantbh.internship.auctionapp.model;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class CategoryResponse {
+public class Category {
     private Long id;
     private String name;
     private String imageUrl;

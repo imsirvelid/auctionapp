@@ -1,33 +1,26 @@
 import React, {useState} from "react";
 import "./TabView.css";
 
-
 function TabView(props) {
   const tabs = props.tabs;
-  const [currentTab, setCurrentTab] = useState(tabs[0].id);
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <>
       <div className="tab-view-header">
-        {true ? (
-          tabs.map((tab) => (
-            <p
-              className={`tab-view-option ${props.optionSize} ${
-                tab.id === currentTab ? "tvo-selected" : ""
-              }`}
-              key={tab.id}
-              onClick={() => setCurrentTab(tab.id)}
-            >
-              {tab.title}
-            </p>
-          ))
-        ) : (
-          <></>
-        )}
+        {tabs.map((tab, index) => (
+          <p
+            className={`tab-view-option ${
+              index === currentTab ? "tvo-selected" : ""
+            }`}
+            key={tab.id}
+            onClick={() => setCurrentTab(index)}
+          >
+            {tab.title}
+          </p>
+        ))}
       </div>
-      {tabs.map((tab) => (
-        tab.id === currentTab && tab.component
-      ))}
+      {tabs[currentTab].component}
     </>
   );
 }

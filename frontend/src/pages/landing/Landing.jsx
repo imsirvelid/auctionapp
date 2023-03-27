@@ -9,7 +9,7 @@ import LastChance from "components/tab-last-chance/LastChance";
 import {getParentCategories} from "api/Category";
 
 function Landing() {
-  var tabs = [
+  const tabs = [
     {
       id: 1,
       title: "New Arrivals",
@@ -25,37 +25,37 @@ function Landing() {
     },
   ];
   const [randomProduct, setRandomProduct] = useState();
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
-    var random = async () => {
+    const random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);
+      console.log(res);
     };
 
-    var getCategories = async () => {
+    const getCategories = async () => {
       const res = await getParentCategories();
       setCategories(res);
     };
-    if (!randomProduct) random();
-    if (!categories) getCategories();
-  });
+    random();
+    getCategories();
+  }, []);
 
   return (
     <div className="container">
       <div className="main-content-landing">
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
-          {categories &&
-            categories.map((category) => (
-              <p className="category-box-p" key={category.id}>
-                {category.name}
-              </p>
-            ))}
+          {categories.map((category) => (
+            <p className="category-box-p" key={category.id}>
+              {category.name}
+            </p>
+          ))}
           <p className="category-box-p-other">Other categories</p>
         </div>
         <div className="random-product-landing">
-          {randomProduct && (
-            <RandomProductCard product={randomProduct} />
+          {(
+            randomProduct && <RandomProductCard product={randomProduct}></RandomProductCard>
           )}
         </div>
       </div>

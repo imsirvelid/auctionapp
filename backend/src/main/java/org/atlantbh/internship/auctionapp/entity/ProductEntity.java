@@ -6,6 +6,8 @@ import org.atlantbh.internship.auctionapp.model.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -52,9 +54,11 @@ public class ProductEntity {
     @Column(name = "status")
     private Status status;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<ImageEntity> images;
 
-    public Product toDomainModel() {
-        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, "", status);
+    public Product toDomainModel(){
+        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()));
     }
 
     public static ProductEntity fromDomainModel(final Product product) {

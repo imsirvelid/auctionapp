@@ -1,13 +1,17 @@
 package org.atlantbh.internship.auctionapp.entity;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.atlantbh.internship.auctionapp.model.Image;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@ToString
 @Table(name = "image")
 public class ImageEntity {
 
@@ -24,4 +28,21 @@ public class ImageEntity {
 
     @Column(name = "url")
     private String imageUrl;
+
+    public Image toDomainModel(){
+        return new Image(this.id, this.imageUrl, this.featured, this.product.toDomainModel());
+    }
+
+    public static ImageEntity fromDomainModel(final Image image){
+        final ImageEntity entity = new ImageEntity();
+        entity.setFeatured(image.getFeatured());
+        entity.setId(image.getId());
+        entity.setImageUrl(image.getImageUrl());
+        entity.setProduct(ProductEntity.fromDomainModel(image.getProduct()));
+        return entity;
+    }
+
+    public Image toDomainModelWithoutProduct(){
+        return new Image(this.id, this.imageUrl, this.featured, null);
+    }
 }

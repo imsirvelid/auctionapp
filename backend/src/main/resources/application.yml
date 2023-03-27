@@ -8,7 +8,7 @@ spring:
             dialect:
                 hibernate: org.hibernate.dialect.PostgreSQLDialect
             hibernate:
-                show-sql: true
+                show_sql: true
                 format_sql: true
                 globally_quoted_identifiers: true
         hibernate:

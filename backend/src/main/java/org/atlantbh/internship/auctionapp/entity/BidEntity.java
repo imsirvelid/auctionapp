@@ -3,6 +3,7 @@ package org.atlantbh.internship.auctionapp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -27,7 +28,7 @@ public class BidEntity {
     private ProductEntity product;
 
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "created")
     private LocalDateTime created;

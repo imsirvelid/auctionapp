@@ -8,4 +8,8 @@ import java.util.List;
 public interface BidRepository extends CrudRepository<BidEntity, Long> {
 
     List<BidEntity> findByProductId(Long productId);
+
+    BidEntity findFirst1ByProductIdOrderByPriceDesc(Long productId);
+
+    Integer countByProductId(Long productId);
 }

@@ -37,7 +37,7 @@ function NewArrivals() {
       {productList.map((product) => (
         <div className="product-item" key={product.id}>
           <ProductGridCard
-            thumbnailUrl={product.thumbnailUrl}
+            thumbnailUrl={product.images[0].imageUrl}
             productTitle={product.name}
             startsFrom={product.startingPrice}
             key={product.id}

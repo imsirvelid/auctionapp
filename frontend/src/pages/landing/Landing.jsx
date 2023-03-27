@@ -54,7 +54,7 @@ function Landing() {
         </div>
         <div className="random-product-landing">
           {(
-            <RandomProductCard product={randomProduct}></RandomProductCard>
+            randomProduct && <RandomProductCard product={randomProduct}></RandomProductCard>
           )}
         </div>
       </div>

@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import {BASE_URL} from "./Commons";
+import {BASE_URL, pageSize} from "./Commons";
 
 const URL = BASE_URL + "/products";
 
-export const getLatestProducts = async (page, sortBy, orderBy) => {
-  const fetchData = await axios.get(URL, { params: { page: page, sort: sortBy, order: orderBy }});
+export const getLatestProducts = async (page, sortBy, orderBy, size = pageSize) => {
+  const fetchData = await axios.get(URL, { params: { pageNumber: page, pageSize: size, sortField: sortBy, sortOrder: orderBy }});
   return fetchData.data;
 };
 

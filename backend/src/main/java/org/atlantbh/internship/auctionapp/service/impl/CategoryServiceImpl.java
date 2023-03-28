@@ -3,7 +3,6 @@ package org.atlantbh.internship.auctionapp.service.impl;
 import org.atlantbh.internship.auctionapp.entity.CategoryEntity;
 import org.atlantbh.internship.auctionapp.repository.CategoryRepository;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -53,6 +53,7 @@ public class ProductEntity {
 
     @NotBlank
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)

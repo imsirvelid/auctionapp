@@ -2,17 +2,19 @@
   width: 75%;
   margin: 37px auto;
   font-size: 18px;
-  padding: 19px;
-  background: #FAFAFA;
+  padding: 0px;
+  background: #fafafa;
 }
 
 .sublink-span {
   font-weight: 500;
+  color: black;
   margin-left: 11px;
 }
 
 .right-p-link {
   margin-left: auto;
+  color: gray;
   font-weight: 100;
 }
 

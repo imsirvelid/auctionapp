@@ -34,3 +34,7 @@
 .product-overview-starts-from {
   font-size: 24px;
 }
+
+.product-info-details {
+  margin: 0 !important;
+}

@@ -9,10 +9,12 @@ import org.springframework.data.domain.Sort;
 @Setter
 @AllArgsConstructor
 public class SortParams {
-    private Sort.Direction sortOrder;
+    private String sortOrder;
     private String sortField;
 
     public Sort getSort(){
-        return Sort.by(sortOrder, sortField);
+        if (sortOrder.equals("desc"))
+            return Sort.by(sortField).descending();
+        return Sort.by(sortField).ascending();
     }
 }

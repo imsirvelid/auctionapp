@@ -20,7 +20,6 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  gap: 25px;
   width: 75%;
 }
 
@@ -71,7 +70,6 @@
   width: 30%;
   text-decoration: none;
   font-size: 16px;
-  margin-left: 3%;
   color: #252525;
   align-items: center;
   letter-spacing: 0.56px;
@@ -87,6 +85,8 @@
 }
 
 .navbar-routes {
-  /*visibility: hidden;*/
+  margin-left: 23px;
+  /*margin-left: auto;
+  visibility: hidden;*/
 }
 

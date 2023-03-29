@@ -1,6 +1,7 @@
 .tab-view-header {
   width: 100%;
   border-bottom: 3px solid #ececec;
+  margin-bottom: 23px;
   display: flex;
   gap: 31px;
 }

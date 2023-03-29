@@ -3,6 +3,7 @@ package org.atlantbh.internship.auctionapp.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.atlantbh.internship.auctionapp.model.Category;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +29,9 @@ public class CategoryEntity {
     @JoinColumn(name = "parent_category_id")
     private CategoryEntity parentCategory;
 
+    public Category toDomainModel(){
+        return new Category(id, name, imageUrl);
+    }
     
 
 }

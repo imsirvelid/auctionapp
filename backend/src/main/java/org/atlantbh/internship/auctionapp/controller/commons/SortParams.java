@@ -13,8 +13,6 @@ public class SortParams {
     private String sortField;
 
     public Sort getSort(){
-        if (sortOrder == "desc")
-            return Sort.by(sortField).descending();
-        return Sort.by(sortField).ascending();
+        return Sort.by(Sort.Direction.fromString(sortOrder), sortField);
     }
 }

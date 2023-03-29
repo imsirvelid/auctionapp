@@ -1,6 +1,6 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.atlantbh.internship.auctionapp.entity.CategoryEntity;
+import org.atlantbh.internship.auctionapp.model.Category;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/parent")
-    public ResponseEntity<List<CategoryEntity>> getParentCategories(){
+    public ResponseEntity<List<Category>> getParentCategories(){
         return ResponseEntity.ok(categoryService.getParentCategories());
     }
 }

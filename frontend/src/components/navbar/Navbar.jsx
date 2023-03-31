@@ -25,7 +25,7 @@ function Navbar() {
             AUCTION
           </div>
           <div className="navbar-search-input">
-            <Input width="95%" placeholder="Try enter: Shoes" ></Input>
+            <Input width="95%" placeholder="Try enter: Shoes" />
             <FontAwesomeIcon className="search-icon" icon={ faSearch } />
           </div>
           <div className="navbar-routes">

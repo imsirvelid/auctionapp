@@ -1,12 +1,13 @@
 .black-navbar {
   width: 100%;
   height: auto;
-  padding: 10px 0px;
+  padding: 0px 0px;
   background-color: #252525;
 }
 
 .white-navbar {
   margin-top: 15px;
+  margin-bottom: 37px;
 }
 
 .container-75 {
@@ -49,7 +50,6 @@
 
 .navbar-search-input {
   display: flex;
-  visibility: hidden;
   border-radius: 3px;
   border: 1px solid #e0e0e0;
   box-shadow: 3px 3px #e0e0e0;
@@ -81,9 +81,5 @@
 
 .navbar-routes a:hover {
   color: #8367D8;
-}
-
-.navbar-routes {
-  visibility: hidden;
 }
 

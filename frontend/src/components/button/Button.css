@@ -3,19 +3,25 @@
   display: table-cell;
   vertical-align: middle;
   padding: 10px 17px;
+  font-size: 18px;
+  letter-spacing: 0.63px;
 }
 
 .primary {
   background-color: inherit;
-  font-size: 18px;
   color: #d8d8d8;
-  letter-spacing: 0.63px;
+}
+
+.default {
+  background-color: inherit;
+  font-weight: bold;
+  color: black;
 }
 
 .primary i {
   font-size: 18px;
 }
 
-button:hover {
+.button:hover {
   cursor: pointer;
 }

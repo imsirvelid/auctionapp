@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import "./RandomProductCard.css";
 import Button from "components/button/Button";
 function RandomProductCard(props) {
   return (
+    <Link to={`/products/${props.product.id}`}>
     <div className="random-product-card">
       <div className="random-product-content">
         <p className="random-product-name">{props.product.name}</p>
@@ -18,6 +20,7 @@ function RandomProductCard(props) {
         <img src={props.product.images[0].imageUrl} alt="product-img" />
       </div>
     </div>
+    </Link>
   );
 }
 

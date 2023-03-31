@@ -52,3 +52,7 @@
   all: unset;
   width: 100%;
 }
+
+a {
+  all: unset;
+}

@@ -22,7 +22,7 @@ function App() {
             element={<TermsAndConditions />}
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/product/:id" element={<ProductOverview />} />
+          <Route path="/products/:id" element={<ProductOverview />} />
         </Routes>
       </div>
       <Footer />

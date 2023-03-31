@@ -1,7 +1,6 @@
 .tab-container {
   display: flex;
   flex-wrap: wrap;
-  /*gap: 53px;*/
 }
 
 .product-item {
@@ -52,4 +51,8 @@
 .infinite-scroll-component__outerdiv {
   all: unset;
   width: 100%;
+}
+
+a {
+  all: unset;
 }

@@ -1,6 +1,7 @@
 package org.atlantbh.internship.auctionapp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,15 +20,22 @@ public class ImageEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "featured")
-    private Boolean featured;
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
+    @NotBlank
     @Column(name = "url")
     private String imageUrl;
+
+    @NotBlank
+    @Column(name = "featured")
+    private Boolean featured;
+
+    @Override
+    public String toString(){
+        return featured.toString();
+    }
 
     public Image toDomainModel(){
         return new Image(this.id, this.imageUrl, this.featured, this.product.toDomainModel());

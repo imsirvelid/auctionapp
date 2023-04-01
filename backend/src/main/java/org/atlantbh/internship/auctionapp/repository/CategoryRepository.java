@@ -1,4 +1,5 @@
 package org.atlantbh.internship.auctionapp.repository;
+
 import org.atlantbh.internship.auctionapp.entity.CategoryEntity;
 import org.springframework.data.repository.CrudRepository;
 

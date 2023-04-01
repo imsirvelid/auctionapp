@@ -1,28 +1,27 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
-import org.atlantbh.internship.auctionapp.dto.Mapper.ProductMapper;
-import org.atlantbh.internship.auctionapp.dto.Product.ProductResponse;
-import org.atlantbh.internship.auctionapp.model.ProductEntity;
+import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.entity.ProductEntity;
+import org.atlantbh.internship.auctionapp.model.Product;
+import org.atlantbh.internship.auctionapp.repository.BidRepository;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
-import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-
     private final ProductRepository productRepository;
+    private final BidRepository bidRepository;
 
-    public ProductServiceImpl(final ProductRepository productRepository) {
+    public ProductServiceImpl(final ProductRepository productRepository, final BidRepository bidRepository) {
         this.productRepository = productRepository;
+        this.bidRepository = bidRepository;
     }
 
     @Override
@@ -37,7 +36,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse getById(Long id) {
-        return productMapper.fromEntity(productRepository.findById(id).get());
+
+    public Product getById(Long id) {
+        return productRepository.findById(id).get().toDomainModel();
     }
 }

@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getAll(PageParams pageParams, SortParams sortParams);
+    Product getById(Long id);
     Product getRandom();
 }

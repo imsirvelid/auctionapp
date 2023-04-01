@@ -30,6 +30,7 @@ function Landing() {
     const random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);
+      console.log(res);
     };
 
     const getCategories = async () => {
@@ -59,7 +60,7 @@ function Landing() {
         </div>
       </div>
       <div className="tab-container">
-        <TabView tabs={tabs}></TabView>
+        <TabView tabs={tabs} optionSize="option-size-normal" />
       </div>
     </div>
   );

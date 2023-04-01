@@ -8,7 +8,7 @@ import NavigationCard from "components/navigation-card/NavigationCard";
 function About() {
   return (
     <>
-      <NavigationCard name="About Us" link="SHOP" subLink="About Us" />
+      <NavigationCard name="About Us" link="HOME" subLink="About Us" />
       <div className="container">
         <h1 className="about-title">About Us</h1>
         <div className="content">

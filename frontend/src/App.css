@@ -1,3 +1,7 @@
 .App {
   font-family: "Lato";
 }
+
+a:hover {
+  cursor: pointer !important;
+}

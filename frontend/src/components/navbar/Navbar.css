@@ -45,6 +45,10 @@
   align-items: center;
 }
 
+.navbar-logo:hover {
+  cursor: pointer;
+}
+
 .search-icon {
   font-size: 24px;
 }
@@ -87,4 +91,5 @@
 
 .navbar-routes {
   margin-left: 23px;
+  margin-left: auto;
 }

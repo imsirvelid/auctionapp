@@ -54,9 +54,6 @@
 }
 
 a {
-  all: unset;
-}
-
-a:hover {
-  cursor: pointer;
+  text-decoration: none;
+  color: unset;
 }

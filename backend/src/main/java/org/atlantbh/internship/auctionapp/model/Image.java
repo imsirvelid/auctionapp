@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 public class Image {
     private Long id;
-    private String imageUrl;
+    private String url;
     private Boolean featured;
     private Product product;
 }

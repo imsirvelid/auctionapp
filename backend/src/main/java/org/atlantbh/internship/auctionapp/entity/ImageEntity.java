@@ -26,7 +26,7 @@ public class ImageEntity {
 
     @NotBlank
     @Column(name = "url")
-    private String imageUrl;
+    private String url;
 
     @NotBlank
     @Column(name = "featured")
@@ -38,19 +38,19 @@ public class ImageEntity {
     }
 
     public Image toDomainModel(){
-        return new Image(this.id, this.imageUrl, this.featured, this.product.toDomainModel());
+        return new Image(this.id, this.url, this.featured, this.product.toDomainModel());
     }
 
     public static ImageEntity fromDomainModel(final Image image){
         final ImageEntity entity = new ImageEntity();
         entity.setFeatured(image.getFeatured());
         entity.setId(image.getId());
-        entity.setImageUrl(image.getImageUrl());
+        entity.setUrl(image.getUrl());
         entity.setProduct(ProductEntity.fromDomainModel(image.getProduct()));
         return entity;
     }
 
     public Image toDomainModelWithoutProduct(){
-        return new Image(this.id, this.imageUrl, this.featured, null);
+        return new Image(this.id, this.url, this.featured, null);
     }
 }

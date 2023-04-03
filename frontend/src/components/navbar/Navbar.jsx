@@ -22,7 +22,7 @@ function Navbar() {
       <div className="white-navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <Link to="/">
+            <Link className = "link-component" to="/">
               <i className="fa-solid fa-hammer" />
               AUCTION
             </Link>

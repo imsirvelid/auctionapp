@@ -30,7 +30,6 @@ function Landing() {
     const random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);
-      console.log(res);
     };
 
     const getCategories = async () => {

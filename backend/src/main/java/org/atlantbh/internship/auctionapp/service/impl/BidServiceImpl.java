@@ -5,6 +5,8 @@ import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class BidServiceImpl implements BidService {
 
@@ -16,8 +18,8 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public ProductBidResponse getProductBidInfo(Long productId) {
-        var maxBid = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId);
-        var numberOfBids = bidRepository.countByProductId(productId);
-        return new ProductBidResponse(maxBid.getPrice(), numberOfBids.intValue());
+        BigDecimal price = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId).map(p -> p.getPrice()).orElse(null);
+        Integer numberOfBids = bidRepository.countByProductId(productId);
+        return new ProductBidResponse(price, numberOfBids);
     }
 }

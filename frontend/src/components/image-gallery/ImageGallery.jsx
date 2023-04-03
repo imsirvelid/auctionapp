@@ -4,13 +4,18 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import "./ImageGallery.css";
 
 function ImageGallery(props) {
-  var images = [];
-  for (var prop in props.images){
-    images.push({original: props.images[prop].imageUrl, thumbnail: props.images[prop].imageUrl});
-  }
+  const images = props.images.map((img) => ({
+    original: img.url,
+    thumbnail: img.url,
+  }));
   return (
-    <ReactImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false} />
-  )
+    <ReactImageGallery
+      items={images}
+      showNav={false}
+      showPlayButton={false}
+      showFullscreenButton={false}
+    />
+  );
 }
 
-export default ImageGallery
+export default ImageGallery;

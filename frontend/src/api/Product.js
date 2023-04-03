@@ -17,3 +17,8 @@ export const getProductById = async(id) => {
   const data = await axios.get(URL + "/" + id)
   return data.data;
 }
+
+export const searchProducts = async(page, sortBy, orderBy, size = PAGE_SIZE) => {
+  const fetchData = await axios.get(URL, { params: { pageNumber: page, pageSize: size, sortField: sortBy, sortOrder: orderBy }});
+  return fetchData.data;
+} 

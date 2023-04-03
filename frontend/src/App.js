@@ -7,6 +7,7 @@ import TermsAndConditions from "pages/terms-and-conditions/TermsAndConditions";
 import PrivacyPolicy from "pages/privacy-policy/PrivacyPolicy";
 import Landing from "pages/landing/Landing";
 import ProductOverview from "pages/product-overview/ProductOverview";
+import Search from "pages/search/Search";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/products/:id" element={<ProductOverview />} />
+          <Route path="/search" element={ <Search />} />
         </Routes>
       </div>
       <Footer />

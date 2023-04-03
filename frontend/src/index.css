@@ -6,3 +6,8 @@ body {
 code {
   font-family: "Lato";
 }
+
+.product-link {
+  all: unset;
+  width: 100%;
+}

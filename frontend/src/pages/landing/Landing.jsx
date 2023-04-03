@@ -50,7 +50,7 @@ function Landing() {
               {category.name}
             </p>
           ))}
-          <p className="category-box-p-other">Other categories</p>
+          
         </div>
         <div className="random-product-landing">
           {(

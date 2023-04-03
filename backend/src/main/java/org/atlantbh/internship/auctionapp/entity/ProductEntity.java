@@ -50,6 +50,11 @@ public class ProductEntity {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
+
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+
     @NotBlank
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -59,7 +64,7 @@ public class ProductEntity {
     private List<ImageEntity> images;
 
     public Product toDomainModel(){
-        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()));
+        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, category.toDomainModel(), status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()));
     }
 
     public static ProductEntity fromDomainModel(final Product product) {
@@ -71,6 +76,7 @@ public class ProductEntity {
         productEntity.setStartDate(product.getStartDate());
         productEntity.setStartingPrice(product.getStartingPrice());
         productEntity.setStatus(product.getStatus());
+        productEntity.setCategory(CategoryEntity.fromDomainModel(product.getCategory()));
         productEntity.setUser(UserEntity.fromDomainModel(product.getUser()));
         return productEntity;
     }

@@ -36,6 +36,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
+    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder", "category"})
+    public ResponseEntity<List<Product>> filterProductsByCategory(PageParams pageParams, SortParams sortParams, Long category){
+        return ResponseEntity.ok(productService.filterByCategory(pageParams, sortParams, category));
+    }
+
     @GetMapping(value = "/random")
     public ResponseEntity<Product> getRandomProduct() {
         return ResponseEntity.ok(productService.getRandom());

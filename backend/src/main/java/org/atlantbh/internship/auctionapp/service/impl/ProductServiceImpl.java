@@ -29,6 +29,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> filterByCategory(PageParams pageParams, SortParams sortParams, Long categoryId) {
+        return productRepository.findByCategoryId(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), categoryId)
+                .stream().map(ProductEntity::toDomainModel).collect(Collectors.toList());
+    }
+
+    @Override
     public Product getRandom() {
         return productRepository.findOneRandom().toDomainModel();
     }

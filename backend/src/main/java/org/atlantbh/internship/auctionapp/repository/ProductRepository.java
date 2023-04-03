@@ -16,4 +16,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
 
     @Query("select pe from ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true order by random() limit 1")
     ProductEntity findOneRandom();
+
+    Page<ProductEntity> findByCategoryId(Pageable pageable, Long categoryId);
 }

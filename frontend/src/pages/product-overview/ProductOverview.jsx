@@ -54,7 +54,7 @@ function ProductOverview() {
             <div className="product-overview-info">
               <h2 className="product-overview-title">{product.name}</h2>
               <p className="product-overview-starts-from">
-                Starts from
+                Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
               {productBidInfo && (
@@ -62,7 +62,9 @@ function ProductOverview() {
                   <p>
                     Highest bid:
                     <span className="purple-span">
-                      {productBidInfo.highestBid ? (" $" + productBidInfo.highestBid) : " /"}
+                      {productBidInfo.highestBid
+                        ? " $" + productBidInfo.highestBid
+                        : " /"}
                     </span>
                   </p>
                   <p>Number of bids: {productBidInfo.numberOfBids}</p>

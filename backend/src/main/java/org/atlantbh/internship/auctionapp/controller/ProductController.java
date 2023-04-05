@@ -1,6 +1,7 @@
 package org.atlantbh.internship.auctionapp.controller;
 
 import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
@@ -36,9 +37,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
-    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder", "category"})
-    public ResponseEntity<List<Product>> filterProductsByCategory(PageParams pageParams, SortParams sortParams, Long category){
-        return ResponseEntity.ok(productService.filterByCategory(pageParams, sortParams, category));
+    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder", "productName", "categoryId"})
+    public ResponseEntity<List<Product>> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams){
+        System.out.println(searchParams);
+        return ResponseEntity.ok(productService.searchByNameAndCategory(pageParams, sortParams, searchParams));
     }
 
     @GetMapping(value = "/random")

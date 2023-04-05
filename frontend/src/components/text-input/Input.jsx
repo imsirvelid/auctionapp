@@ -8,6 +8,7 @@ function Input(props) {
       type="text"
       placeholder={props.placeholder}
       style={{ width: `${props.width}`}}
+      onChange = {props.onChange}
     />
   );
 }

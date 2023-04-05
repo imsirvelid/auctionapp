@@ -1,6 +1,7 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
 import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
+import org.atlantbh.internship.auctionapp.controller.commons.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.model.Product;
@@ -29,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> filterByCategory(PageParams pageParams, SortParams sortParams, Long categoryId) {
-        return productRepository.findByCategoryId(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), categoryId)
+    public List<Product> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+        return productRepository.searchByNameAndCategory(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), searchParams.getProductName(), searchParams.getCategoryId())
                 .stream().map(ProductEntity::toDomainModel).collect(Collectors.toList());
     }
 

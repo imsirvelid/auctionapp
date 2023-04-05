@@ -7,6 +7,7 @@ import "./Landing.css";
 import NewArrivals from "components/tab-new-arrivals/NewArrivals";
 import LastChance from "components/tab-last-chance/LastChance";
 import {getParentCategories} from "api/Category";
+import { Link } from "react-router-dom";
 
 function Landing() {
   const tabs = [
@@ -46,15 +47,16 @@ function Landing() {
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
           {categories.map((category) => (
-            <p className="category-box-p" key={category.id}>
-              {category.name}
-            </p>
+            <Link to={`/search?category=${category.id}`} key = {category.id}>
+              <p className="category-box-p">
+                {category.name}
+              </p>
+            </Link>
           ))}
-          
         </div>
         <div className="random-product-landing">
-          {(
-            randomProduct && <RandomProductCard product={randomProduct}></RandomProductCard>
+          {randomProduct && (
+            <RandomProductCard product={randomProduct}></RandomProductCard>
           )}
         </div>
       </div>

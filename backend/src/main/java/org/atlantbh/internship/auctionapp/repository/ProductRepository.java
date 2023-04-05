@@ -18,4 +18,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
     ProductEntity findOneRandom();
 
     Page<ProductEntity> findByCategoryId(Pageable pageable, Long categoryId);
+
+    @Query("select pe from ProductEntity pe where (:name is null or pe.name like %:name%) and (:categoryId is null or :categoryId = pe.category.id)")
+    Page<ProductEntity> searchByNameAndCategory(Pageable pageable, String name, Long categoryId);
 }

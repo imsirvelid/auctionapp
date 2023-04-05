@@ -22,9 +22,9 @@ function App() {
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/products/:id" element={<ProductOverview />} />
-          <Route path="/search" element={ <Search />} />
+          <Route path="/privacy-policy" element = {<PrivacyPolicy />} />
+          <Route path="/products/:id" element = {<ProductOverview />} />
+          <Route path="/search" element ={ <Search key={window.location.pathname}/>} />
         </Routes>
       </div>
       <Footer />

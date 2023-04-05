@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import {getLatestProducts} from "api/Product";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -35,7 +34,8 @@ function LastChance() {
       {productList.map((product) => (
         <div className="product-item" key={product.id}>
           <ProductGridCard
-            thumbnailUrl={product.images[0].imageUrl}
+            linkTo = {`/products/${product.id}`}
+            thumbnailUrl={product.images[0].url}
             productTitle={product.name}
             startsFrom={product.startingPrice}
           />

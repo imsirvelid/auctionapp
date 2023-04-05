@@ -1,9 +1,10 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
+import {Link} from "react-router-dom";
 
 function Navbar() {
   return (
@@ -11,7 +12,7 @@ function Navbar() {
       <div className="black-navbar">
         <div className="navbar-container">
           <div>
-              <SocialMediaCard />            
+            <SocialMediaCard />
           </div>
           <div className="div-right">
             <p className="login-options"> Hi, John Doe </p>
@@ -21,17 +22,17 @@ function Navbar() {
       <div className="white-navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <i className="fa-solid fa-hammer" />
-            AUCTION
+            <Link className = "link-component" to="/">
+              <i className="fa-solid fa-hammer" />
+              AUCTION
+            </Link>
           </div>
           <div className="navbar-search-input">
             <Input width="95%" placeholder="Try enter: Shoes" />
-            <FontAwesomeIcon className="search-icon" icon={ faSearch } />
+            <FontAwesomeIcon className="search-icon" icon={faSearch} />
           </div>
           <div className="navbar-routes">
-            <a href="/about">HOME</a>
-            <a href="/about">SHOP</a>
-            <a href="/about">MY ACCOUNT</a>
+            <Link to="">HOME</Link>
           </div>
         </div>
       </div>

@@ -1,16 +1,24 @@
 .tab-view-header {
   width: 100%;
   border-bottom: 3px solid #ececec;
+  margin-bottom: 23px;
   display: flex;
   gap: 31px;
 }
 
 .tab-view-option {
-  font-size: 28px;
   color: #252525;
   letter-spacing: 0.98px;
   margin: 0;
   height: 100%;
+}
+
+.option-size-normal {
+  font-size: 24px;
+}
+
+.optoin-size-small {
+  font-size: 18px;
 }
 
 .tvo-selected {

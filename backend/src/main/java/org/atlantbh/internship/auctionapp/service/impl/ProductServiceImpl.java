@@ -10,11 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
 
     private final ProductRepository productRepository;
 
@@ -31,5 +31,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getRandom() {
         return productRepository.findOneRandom().toDomainModel();
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id).map(ProductEntity::toDomainModel);
     }
 }

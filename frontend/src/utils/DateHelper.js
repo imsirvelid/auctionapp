@@ -1,0 +1,11 @@
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format"
+
+export const getDateDiffernece = (start, end) => {
+  const endDate = moment(end);
+  const startDate = moment(start);
+  momentDurationFormatSetup(moment);
+  const minutesBetween = endDate.diff(startDate, "minutes");
+  const duration = moment.duration(minutesBetween, "minutes").format();
+  return duration;
+};

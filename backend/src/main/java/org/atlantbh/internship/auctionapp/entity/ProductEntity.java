@@ -1,5 +1,4 @@
 package org.atlantbh.internship.auctionapp.entity;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -63,7 +62,7 @@ public class ProductEntity {
         return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()));
     }
 
-    public static ProductEntity fromDomainModel(final Product product){
+    public static ProductEntity fromDomainModel(final Product product) {
         final ProductEntity productEntity = new ProductEntity();
         productEntity.setId(product.getId());
         productEntity.setCreated(product.getCreated());
@@ -76,3 +75,4 @@ public class ProductEntity {
         return productEntity;
     }
 }
+

@@ -32,6 +32,4 @@ public class CategoryEntity {
     public Category toDomainModel(){
         return new Category(id, name, imageUrl);
     }
-    
-
 }

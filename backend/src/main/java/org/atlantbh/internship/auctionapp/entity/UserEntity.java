@@ -67,5 +67,4 @@ public class UserEntity {
         userEntity.setImageUrl(user.getImageUrl());
         return userEntity;
     }
-
 }

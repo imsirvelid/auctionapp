@@ -7,7 +7,7 @@ function NavigationCard({ name, link, subLink }) {
       <div className="current-location-flexdiv">
         <p>{name}</p>
         <p className="right-p-link">
-          {link}/<span className="sublink-span">{subLink}</span>
+          {link} <span className="slash"> / </span><span className="sublink-span">{subLink}</span>
         </p>
       </div>
     </div>

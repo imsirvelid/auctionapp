@@ -4,7 +4,7 @@ import NavigationCard from "components/navigation-card/NavigationCard";
 function TermsAndConditions() {
   return (
     <>
-      <NavigationCard name="About Us" link="SHOP" subLink="About Us" />
+      <NavigationCard name="About Us" link="HOME" subLink="About Us" />
       <div className="container-55">
         <h1>Terms and Conditions for Auctionapp</h1>
 

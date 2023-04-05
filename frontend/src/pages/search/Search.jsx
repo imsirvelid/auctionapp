@@ -12,6 +12,7 @@ function Search() {
   const [nextPage, setNextPage] = useState(1);
   const [category, setCategory] = useState(null);
   const [name, setName] = useState("");
+  const [last, setLast] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,7 +26,8 @@ function Search() {
 
     const getProducts = async () => {
       const res = await searchProducts(0, "created", "DESC", 3, name, category);
-      setProducts(res);
+      setProducts(res.content);
+      setLast(res.last);
     };
     getCategories();
     getProducts();
@@ -34,12 +36,14 @@ function Search() {
   const exploreMore = async () => {
     const res = await searchProducts(nextPage, "created", "DESC", 3, name, category);
     setNextPage(nextPage + 1);
-    setProducts([...products, ...res]);
+    setProducts([...products, ...res.content]);
+    setLast(res.last);
   };
 
   return (
     <div className="container">
       <div className="main-content-search">
+      <div className="categories-container">
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
           {categories.map((category) => (
@@ -59,11 +63,14 @@ function Search() {
             </Link>
           ))}
         </div>
+        <div className="empty-div"></div>
+        </div>
         <div className="right-search-content">
           <div className="search-products-grid">
             {products.map((product) => (
               <div className="search-product-item" key={product.id}>
                 <ProductGridCard
+                  linkTo = {`/products/${product.id}`}
                   thumbnailUrl={product.images[0].url}
                   startsFrom={product.startingPrice}
                   productTitle={product.name}
@@ -71,9 +78,9 @@ function Search() {
               </div>
             ))}
           </div>
-          <Button type="explore-more-btn purple" onClick={exploreMore}>
+          {!last && <Button type="explore-more-btn purple" onClick={exploreMore}>
             EXPLORE MORE
-          </Button>
+          </Button>}
         </div>
       </div>
     </div>

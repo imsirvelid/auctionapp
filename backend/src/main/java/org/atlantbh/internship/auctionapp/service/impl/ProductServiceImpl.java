@@ -7,6 +7,7 @@ import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
-        return productRepository.searchByNameAndCategory(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), searchParams.getProductName(), searchParams.getCategoryId())
-                .stream().map(ProductEntity::toDomainModel).collect(Collectors.toList());
+    public Page<Product> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+        Page<ProductEntity> res = productRepository.searchByNameAndCategory(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), searchParams.getProductName(), searchParams.getCategoryId());
+        Page<Product> pages = res.map(ProductEntity::toDomainModel);
+        return pages;
     }
 
     @Override

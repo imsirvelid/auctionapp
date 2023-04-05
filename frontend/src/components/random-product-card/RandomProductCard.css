@@ -1,6 +1,7 @@
 .random-product-card {
   display: flex;
-  width: 100%;
+  width: 95%;
+  margin-left: 5%;
 }
 
 .random-product-content {

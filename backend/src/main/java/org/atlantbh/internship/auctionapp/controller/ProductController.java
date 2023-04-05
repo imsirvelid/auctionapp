@@ -6,6 +6,7 @@ import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +39,7 @@ public class ProductController {
     }
 
     @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder", "productName", "categoryId"})
-    public ResponseEntity<List<Product>> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams){
-        System.out.println(searchParams);
+    public ResponseEntity<Page<Product>> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams){
         return ResponseEntity.ok(productService.searchByNameAndCategory(pageParams, sortParams, searchParams));
     }
 

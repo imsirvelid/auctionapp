@@ -44,6 +44,7 @@ function Landing() {
   return (
     <div className="container">
       <div className="main-content-landing">
+      <div className="categories-container">
         <div className="landing-categories">
           <p className="categories-title">CATEGORIES</p>
           {categories.map((category) => (
@@ -53,6 +54,8 @@ function Landing() {
               </p>
             </Link>
           ))}
+        </div>
+        <div className="empty-div"></div>
         </div>
         <div className="random-product-landing">
           {randomProduct && (

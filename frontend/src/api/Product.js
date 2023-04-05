@@ -21,7 +21,6 @@ export const getProductById = async(id) => {
 export const searchProducts = async(page, sortBy, orderBy, size = PAGE_SIZE, name, category) => {
   if (category == null)
     category = "";
-  //console.log("Pretraga za: ", name, " - ", category);
   const fetchData = await axios.get(URL + "/search", { params: { pageNumber: page, pageSize: size, sortField: sortBy, sortOrder: orderBy, productName: name, categoryId: category }});
   return fetchData.data;
 } 

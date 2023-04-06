@@ -28,3 +28,18 @@
   margin: 0 auto;
   display: block;
 }
+
+.search-categories {
+  width: 100%;
+  margin-right: 5%;
+  height: auto;
+  border: 1px solid #D8D8D8;
+  font-size: 16px;
+  color: #252525;
+  letter-spacing: 0.56px;
+  padding-left: 17px;
+}
+
+.search-category-box-p {
+  padding-bottom: 17px;
+}

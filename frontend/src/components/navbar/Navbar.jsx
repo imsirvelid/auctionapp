@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
@@ -7,8 +7,7 @@ import "./Navbar.css";
 import {Link} from "react-router-dom";
 
 function Navbar() {
-  
-  const[inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <nav>
@@ -25,15 +24,20 @@ function Navbar() {
       <div className="white-navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <Link className = "link-component" to="/">
+            <Link className="link-component" to="/">
               <i className="fa-solid fa-hammer" />
               AUCTION
             </Link>
           </div>
           <div className="navbar-search-input">
-            <Input width="95%" placeholder="Try enter: Shoes" value={inputValue} onChange={ evt => setInputValue(evt.target.value)}/>
+            <Input
+              width="95%"
+              placeholder="Try enter: Shoes"
+              value={inputValue}
+              onChange={(evt) => setInputValue(evt.target.value)}
+            />
             <Link to={`/search?name=${inputValue}`}>
-            <FontAwesomeIcon className="search-icon" icon={faSearch} />
+              <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </Link>
           </div>
           <div className="navbar-routes">

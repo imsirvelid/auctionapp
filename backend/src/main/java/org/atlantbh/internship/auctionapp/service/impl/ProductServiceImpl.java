@@ -1,8 +1,8 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
-import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
-import org.atlantbh.internship.auctionapp.controller.commons.SearchParams;
-import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.controller.common.PageParams;
+import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
+import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
@@ -31,10 +31,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
-        Page<ProductEntity> res = productRepository.searchByNameAndCategory(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()), searchParams.getProductName(), searchParams.getCategoryId());
-        Page<Product> pages = res.map(ProductEntity::toDomainModel);
-        return pages;
+    public Page<Product> search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+        Page<ProductEntity> res = productRepository.searchByNameAndCategory(
+                PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()),
+                searchParams.getProductName(), searchParams.getCategoryId()
+        );
+        return res.map(ProductEntity::toDomainModel);
     }
 
     @Override

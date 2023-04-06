@@ -10,14 +10,15 @@ function Search() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  const [category, setCategory] = useState(null);
-  const [name, setName] = useState("");
   const [last, setLast] = useState(false);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState();
   const location = useLocation();
 
   useEffect(() => {
+    console.log("Prvi put");
     const params = new URLSearchParams(location.search);
-    params.get("name") ? setName(params.get("name")) : setName("");
+    setName(params.get("name"));
     setCategory(params.get("category"));
     const getCategories = async () => {
       const res = await getParentCategories();
@@ -25,13 +26,13 @@ function Search() {
     };
 
     const getProducts = async () => {
-      const res = await searchProducts(0, "created", "DESC", 3, name, category);
+      const res = await searchProducts(0, "created", "DESC", 3, params.get("name"), params.get("category"));
       setProducts(res.content);
       setLast(res.last);
     };
     getCategories();
     getProducts();
-  }, [location, category, name]);
+  }, [location]);
 
   const exploreMore = async () => {
     const res = await searchProducts(nextPage, "created", "DESC", 3, name, category);
@@ -44,19 +45,17 @@ function Search() {
     <div className="container">
       <div className="main-content-search">
       <div className="categories-container">
-        <div className="landing-categories">
-          <p className="categories-title">CATEGORIES</p>
+        <div className="search-categories">
+          <p className="categories-title">PRODUCT CATEGORIES</p>
           {categories.map((category) => (
             <Link
               to={`/search?category=${category.id}${
-                name !== "" ? `&name=${name}` : ``
+                (name !== null && name !== '') ? `&name=${name}` : ``
               }`}
               key={category.id}
             >
               <p
-                className="category-box-p"
-                key={category.id}
-                onClick={() => setCategory(category.id)}
+                className="search-category-box-p"
               >
                 {category.name}
               </p>
@@ -67,7 +66,7 @@ function Search() {
         </div>
         <div className="right-search-content">
           <div className="search-products-grid">
-            {products.map((product) => (
+            {products.length > 0 ? products.map((product) => (
               <div className="search-product-item" key={product.id}>
                 <ProductGridCard
                   linkTo = {`/products/${product.id}`}
@@ -76,7 +75,7 @@ function Search() {
                   productTitle={product.name}
                 />
               </div>
-            ))}
+            )) : <p>No products found</p>}
           </div>
           {!last && <Button type="explore-more-btn purple" onClick={exploreMore}>
             EXPLORE MORE

@@ -1,17 +1,14 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import org.atlantbh.internship.auctionapp.controller.commons.PageParams;
-import org.atlantbh.internship.auctionapp.controller.commons.SearchParams;
-import org.atlantbh.internship.auctionapp.controller.commons.SortParams;
+import org.atlantbh.internship.auctionapp.controller.common.PageParams;
+import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
+import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,9 +35,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
-    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder", "productName", "categoryId"})
-    public ResponseEntity<Page<Product>> searchByNameAndCategory(PageParams pageParams, SortParams sortParams, SearchParams searchParams){
-        return ResponseEntity.ok(productService.searchByNameAndCategory(pageParams, sortParams, searchParams));
+    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    public ResponseEntity<Page<Product>> search(PageParams pageParams,
+                                                SortParams sortParams, @RequestParam(required = false) String productName,
+                                                @RequestParam(required = false) Long categoryId){
+        return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 
     @GetMapping(value = "/random")

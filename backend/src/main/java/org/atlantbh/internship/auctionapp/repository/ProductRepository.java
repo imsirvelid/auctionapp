@@ -19,6 +19,11 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
 
     Page<ProductEntity> findByCategoryId(Pageable pageable, Long categoryId);
 
-    @Query("select pe from ProductEntity pe where (:name is null or pe.name like %:name%) and (:categoryId is null or :categoryId = pe.category.id)")
+    @Query("""
+                select pe 
+                from ProductEntity pe 
+                where (:name is null or lower(pe.name) like lower(concat('%', :name, '%'))) and 
+                      (:categoryId is null or :categoryId = pe.category.id)
+            """)
     Page<ProductEntity> searchByNameAndCategory(Pageable pageable, String name, Long categoryId);
 }

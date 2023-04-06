@@ -26,8 +26,6 @@ function App() {
           <Route path="/privacy-policy" element = {<PrivacyPolicy />} />
           <Route path="/products/:id" element = {<ProductOverview />} />
           <Route path="/search" element ={ <Search key={window.location.pathname}/>} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/products/:id" element={<ProductOverview />} />
         </Routes>
       </div>
       <Footer />

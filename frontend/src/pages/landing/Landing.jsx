@@ -28,6 +28,7 @@ function Landing() {
   const [randomProduct, setRandomProduct] = useState();
   const [categories, setCategories] = useState([]);
   useEffect(() => {
+    console.log("Pozvan");
     const random = async () => {
       const res = await getRandomProduct();
       setRandomProduct(res);

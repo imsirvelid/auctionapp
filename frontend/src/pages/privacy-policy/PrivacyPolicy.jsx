@@ -5,7 +5,12 @@ import "./PrivacyPolicy.css";
 function PrivacyPolicy() {
   return (
     <>
-      <NavigationCard name="Privacy Policy" link="HOME" subLink="Privacy Policy" />
+      <NavigationCard
+        name="Privacy Policy"
+        link="HOME"
+        subLink="Privacy Policy"
+        linkTo="/"
+      />
       <div className="container-55">
         <h1>Privacy Policy for Auctionapp</h1>
 

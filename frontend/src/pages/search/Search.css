@@ -43,3 +43,8 @@
 .search-category-box-p {
   padding-bottom: 17px;
 }
+
+.selected {
+  font-weight: bold;
+  color: #8367d8;
+}

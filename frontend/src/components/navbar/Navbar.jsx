@@ -1,13 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Navbar() {
   const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+    navigate("/search?name="+inputValue)
+    setInputValue("");
+  }
 
   return (
     <nav>
@@ -29,19 +36,20 @@ function Navbar() {
               AUCTION
             </Link>
           </div>
-          <div className="navbar-search-input">
+            <form className="navbar-search-input" onSubmit={searchHandler}>
             <Input
               width="95%"
               placeholder="Try enter: Shoes"
               value={inputValue}
               onChange={(evt) => setInputValue(evt.target.value)}
             />
-            <Link to={`/search?name=${inputValue}`}>
+            <Link type="submit" to={`/search?name=${inputValue}`}>
               <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </Link>
-          </div>
+          </form>
           <div className="navbar-routes">
             <Link to="">HOME</Link>
+            <Link to="/search">SHOP</Link>
           </div>
         </div>
       </div>

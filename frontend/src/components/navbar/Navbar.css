@@ -93,3 +93,13 @@
   margin-left: 23px;
   margin-left: auto;
 }
+
+.navbar-search-input form {
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 3px 3px #e0e0e0;
+  width: 40%;
+  padding: 0 5px;
+  align-items: center;
+}

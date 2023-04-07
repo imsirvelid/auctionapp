@@ -35,3 +35,7 @@
   color: #252525;
   letter-spacing: 1.61px;
 }
+
+.hidden {
+  visibility: hidden;
+}

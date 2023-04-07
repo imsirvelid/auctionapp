@@ -44,6 +44,7 @@ function ProductOverview() {
         name={product && product.name}
         link="SHOP"
         subLink="Single product"
+        linkTo="/search"
       />
       <div className="container">
         {product && (

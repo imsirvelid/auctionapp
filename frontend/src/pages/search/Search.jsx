@@ -29,7 +29,7 @@ function Search() {
         0,
         "created",
         "DESC",
-        3,
+        9,
         params.get("name"),
         params.get("category")
       );
@@ -45,7 +45,7 @@ function Search() {
       nextPage,
       "created",
       "DESC",
-      3,
+      9,
       name,
       categoryId
     );

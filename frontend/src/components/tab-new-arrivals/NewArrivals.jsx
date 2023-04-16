@@ -12,7 +12,7 @@ function NewArrivals() {
 
   useEffect(() => {
     const getLatest = async () => {
-      const res = await getLatestProducts(0, "created", "asc");
+      const res = await getLatestProducts(0, "created", "desc");
       setProductList(res);
     };
     getLatest();
@@ -21,7 +21,7 @@ function NewArrivals() {
 
   const fetchData = async () => {
     if (end || !initial) return;
-    const res = await getLatestProducts(page, "created", "asc");
+    const res = await getLatestProducts(page, "created", "desc");
     if (res.length === 0) setEnd(true);
     setProductList([...productList, ...res]);
     setPage(page + 1);

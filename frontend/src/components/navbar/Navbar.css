@@ -103,3 +103,8 @@
   padding: 0 5px;
   align-items: center;
 }
+
+.selected-route{
+  font-weight: bold;
+  color: #8367D8 !important;
+}

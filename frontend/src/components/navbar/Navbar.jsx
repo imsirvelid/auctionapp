@@ -4,17 +4,24 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function Navbar() {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const [path, setPath] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
-    navigate("/search?name="+inputValue)
-    setInputValue("");
-  }
+    navigate("/search?name=" + inputValue);
+  };
+
+  useEffect(() => {
+    setPath(location.pathname);
+    if (location.pathname === '/')
+      setInputValue("");
+  }, [location.pathname]);
 
   return (
     <nav>
@@ -36,7 +43,7 @@ function Navbar() {
               AUCTION
             </Link>
           </div>
-            <form className="navbar-search-input" onSubmit={searchHandler}>
+          <form className="navbar-search-input" onSubmit={searchHandler}>
             <Input
               width="95%"
               placeholder="Try enter: Shoes"
@@ -48,8 +55,10 @@ function Navbar() {
             </Link>
           </form>
           <div className="navbar-routes">
-            <Link to="">HOME</Link>
-            <Link to="/search">SHOP</Link>
+            <Link to="" className={`${path === "/" ? "selected-route" : ""}`}>
+              HOME
+            </Link>
+            <Link to="/search" className={`${path === "/search" ? "selected-route" : ""}`}>SHOP</Link>
           </div>
         </div>
       </div>

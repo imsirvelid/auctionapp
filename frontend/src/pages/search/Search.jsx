@@ -14,7 +14,6 @@ function Search() {
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const location = useLocation();
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setName(params.get("name"));
@@ -36,9 +35,10 @@ function Search() {
       setProducts(res.content);
       setLast(res.last);
     };
-    getCategories();
+    if (categories.length === 0)
+      getCategories();
     getProducts();
-  }, [location]);
+  }, [location, categories.length]);
 
   const exploreMore = async () => {
     const res = await searchProducts(
@@ -69,7 +69,7 @@ function Search() {
               >
                 <p
                   className={`search-category-box-p ${
-                    categoryId == category.id ? "selected" : ""
+                    categoryId === category.id ? "selected" : ""
                   }`}
                 >
                   {category.name}

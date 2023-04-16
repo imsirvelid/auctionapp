@@ -10,7 +10,7 @@ function Search() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  const [last, setLast] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const location = useLocation();
@@ -33,7 +33,7 @@ function Search() {
         params.get("category")
       );
       setProducts(res.content);
-      setLast(res.last);
+      setHasMore(!res.last);
     };
     if (categories.length === 0)
       getCategories();
@@ -51,7 +51,7 @@ function Search() {
     );
     setNextPage(nextPage + 1);
     setProducts([...products, ...res.content]);
-    setLast(res.last);
+    setHasMore(!res.last);
   };
 
   return (
@@ -96,7 +96,7 @@ function Search() {
               <p>No products found</p>
             )}
           </div>
-          {!last && (
+          {hasMore && (
             <Button type="explore-more-btn purple" onClick={exploreMore}>
               EXPLORE MORE
             </Button>

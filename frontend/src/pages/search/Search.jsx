@@ -17,7 +17,7 @@ function Search() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setName(params.get("name"));
-    setCategory(params.get("category"));
+    setCategory(Number(params.get("category")));
     const getCategories = async () => {
       const res = await getParentCategories();
       setCategories(res);

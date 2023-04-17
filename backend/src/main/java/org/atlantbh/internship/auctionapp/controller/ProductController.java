@@ -35,7 +35,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
-    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    @GetMapping(value="/search")
     public ResponseEntity<Page<Product>> search(PageParams pageParams,
                                                 SortParams sortParams,
                                                 @RequestParam(required = false) String productName,

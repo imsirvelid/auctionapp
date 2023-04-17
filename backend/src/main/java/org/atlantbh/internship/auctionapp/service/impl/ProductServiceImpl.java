@@ -32,6 +32,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+        var tmp = productRepository.similarProducts(searchParams.getProductName());
+        System.out.println("similar products");
+        for (var x: tmp)
+            System.out.println(x.get(1) + " - " + x.get(0));
         Page<ProductEntity> res = productRepository.searchByNameAndCategory(
                 PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()),
                 searchParams.getProductName(), searchParams.getCategoryId()

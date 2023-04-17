@@ -8,6 +8,7 @@ import PrivacyPolicy from "pages/privacy-policy/PrivacyPolicy";
 import Landing from "pages/landing/Landing";
 import ProductOverview from "pages/product-overview/ProductOverview";
 import Search from "pages/search/Search";
+import "./App.css";
 
 
 function App() {

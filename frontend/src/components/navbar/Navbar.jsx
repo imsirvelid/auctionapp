@@ -58,7 +58,7 @@ function Navbar() {
             <Link to="" className={`${path === "/" ? "selected-route" : ""}`}>
               HOME
             </Link>
-            <Link to="/search" className={`${path === "/search" ? "selected-route" : ""}`}>SHOP</Link>
+            <Link to="/search" className={`${(path === "/search" || path.slice(0, 9) === "/products") ? "selected-route" : ""}`}>SHOP</Link>
           </div>
         </div>
       </div>

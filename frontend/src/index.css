@@ -3,6 +3,11 @@ body {
   font-family: "Lato";
 }
 
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
 code {
   font-family: "Lato";
 }

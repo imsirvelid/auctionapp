@@ -30,12 +30,12 @@ public class ProductController {
                 .orElseThrow(() -> new BadRequestException("Product is not found"));
     }
 
-    @GetMapping(params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    @GetMapping()
     public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams){
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
-    @GetMapping(value="/search", params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    @GetMapping(value="/search")
     public ResponseEntity<Page<Product>> search(PageParams pageParams,
                                                 SortParams sortParams,
                                                 @RequestParam(required = false) String productName,

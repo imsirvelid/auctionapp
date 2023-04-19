@@ -10,14 +10,14 @@ function Search() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const location = useLocation();
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setName(params.get("name"));
-    setCategory(Number(params.get("category")));
+    setCategory(params.get("category"));
     const getCategories = async () => {
       const res = await getParentCategories();
       setCategories(res);

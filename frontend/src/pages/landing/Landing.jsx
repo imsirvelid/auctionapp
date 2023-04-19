@@ -38,8 +38,9 @@ function Landing() {
       setCategories(res);
     };
     random();
-    getCategories();
-  }, []);
+    if (categories.length === 0)
+      getCategories();
+  }, [categories.length]);
 
   return (
     <div className="container">

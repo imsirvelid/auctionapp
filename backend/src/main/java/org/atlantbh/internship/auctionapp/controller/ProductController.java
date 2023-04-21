@@ -5,8 +5,8 @@ import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
+import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +36,10 @@ public class ProductController {
     }
 
     @GetMapping(value="/search")
-    public ResponseEntity<Page<Product>> search(PageParams pageParams,
-                                                SortParams sortParams,
-                                                @RequestParam(required = false) String productName,
-                                                @RequestParam(required = false) Long categoryId){
+    public ResponseEntity<SearchProductResponse> search(PageParams pageParams,
+                                                        SortParams sortParams,
+                                                        @RequestParam(required = false) String productName,
+                                                        @RequestParam(required = false) Long categoryId){
         return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 

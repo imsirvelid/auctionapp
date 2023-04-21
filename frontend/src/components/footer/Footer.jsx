@@ -26,8 +26,8 @@ function Footer() {
         <div className="ul-block">
           <p className="item-title">GET IN TOUCH</p>
           <ul className="footer-ul-item">
-            <li className="footer-li-item">Call Us at +123 797-567-2535</li>
-            <li className="footer-li-item">support@auction.com</li>
+            <li className="footer-li-item"><a href="tel:+1237975672535">Call Us at +123 797-567-2535</a></li>
+            <li className="footer-li-item"><a href="mailto:support@auction.com">support@auction.com</a></li>
             <li className="footer-li-item">
               <SocialMediaCard />
             </li>

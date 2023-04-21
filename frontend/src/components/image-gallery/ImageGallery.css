@@ -1,3 +1,7 @@
 .image-gallery-thumbnails-wrapper{
   background-color: white;
 }
+
+.image-gallery-thumbnail-image:hover {
+  cursor: pointer;
+}

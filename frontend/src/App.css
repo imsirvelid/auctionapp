@@ -1,5 +1,7 @@
 .App {
   font-family: "Lato";
+  padding-bottom: 270px;
+  position: relative;
 }
 
 a:hover {

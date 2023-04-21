@@ -22,6 +22,11 @@
   font-size: 18px;
 }
 
+.purple {
+  background-color: #8367D8;
+  color: white;
+}
+
 .button:hover {
   cursor: pointer;
 }

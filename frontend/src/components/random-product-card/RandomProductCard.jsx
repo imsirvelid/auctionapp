@@ -12,7 +12,7 @@ function RandomProductCard(props) {
           Start From - ${props.product.startingPrice}
         </p>
         <p>{props.product.details}</p>
-        <Button type="default">
+        <Button type="default hidden">
           BID NOW <FontAwesomeIcon icon={faAngleRight} />
         </Button>
       </div>

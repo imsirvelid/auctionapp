@@ -1,4 +1,4 @@
-package org.atlantbh.internship.auctionapp.controller.commons;
+package org.atlantbh.internship.auctionapp.controller.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -32,4 +32,12 @@ public class CategoryEntity {
     public Category toDomainModel(){
         return new Category(id, name, imageUrl);
     }
+
+    public static CategoryEntity fromDomainModel(final Category category){
+        final CategoryEntity entity = new CategoryEntity();
+        entity.setId(category.getId());
+        entity.setName(category.getName());
+        entity.setImageUrl(category.getImageUrl());
+        return entity;
+    }
 }

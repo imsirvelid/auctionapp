@@ -7,6 +7,8 @@ import TermsAndConditions from "pages/terms-and-conditions/TermsAndConditions";
 import PrivacyPolicy from "pages/privacy-policy/PrivacyPolicy";
 import Landing from "pages/landing/Landing";
 import ProductOverview from "pages/product-overview/ProductOverview";
+import Search from "pages/search/Search";
+import "./App.css";
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/products/:id" element={<ProductOverview />} />
+          <Route path="/privacy-policy" element = {<PrivacyPolicy />} />
+          <Route path="/products/:id" element = {<ProductOverview />} />
+          <Route path="/search" element ={ <Search key={window.location.pathname}/>} />
         </Routes>
       </div>
       <Footer />

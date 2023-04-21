@@ -10,7 +10,7 @@ function LastChance() {
   const [initial, setInitial] = useState(false);
   useEffect(() => {
     const getLatest = async () => {
-      const res = await getLatestProducts(0, "endDate", "desc");
+      const res = await getLatestProducts(0, "endDate", "asc");
       setProductList(res);
     };
     getLatest();
@@ -19,7 +19,7 @@ function LastChance() {
 
   const fetchData = async () => {
     if (end || !initial) return;
-    const res = await getLatestProducts(page, "endDate", "desc");
+    const res = await getLatestProducts(page, "endDate", "asc");
     if (res.length === 0) setEnd(true);
     setProductList([...productList, ...res]);
     setPage(page + 1);

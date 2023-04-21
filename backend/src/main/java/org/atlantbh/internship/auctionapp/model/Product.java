@@ -22,6 +22,7 @@ public class Product {
     private LocalDateTime created;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private Category category;
     private Status status;
     private List<Image> images;
 

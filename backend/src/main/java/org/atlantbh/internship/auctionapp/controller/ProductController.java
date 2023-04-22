@@ -1,5 +1,6 @@
 package org.atlantbh.internship.auctionapp.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.controller.common.PageParams;
 import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Tag(name = "Product", description = "Product APIs")
 @RestController
 @RequestMapping("/products")
 public class ProductController {

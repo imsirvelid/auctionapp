@@ -30,10 +30,10 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
     @Query("""
                 SELECT pe.name
                 FROM ProductEntity pe
-                WHERE levenshtein(pe.name, :name) > 0
+                WHERE (:categoryId is null or :categoryId = pe.category.id) and levenshtein(pe.name, :name) > 0
                 GROUP BY pe.name
                 ORDER BY COUNT(pe.name) * 1.0 / levenshtein(pe.name, :name) DESC
                 LIMIT 1
             """)
-    Optional<String> searchSimilarProductsName(String name);
+    Optional<String> searchSimilarProductsName(String name, Long categoryId);
 }

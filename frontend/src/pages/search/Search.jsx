@@ -108,14 +108,7 @@ function Search() {
                     />
                   </div>
                 ))
-              ) : didYouMean ? (
-                <p>
-                  Did you mean{" "}
-                  <Link to={`/search?name=${didYouMean}`}>{didYouMean}</Link>
-                </p>
-              ) : (
-                <p>No products found</p>
-              )}
+              ) : !didYouMean && ( <p>No products found</p>)}
             </div>
             {hasMore && (
               <Button type="explore-more-btn purple" onClick={exploreMore}>

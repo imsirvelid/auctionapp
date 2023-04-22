@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
         );
         String didYouMean = null;
         if (res.getTotalElements() == 0 && searchParams.getProductName() != null)
-            didYouMean = productRepository.searchSimilarProductsName(searchParams.getProductName()).get();
+            didYouMean = productRepository.searchSimilarProductsName(searchParams.getProductName(), searchParams.getCategoryId()).get();
         return new SearchProductResponse(res.map(ProductEntity::toDomainModel), didYouMean);
     }
 

@@ -32,16 +32,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+<<<<<<< HEAD
     public SearchProductResponse search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
 
+=======
+    public Page<Product> search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+>>>>>>> main
         Page<ProductEntity> res = productRepository.searchByNameAndCategory(
                 PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()),
                 searchParams.getProductName(), searchParams.getCategoryId()
         );
+<<<<<<< HEAD
         String didYouMean = null;
         if (res.getTotalElements() == 0 && searchParams.getProductName() != null)
             didYouMean = productRepository.searchSimilarProductsName(searchParams.getProductName(), searchParams.getCategoryId()).get();
         return new SearchProductResponse(res.map(ProductEntity::toDomainModel), didYouMean);
+=======
+        return res.map(ProductEntity::toDomainModel);
+>>>>>>> main
     }
 
     @Override

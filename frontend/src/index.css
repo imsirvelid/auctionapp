@@ -4,8 +4,8 @@ body {
 }
 
 #root {
-  position: relative;
   min-height: 100vh;
+  position: relative;
 }
 
 code {

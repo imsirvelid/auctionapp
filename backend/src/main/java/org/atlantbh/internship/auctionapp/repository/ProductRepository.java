@@ -26,6 +26,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
                       (:categoryId is null or :categoryId = pe.category.id)
             """)
     Page<ProductEntity> searchByNameAndCategory(Pageable pageable, String name, Long categoryId);
+<<<<<<< HEAD
 
     @Query("""
                 SELECT pe.name
@@ -36,4 +37,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
                 LIMIT 1
             """)
     Optional<String> searchSimilarProductsName(String name, Long categoryId);
+=======
+>>>>>>> main
 }

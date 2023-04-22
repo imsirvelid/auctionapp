@@ -10,7 +10,6 @@ import ProductOverview from "pages/product-overview/ProductOverview";
 import Search from "pages/search/Search";
 import "./App.css";
 
-
 function App() {
   return (
     <Router>

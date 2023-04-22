@@ -48,21 +48,3 @@
   font-weight: bold;
   color: #8367d8;
 }
-
-.did-you-mean-breacrumb {
-  width: 100%;
-  vertical-align: middle;
-  background-color: #fafafa;
-}
-
-.did-you-mean-breacrumb p {
-  margin-left: 31.5%;
-  padding: 10px 0;
-  font-size: 18px;
-  color: #9b9b9b;
-  letter-spacing: 0.63px;
-}
-
-.did-you-mean-link {
-  color: #8367d8;
-}

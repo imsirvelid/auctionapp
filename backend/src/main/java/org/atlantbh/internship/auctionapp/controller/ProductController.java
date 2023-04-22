@@ -7,6 +7,7 @@ import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,16 +31,23 @@ public class ProductController {
                 .orElseThrow(() -> new BadRequestException("Product is not found"));
     }
 
-    @GetMapping(params = { "pageNumber", "pageSize", "sortField", "sortOrder"})
+    @GetMapping()
     public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams){
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
     @GetMapping(value="/search")
+<<<<<<< HEAD
     public ResponseEntity<SearchProductResponse> search(PageParams pageParams,
                                                         SortParams sortParams,
                                                         @RequestParam(required = false) String productName,
                                                         @RequestParam(required = false) Long categoryId){
+=======
+    public ResponseEntity<Page<Product>> search(PageParams pageParams,
+                                                SortParams sortParams,
+                                                @RequestParam(required = false) String productName,
+                                                @RequestParam(required = false) Long categoryId){
+>>>>>>> main
         return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 

@@ -38,7 +38,8 @@ function Search() {
       setDidYouMean(res.didYouMeanSuggestion);
       setHasMore(!res.page.last);
     };
-    if (categories.length === 0) getCategories();
+    if (categories.length === 0)
+      getCategories();
     getProducts();
   }, [location, categories.length]);
 

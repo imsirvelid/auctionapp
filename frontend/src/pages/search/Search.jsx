@@ -10,7 +10,7 @@ function Search() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const [didYouMean, setDidYouMean] = useState();
@@ -36,7 +36,7 @@ function Search() {
       );
       setProducts(res.page.content);
       setDidYouMean(res.didYouMeanSuggestion);
-      setHasMore(!res.last);
+      setHasMore(!res.page.last);
     };
     if (categories.length === 0) getCategories();
     getProducts();
@@ -54,7 +54,7 @@ function Search() {
     setNextPage(nextPage + 1);
     setProducts([...products, ...res.page.content]);
     setDidYouMean(res.didYouMeanSuggestion);
-    setHasMore(!res.last);
+    setHasMore(!res.page.last);
   };
 
   return (

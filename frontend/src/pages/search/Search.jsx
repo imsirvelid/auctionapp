@@ -109,7 +109,7 @@ function Search() {
                     />
                   </div>
                 ))
-              ) : !didYouMean && ( <p>No products found</p>)}
+              ) : ( <p>No products found</p>)}
             </div>
             {hasMore && (
               <Button type="explore-more-btn purple" onClick={exploreMore}>

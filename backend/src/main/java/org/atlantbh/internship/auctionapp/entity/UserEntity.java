@@ -16,7 +16,7 @@ import org.atlantbh.internship.auctionapp.model.User;
 @Table(name = "user")
 public class UserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @NotBlank
@@ -31,27 +31,38 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
-    @NotBlank
     @Column(name = "address")
     private String address;
 
-    @NotBlank
     @Column(name = "phone")
     private String phone;
 
-    @NotBlank
     @Column(name = "city")
     private String city;
 
-    @NotBlank
     @Column(name = "country")
     private String country;
 
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "password_hash")
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public UserEntity(String name, String surname,
+                      String email,String password, Role role) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public User toDomainModel() {
-        return new User(id, name, surname, email, address, phone, city, country, imageUrl);
+        return new User(id, name, surname, email, address, phone, city, country, imageUrl, password, role);
     }
 
     public static UserEntity fromDomainModel(final User user){

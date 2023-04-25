@@ -1,12 +1,7 @@
 package org.atlantbh.internship.auctionapp.model;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.atlantbh.internship.auctionapp.entity.Status;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import org.atlantbh.internship.auctionapp.entity.Role;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,4 +19,6 @@ public class User {
     private String city;
     private String country;
     private String imageUrl;
+    private String password;
+    private Role role;
 }

@@ -13,3 +13,6 @@ spring:
                 globally_quoted_identifiers: true
         hibernate:
             ddl-auto: update
+app:
+    jwtSecret: yourfavoritecolor
+    jwtExpiration: 1600000000

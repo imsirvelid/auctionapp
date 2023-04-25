@@ -62,7 +62,7 @@ function Search() {
     <>
     { 
       didYouMean && (
-      <div className="did-you-mean-breacrumb">
+      <div className="did-you-mean-breadcrumb">
         <p>
           Did you mean?{" "}
           <Link className="did-you-mean-link" to={`/search?name=${didYouMean}`}>

@@ -62,7 +62,7 @@ function Search() {
     <>
     { 
       didYouMean && (
-      <div className="did-you-mean-breacrumb">
+      <div className="did-you-mean-breadcrumb">
         <p>
           Did you mean?{" "}
           <Link className="did-you-mean-link" to={`/search?name=${didYouMean}`}>
@@ -109,7 +109,7 @@ function Search() {
                     />
                   </div>
                 ))
-              ) : !didYouMean && ( <p>No products found</p>)}
+              ) : ( <p>No products found</p>)}
             </div>
             {hasMore && (
               <Button type="explore-more-btn purple" onClick={exploreMore}>

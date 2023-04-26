@@ -14,18 +14,15 @@ public class LoginRequest {
     @Size(min = 8, message = "Password must contain at least 8 characters")
     private String password;
 
-    private boolean rememberMe;
 
     public LoginRequest() {
     }
 
     public LoginRequest(@NotBlank(message = "Email can't be empty") @Email(message = "Email format is not valid")
                                 String email, @NotBlank(message = "Password can't be empty")
-                        @Size(min = 8, message = "Password must contain at least 8 characters") String password,
-                        Boolean rememberMe) {
+                        @Size(min = 8, message = "Password must contain at least 8 characters") String password) {
         this.email = email;
         this.password = password;
-        this.rememberMe = rememberMe;
     }
 
     public String getEmail() {
@@ -44,11 +41,4 @@ public class LoginRequest {
         this.password = password;
     }
 
-    public Boolean getRememberMe() {
-        return rememberMe;
-    }
-
-    public void setRememberMe(Boolean rememberMe) {
-        this.rememberMe = rememberMe;
-    }
 }

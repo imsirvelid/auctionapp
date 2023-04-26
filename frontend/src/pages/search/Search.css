@@ -48,3 +48,13 @@
   font-weight: bold;
   color: #8367d8;
 }
+
+.did-you-mean-breadcrumb p{
+  font-size: 18px;
+  letter-spacing: 0.63px;
+  margin-left: 30%;
+}
+
+.did-you-mean-link {
+  color: #8367D8;
+}

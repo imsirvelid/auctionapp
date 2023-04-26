@@ -13,9 +13,11 @@ function Search() {
   const [hasMore, setHasMore] = useState(false);
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
+  const [didYouMean, setDidYouMean] = useState();
   const location = useLocation();
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+    setNextPage(1);
     setName(params.get("name"));
     setCategory(params.get("category"));
     const getCategories = async () => {
@@ -32,8 +34,9 @@ function Search() {
         params.get("name"),
         params.get("category")
       );
-      setProducts(res.content);
-      setHasMore(!res.last);
+      setProducts(res.page.content);
+      setDidYouMean(res.didYouMeanSuggestion);
+      setHasMore(!res.page.last);
     };
     if (categories.length === 0)
       getCategories();
@@ -50,60 +53,73 @@ function Search() {
       categoryId
     );
     setNextPage(nextPage + 1);
-    setProducts([...products, ...res.content]);
-    setHasMore(!res.last);
+    setProducts([...products, ...res.page.content]);
+    setDidYouMean(res.didYouMeanSuggestion);
+    setHasMore(!res.page.last);
   };
 
   return (
-    <div className="container">
-      <div className="main-content-search">
-        <div className="categories-container">
-          <div className="search-categories">
-            <p className="categories-title">PRODUCT CATEGORIES</p>
-            {categories.map((category) => (
-              <Link
-                to={`/search?category=${category.id}${
-                  name !== null && name !== "" ? `&name=${name}` : ``
-                }`}
-                key={category.id}
-              >
-                <p
-                  className={`search-category-box-p ${
-                    categoryId === category.id ? "selected" : ""
+    <>
+    { 
+      didYouMean && (
+      <div className="did-you-mean-breadcrumb">
+        <p>
+          Did you mean?{" "}
+          <Link className="did-you-mean-link" to={`/search?name=${didYouMean}`}>
+            {didYouMean}
+          </Link>
+        </p>
+      </div>
+      )
+    }
+      <div className="container">
+        <div className="main-content-search">
+          <div className="categories-container">
+            <div className="search-categories">
+              <p className="categories-title">PRODUCT CATEGORIES</p>
+              {categories.map((category) => (
+                <Link
+                  to={`/search?category=${category.id}${
+                    name !== null && name !== "" ? `&name=${name}` : ``
                   }`}
+                  key={category.id}
                 >
-                  {category.name}
-                </p>
-              </Link>
-            ))}
+                  <p
+                    className={`search-category-box-p ${
+                      Number(categoryId) === category.id ? "selected" : ""
+                    }`}
+                  >
+                    {category.name}
+                  </p>
+                </Link>
+              ))}
+            </div>
+            <div className="empty-div"></div>
           </div>
-          <div className="empty-div"></div>
-        </div>
-        <div className="right-search-content">
-          <div className="search-products-grid">
-            {products.length > 0 ? (
-              products.map((product) => (
-                <div className="search-product-item" key={product.id}>
-                  <ProductGridCard
-                    linkTo={`/products/${product.id}`}
-                    thumbnailUrl={product.images[0].url}
-                    startsFrom={product.startingPrice}
-                    productTitle={product.name}
-                  />
-                </div>
-              ))
-            ) : (
-              <p>No products found</p>
+          <div className="right-search-content">
+            <div className="search-products-grid">
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <div className="search-product-item" key={product.id}>
+                    <ProductGridCard
+                      linkTo={`/products/${product.id}`}
+                      thumbnailUrl={product.images[0].url}
+                      startsFrom={product.startingPrice}
+                      productTitle={product.name}
+                    />
+                  </div>
+                ))
+              ) : ( <p>No products found</p>)}
+            </div>
+            {hasMore && (
+              <Button type="explore-more-btn purple" onClick={exploreMore}>
+                EXPLORE MORE
+              </Button>
             )}
           </div>
-          {hasMore && (
-            <Button type="explore-more-btn purple" onClick={exploreMore}>
-              EXPLORE MORE
-            </Button>
-          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

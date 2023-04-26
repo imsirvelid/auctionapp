@@ -1,5 +1,6 @@
 package org.atlantbh.internship.auctionapp.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.model.Category;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Category", description = "Category APIs")
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {

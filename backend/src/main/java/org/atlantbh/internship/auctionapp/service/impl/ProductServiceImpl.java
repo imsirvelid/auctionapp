@@ -6,6 +6,7 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
+import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,12 +32,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
+    public SearchProductResponse search(PageParams pageParams, SortParams sortParams, SearchParams searchParams) {
         Page<ProductEntity> res = productRepository.searchByNameAndCategory(
                 PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()),
                 searchParams.getProductName(), searchParams.getCategoryId()
         );
-        return res.map(ProductEntity::toDomainModel);
+        String didYouMean = null;
+        if (res.isEmpty() && searchParams.getProductName() != null)
+            didYouMean = productRepository.searchSimilarProductsName(searchParams.getProductName(), searchParams.getCategoryId()).orElse(null);
+        return new SearchProductResponse(res.map(ProductEntity::toDomainModel), didYouMean);
     }
 
     @Override

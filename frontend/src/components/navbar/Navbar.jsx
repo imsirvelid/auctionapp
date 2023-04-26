@@ -90,9 +90,9 @@ function Navbar() {
             </Link>
             {user && (
               <Link
-                to="/user/account"
+                to="/user/profile"
                 className={`${
-                  path === "/user/account" ? "selected-route" : ""
+                  path === "/user/profile" ? "selected-route" : ""
                 }`}
               >
                 MY ACCOUNT

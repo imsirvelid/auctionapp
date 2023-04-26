@@ -18,10 +18,11 @@ public class Jwt {
     @Value("${app.jwtExpiration}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication, boolean remindMe) {
+        int expiration = (remindMe ? jwtExpirationMs * 30 : jwtExpirationMs);
         PersonDetails userPrincipal = (PersonDetails) authentication.getPrincipal();
         final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + jwtExpirationMs);
+        final Date expirationDate = new Date(createdDate.getTime() + expiration);
         System.out.println(createdDate);
         System.out.println(expirationDate);
         return Jwts.builder()
@@ -31,6 +32,10 @@ public class Jwt {
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
+    }
+
+    public String generateJwtToken(Authentication authentication){
+        return generateJwtToken(authentication, false);
     }
 
     public String getEmailFromJwtToken(String token) {

@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
             throw new Exception("Email already in use");
         }
         UserEntity user = new UserEntity(
-                registerRequest.getFirstName(),
-                registerRequest.getLastName(),
+                registerRequest.getName(),
+                registerRequest.getSurname(),
                 registerRequest.getEmail(),
                 passwordEncoder.encode(registerRequest.getPassword()),
                 Role.USER);
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication, loginRequest.getRememberMe());
         user.setPassword(null);
         return new AuthResponse(user.toDomainModel(), jwt);
     }

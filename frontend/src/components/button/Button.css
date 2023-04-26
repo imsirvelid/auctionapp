@@ -30,3 +30,8 @@
 .button:hover {
   cursor: pointer;
 }
+
+.custom-p-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

@@ -20,8 +20,8 @@ import java.util.List;
 @Setter
 public class PersonDetails implements UserDetails {
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String surname;
     private String email;
     private String password;
     private Role role;

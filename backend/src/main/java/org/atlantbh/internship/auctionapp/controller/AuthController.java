@@ -3,6 +3,7 @@ package org.atlantbh.internship.auctionapp.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
@@ -45,6 +46,14 @@ public class AuthController {
     @PostMapping("/logout")
     public void fakeLogout() {
         throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security filters.");
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/getuser")
+    public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {
+        System.out.println(request.getHeader("Authorization"));
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return ResponseEntity.ok(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     @PreAuthorize("hasRole('USER')")

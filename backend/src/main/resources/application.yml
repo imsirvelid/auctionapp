@@ -15,4 +15,4 @@ spring:
             ddl-auto: update
 app:
     jwtSecret: yourfavoritecolor
-    jwtExpiration: 1600000000
+    jwtExpiration: 86400000

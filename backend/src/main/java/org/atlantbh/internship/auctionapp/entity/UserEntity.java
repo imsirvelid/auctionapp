@@ -76,6 +76,8 @@ public class UserEntity {
         userEntity.setCity(user.getCity());
         userEntity.setCountry(user.getCountry());
         userEntity.setImageUrl(user.getImageUrl());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setRole(user.getRole());
         return userEntity;
     }
 }

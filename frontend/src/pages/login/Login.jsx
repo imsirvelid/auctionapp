@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const {user, setUser} = useContext(UserContext);
+  const {setUser} = useContext(UserContext);
   const [errorMessage, setErrorMesage] = useState();
   const [remindEmail, setRemindEmail] = useState("");
   const [remember, setRemember] = useState(false);
@@ -26,7 +26,7 @@ function Login() {
       const loggedUser = await loginUser(args);
       setUser(loggedUser.user);
       localStorage.setItem('token', loggedUser.token);
-      //localStorage.setItem('user', JSON.stringify(loggedUser.user));
+      localStorage.setItem('user', JSON.stringify(loggedUser.user));
       if (args.remindMe)
         localStorage.setItem("email", args.email);
       else

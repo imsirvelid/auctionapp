@@ -17,6 +17,7 @@ import Register from "pages/register/Register";
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
+
   useEffect(() => {
     getCurrentUser(localStorage.getItem("token"))
       .then((response) => {
@@ -26,7 +27,7 @@ function App() {
       .catch((error) => {
         setUser(null);
       });
-  }, [localStorage.getItem("token")]);
+  }, []);
 
   return (
     <Router>

@@ -3,12 +3,12 @@ import * as Yup from "yup";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import "./Register.css";
 import NavigationCard from "components/navigation-card/NavigationCard";
-import {loginUser, registerUser} from "api/User";
+import {registerUser} from "api/User";
 import {UserContext} from "context/UserContext";
 import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
-  const {user, setUser} = useContext(UserContext);
+  const {setUser} = useContext(UserContext);
   const [errorMessage, setErrorMesage] = useState();
   const navigate = useNavigate();
 

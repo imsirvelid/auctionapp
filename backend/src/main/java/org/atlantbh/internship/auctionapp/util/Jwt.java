@@ -22,8 +22,6 @@ public class Jwt {
         PersonDetails userPrincipal = (PersonDetails) authentication.getPrincipal();
         final Date createdDate = new Date();
         final Date expirationDate = new Date(createdDate.getTime() + jwtExpirationMs);
-        System.out.println(createdDate);
-        System.out.println(expirationDate);
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setId(userPrincipal.getId().toString())

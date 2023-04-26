@@ -11,7 +11,6 @@ import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Auth", description = "Authentication and Authorization APIs")
@@ -20,19 +19,17 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
-
-    @Autowired
     private Jwt jwtUtils;
 
     @Autowired
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, Jwt jwtUtils) {
         this.userService = userService;
+        this.jwtUtils = jwtUtils;
     }
 
     @PostMapping("/login")
     public ResponseEntity logIn(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
         AuthResponse authResponse = userService.login(loginRequest);
-        System.out.println("After login authentication is: " + SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok(authResponse);
     }
 
@@ -50,8 +47,6 @@ public class AuthController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/test")
     public ResponseEntity<String> testMethod(HttpServletRequest request){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
-        System.out.println(request.getHeader("Authorization"));
         return ResponseEntity.ok("This is just a test");
     }
 }

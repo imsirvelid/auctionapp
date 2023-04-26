@@ -32,10 +32,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            System.out.println("JWT: " + jwt);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String email = jwtUtils.getEmailFromJwtToken(jwt);
-                System.out.println("JWT je: " + email);
                 if (!userService.existsByEmail(email)) {
                     throw new UsernameNotFoundException("Email address not found");
                 }

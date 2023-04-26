@@ -1,3 +1,4 @@
+config_variables_file_path: ~/.bashrc
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/auctionapp
@@ -14,5 +15,5 @@ spring:
         hibernate:
             ddl-auto: update
 app:
-    jwtSecret: yourfavoritecolor
+    jwtSecret: ${TOKEN_SECRET}
     jwtExpiration: 1600000000

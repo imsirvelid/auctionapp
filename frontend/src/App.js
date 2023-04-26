@@ -14,6 +14,7 @@ import {UserContext} from "context/UserContext";
 import {getCurrentUser} from "api/User";
 import Register from "pages/register/Register";
 import UserProfile from "pages/user-profile/UserProfile";
+import Protected from "components/protected/Protected";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -51,7 +52,14 @@ function App() {
             />
             <Route path="/user/login" element={<Login />} />
             <Route path="/user/register" element={<Register />} />
-            <Route path="/user/profile" element={<UserProfile />} />
+            <Route
+              path="/user/profile"
+              element={
+                <Protected>
+                  <UserProfile />
+                </Protected>
+              }
+            />
           </Routes>
         </div>
         <Footer />

@@ -66,21 +66,21 @@ function Login() {
                 <label className="formik-field-label" htmlFor="email">
                   Enter Email
                 </label>
-                <ErrorMessage name="email" component = "div" className="formik-error-message" />
                 <Field
                   type="email"
                   name="email"
                   className="custom-formik-field"
                 />
+                <ErrorMessage name="email" component = "div" className="formik-error-message" />
                 <label className="formik-field-label" htmlFor="password">
                   Password
                 </label>
-                <ErrorMessage name="password" component="div" className="formik-error-message"/>
                 <Field
                   type="password"
                   name="password"
                   className="custom-formik-field"
                 />
+                <ErrorMessage name="password" component="div" className="formik-error-message"/>
                 <div className="checkbox-container">
                   <Field
                     className="check-field-input"
@@ -91,7 +91,7 @@ function Login() {
                     Remember me
                   </label>
                 </div>
-                <button className="submit-form-button" type="submit">
+                <button className="submit-login-form-button" type="submit">
                   LOGIN
                 </button>
               </Form>

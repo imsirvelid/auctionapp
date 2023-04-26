@@ -1,11 +1,11 @@
 import React, {useContext, useState} from "react";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import "./Register.css";
 import NavigationCard from "components/navigation-card/NavigationCard";
 import {loginUser, registerUser} from "api/User";
 import {UserContext} from "context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
   const {user, setUser} = useContext(UserContext);
@@ -26,15 +26,21 @@ function Register() {
 
   const RegisterSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
     surname: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(8, "Password should be 8 char minimum").required('Required')
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string()
+      .min(8, "Password should be 8 char minimum")
+      .required("Required")
+      .matches(
+        /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/,
+        "Password must contain atleast one capitalized one small letter and special character"
+      ),
   });
 
   return (
@@ -61,46 +67,71 @@ function Register() {
                 <label className="formik-field-label" htmlFor="name">
                   First Name
                 </label>
-                <ErrorMessage name="name" component="div" className="formik-error-message"/>
+
                 <Field
                   type="text"
                   name="name"
                   className="custom-formik-field"
                 />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className="formik-error-message"
+                />
                 <label className="formik-field-label" htmlFor="surname">
                   Last Name
                 </label>
-                <ErrorMessage name="surname" component="div" className="formik-error-message"/>
+
                 <Field
                   type="text"
                   name="surname"
                   className="custom-formik-field"
                 />
+                <ErrorMessage
+                  name="surname"
+                  component="div"
+                  className="formik-error-message"
+                />
                 <label className="formik-field-label" htmlFor="email">
                   Enter Email
                 </label>
-                <ErrorMessage name="email" component="div" className="formik-error-message"/>
+
                 <Field
                   type="email"
                   name="email"
                   className="custom-formik-field"
                 />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="formik-error-message"
+                />
                 <label className="formik-field-label" htmlFor="password">
                   Password
                 </label>
-                <ErrorMessage name="password" component="div" className="formik-error-message"/>
+
                 <Field
                   type="password"
                   name="password"
                   className="custom-formik-field"
                 />
-                <button className="submit-form-button" type="submit">
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="formik-error-message"
+                />
+                <button className="submit-register-form-button" type="submit">
                   REGISTER
                 </button>
               </Form>
             )}
           </Formik>
-          <p className="centered-text">Already have an acount? <Link className="purple-link" to="/user/login">Login</Link></p>
+          <p className="centered-text">
+            Already have an acount?{" "}
+            <Link className="purple-link" to="/user/login">
+              Login
+            </Link>
+          </p>
         </div>
       </div>
     </>

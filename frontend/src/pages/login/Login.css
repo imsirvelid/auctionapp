@@ -7,7 +7,6 @@
 
 .login-form button {
   padding: 10px;
-  margin: 0;
   width: 60%;
 }
 
@@ -37,17 +36,21 @@
   padding: 10px 10px;
   font-size: 18px;
   color: #9B9B9B;
-  margin-bottom: 35px;
   box-sizing: border-box;
   letter-spacing: 0.63px;
 }
 
-.submit-form-button {
+.submit-login-form-button {
   margin-bottom: 25px;
+  margin-top: 21px;
   background-color: #8367D8;
   border: 3px solid #8367d8;
   font-weight: bold;
   color: white;
+}
+
+.submit-form-button:hover {
+  cursor: pointer;
 }
 
 .formik-field-label {
@@ -55,6 +58,7 @@
   padding: 10px;
   color: black;
   margin-left: 0px;
+  margin-top: 45px;
 }
 
 .checkbox-field-label {
@@ -72,7 +76,7 @@
   width: 60%;
   display: flex;
   text-align: left;
-  margin-bottom: 45px;
+  margin: 45px 0;
 }
 
 .login-error-message {
@@ -83,5 +87,5 @@
 .formik-error-message {
   width: 60%;
   color: red;
-  font-size: 14px;
+  font-size: 11px;
 }

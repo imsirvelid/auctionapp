@@ -1,86 +1,12 @@
-.login-form {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.login-form button {
-  padding: 10px;
-  margin: 0;
-  width: 60%;
-}
-
-.form-container {
-  border: 1px solid #d8d8d8;
-  height: auto;
-  padding-bottom: 50px;
-}
-
-.form-title {
-  font-weight: bold;
-  font-size: 24px;
-  color: #252525;
-  letter-spacing: 0.84px;
-  text-align: center;
-  padding: 10px 10px;
-  background-color: #fafafa;
-  margin: 0;
-  margin-bottom: 45px;
-}
-
-.custom-formik-field {
-  height: 45px;
-  width: 60%;
-  border: 1px solid #d8d8d8;
-  background-color: #ffffff;
-  padding: 10px 10px;
-  font-size: 18px;
-  color: #9b9b9b;
-  margin-bottom: 35px;
-  box-sizing: border-box;
-  letter-spacing: 0.63px;
-}
-
-.submit-form-button {
+.submit-register-form-button {
   margin-bottom: 25px;
+  margin-top: 41px;
   background-color: #8367d8;
-  border: 3px solid #8367d8;
   font-weight: bold;
   color: #252525;
   background: #ffffff;
   border: 3px solid #8367d8;
   box-shadow: 3px 3px 0 0 rgba(131, 103, 216, 0.31);
-}
-
-.formik-field-label {
-  width: 60%;
-  padding: 10px;
-  color: black;
-  margin-left: 0px;
-}
-
-.checkbox-field-label {
-  font-size: 18px;
-  color: #252525;
-  letter-spacing: 0.63px;
-}
-
-.check-field-input {
-  background: #ececec;
-  border: 1px solid #d8d8d8;
-}
-
-.checkbox-container {
-  width: 60%;
-  display: flex;
-  text-align: left;
-  margin-bottom: 45px;
-}
-
-.login-error-message {
-  color: red;
-  text-align: center;
 }
 
 .centered-text {

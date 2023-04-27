@@ -15,3 +15,12 @@ export const getBidsForUser = async () => {
   });
   return fetchData.data;
 };
+
+export const bid = async (bidRequest) => {
+  console.log("Request je: ", bidRequest);
+  const response = await axios.post(URL + "/bid", bidRequest, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token")},
+  });
+  console.log("Resposne je: ", response);
+  return response.data;
+}

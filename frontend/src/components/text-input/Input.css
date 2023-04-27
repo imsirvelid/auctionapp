@@ -6,3 +6,12 @@
   padding: 10px;
   color: aliceblue;
 }
+
+.gray {
+  background: #ECECEC;
+  border: 1px solid #D8D8D8;
+  color: black;
+  margin-right: 17px;
+  font-size: 18px;
+  letter-spacing: 0.63px;
+}

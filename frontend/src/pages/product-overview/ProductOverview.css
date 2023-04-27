@@ -23,7 +23,7 @@
 }
 
 .purple-span {
-  color: #8367D8;;
+  color: #8367d8;
   letter-spacing: 0.56px;
 }
 
@@ -34,4 +34,28 @@
 
 .product-info-details {
   margin: 0;
+}
+
+.bid-message {
+  width: 100%;
+  height: 57px;
+  margin: 0px auto;
+  font-size: 18px;
+  letter-spacing: 0.63px;
+  padding: 0px;
+}
+
+.success {
+  font-weight: bold;
+  background-color: #F0F3EE;
+  color: #417505;
+}
+
+.error {
+  background-color: #F6F2E5;
+  color: #AB944E;
+}
+
+.container-top {
+  margin-top: 97px;
 }

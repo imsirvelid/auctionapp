@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import TabView from "components/tab-view/TabView";
 import "./ProductOverview.css";
 import moment from "moment";
@@ -7,16 +7,26 @@ import ImageGallery from "components/image-gallery/ImageGallery";
 import {getProductById} from "api/Product";
 import {useParams} from "react-router-dom";
 import {getDateDiffernece} from "utils/DateHelper";
-import {getProductBidInfo} from "api/Bid";
+import {bid, getProductBidInfo} from "api/Bid";
 import NavigationCard from "components/navigation-card/NavigationCard";
+import Button from "components/button/Button";
+import Input from "components/text-input/Input";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "context/UserContext";
 
 function ProductOverview() {
   const params = useParams();
   const [product, setProduct] = useState();
   const [productBidInfo, setProductBidInfo] = useState();
+  const [enteredPrice, setPrice] = useState(0);
+  const [message, setMessage] = useState("");
+  const [messageStyle, setMessageStyle] = useState("");
+  const {user} = useContext(UserContext);
   useEffect(() => {
     const getProduct = async (id) => {
       const res = await getProductById(id);
+      console.log("product is: ", product);
       setProduct(res);
     };
     const getProductBid = async (id) => {
@@ -38,6 +48,28 @@ function ProductOverview() {
       ),
     },
   ];
+
+  const placeBid = async () => {
+    if (enteredPrice < product.startingPrice) {
+      setMessage(
+        "There are higher bids than yours. You could give a second try."
+      );
+      setMessageStyle("error");
+    }
+    try {
+      const bidResponse = await bid({
+        productId: product.id,
+        price: enteredPrice,
+      });
+      setMessage(bidResponse.message);
+      if (bidResponse.successful) setMessageStyle("success");
+      else setMessageStyle("error");
+    } catch (exception) {
+      setMessageStyle("error");
+      setMessage(exception.response.data);
+    }
+  };
+
   return (
     <>
       <NavigationCard
@@ -46,7 +78,12 @@ function ProductOverview() {
         subLink="Single product"
         linkTo="/search"
       />
-      <div className="container">
+      {message && (
+        <div className={`bid-message ${messageStyle}`}>
+          <div className="current-location-flexdiv">{message}</div>
+        </div>
+      )}
+      <div className="container container-top">
         {product && (
           <div className="product-overview">
             <div className="product-overview-images">
@@ -58,6 +95,19 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
+              { product.user.id !== user.id &&
+                <div>
+                  <Input
+                    value={enteredPrice}
+                    onChange={(e) => setPrice(e.target.value)}
+                    width="111px"
+                    type="gray"
+                  ></Input>
+                  <Button onClick={placeBid}>
+                    PLACE BID <FontAwesomeIcon icon={faAngleRight} />{" "}
+                  </Button>
+                </div>
+              }
               {productBidInfo && (
                 <div className="product-overview-bid-info">
                   <p>

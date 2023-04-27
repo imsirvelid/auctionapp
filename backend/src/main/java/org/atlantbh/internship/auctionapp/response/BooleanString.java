@@ -8,6 +8,6 @@ import lombok.*;
 @Setter
 @ToString
 public class BooleanString {
-    private Boolean successfull;
+    private Boolean successful;
     private String message;
 }

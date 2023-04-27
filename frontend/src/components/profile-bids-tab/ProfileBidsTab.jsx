@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./ProfileBidsTab.css";
 import Button from "components/button/Button";
+import {getBidsForUser} from "api/Bid";
+import { getDateDiffernece } from "utils/DateHelper";
+import moment from "moment";
+import { Link } from "react-router-dom";
 
 function ProfileBidsTab() {
+  const [bids, setBids] = useState([]);
+
+  useEffect(() => {
+    const getBids = async () => {
+      const res = await getBidsForUser();
+      setBids(res);
+    };
+    getBids();
+  }, []);
+
   return (
     <div className="profile-bids-table">
       <div className="gray-heading">
@@ -14,21 +28,28 @@ function ProfileBidsTab() {
         <div className="bids-table-highest">Highest Bid</div>
         <div className="bids-table-empty"></div>
       </div>
-      <div className="bids-table-row">
-        <div className="bids-table-item">
-          <img
-            className="bids-table-img"
-            alt="Item"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Patek-Philippe-Nautilus-5711-1A-010-1.jpg/479px-Patek-Philippe-Nautilus-5711-1A-010-1.jpg?20211118111020"
-          />
+      {bids.map((bid, index) => (
+        <div className="bids-table-row" key={index}>
+          <div className="bids-table-item">
+            <img
+              className="bids-table-img"
+              alt="Item"
+              src={bid.productThumbnail}
+            />
+          </div>
+          <div className="bids-table-name">
+            <p className="bold">{bid.productName}</p>
+            <p className="purple-id">#{bid.productId}</p>
+          </div>
+          <div className="bids-table-left">{getDateDiffernece(moment(), bid.endDate)}</div>
+          <div className={`bids-table-price ${bid.myPrice === bid.highestPrice && "green-bold"}`}>${bid.myPrice}</div>
+          <div className="bids-table-bids">{bid.numberOfBids}</div>
+          <div className={`bids-table-price ${bid.myPrice === bid.highestPrice ? "green-bold" : "blue-bold"}`}>${bid.highestPrice}</div>
+          <div className="bids-table-empty">
+            <Button type="white"><Link to={`/products/${bid.productId}`}>VIEW</Link></Button>
+          </div>
         </div>
-        <div className="bids-table-name"><p className="bold">Philipe Patek Nautilus 5711</p><p className="purple-id">#2145</p></div>
-        <div className="bids-table-left">12h</div>
-        <div className="bids-table-price blue-bold">$1255.20</div>
-        <div className="bids-table-bids">4</div>
-        <div className="bids-table-highest green-bold">$1255.20</div>
-        <div className="bids-table-empty"><Button type="white">VIEW</Button></div>
-      </div>
+      ))}
     </div>
   );
 }

@@ -54,27 +54,27 @@
 }
 
 .bids-table-left {
-  width: 12%;
+  width: 15%;
 }
 
 .bids-table-price {
-  width: 12%;
+  width: 13%;
 }
 
 .bids-table-bids {
-  width: 12%;
+  width: 10%;
 }
 
 .bids-table-highest {
-  width: 12%;
+  width: 13%;
 }
 
 .bids-table-empty {
-  width: 7%;
+  width: 4%;
 }
 
 .bids-table-img {
-  max-width: 100%;
+  width: 100px;
   height: 100px;
 }
 

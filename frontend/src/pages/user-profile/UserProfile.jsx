@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./UserProfile.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGavel, faList, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faGavel, faList} from "@fortawesome/free-solid-svg-icons";
 import NavigationCard from "components/navigation-card/NavigationCard";
 import ProfileBidsTab from "components/profile-bids-tab/ProfileBidsTab";
 

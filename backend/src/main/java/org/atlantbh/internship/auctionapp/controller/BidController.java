@@ -27,7 +27,7 @@ public class BidController {
         return ResponseEntity.ok(bidService.getProductBidInfo(productId));
     }
 
-    @GetMapping(value = "/bids/user")
+    @GetMapping(value = "/user")
     public ResponseEntity<?> getBidsForUser(){
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

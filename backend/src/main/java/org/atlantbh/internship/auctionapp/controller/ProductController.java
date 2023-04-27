@@ -5,13 +5,12 @@ import org.atlantbh.internship.auctionapp.controller.common.PageParams;
 import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
-import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.UserProfileProductsInfo;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
+import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,14 +53,12 @@ public class ProductController {
 
     @GetMapping(value = "/user/active")
     public ResponseEntity<List<UserProfileProductsInfo>> getUserActiveProducts(){
-        PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(productService.getUserActiveProducts(personDetails.getId()));
+        return ResponseEntity.ok(productService.getUserActiveProducts(Jwt.getCurrentUserId()));
     }
 
     @GetMapping(value = "/user/sold")
     public ResponseEntity<List<UserProfileProductsInfo>> getUserSoldProducts(){
-        PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(productService.getUserSoldProducts(personDetails.getId()));
+        return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
     }
 
 }

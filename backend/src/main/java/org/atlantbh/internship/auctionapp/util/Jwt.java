@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -35,8 +36,8 @@ public class Jwt {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public Object getCurrentUserId(Authentication authentication) {
-        PersonDetails userPrincipal = (PersonDetails) authentication.getPrincipal();
+    public static Long getCurrentUserId() {
+        PersonDetails userPrincipal = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userPrincipal.getId();
     }
 

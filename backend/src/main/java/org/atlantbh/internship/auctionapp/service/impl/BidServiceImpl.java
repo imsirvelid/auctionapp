@@ -27,15 +27,6 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public List<UserProfileProductsInfo> getBidsForUser(Long userId) {
-        for (var dajmi : bidRepository.getUserBids(userId)){
-            System.out.println(dajmi.getProductName());
-            System.out.println(dajmi.getHighestPrice());
-            System.out.println(dajmi.getMyPrice());
-            System.out.println(dajmi.getNumberOfBids());
-            System.out.println(dajmi.getProductThumbnail());
-            System.out.println("*******************");
-        }
-        System.out.println(bidRepository.getUserBids(userId));
         return bidRepository.getUserBids(userId);
     }
 }

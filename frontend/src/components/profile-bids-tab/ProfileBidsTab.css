@@ -1,0 +1,96 @@
+.profile-bids-table {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #d8d8d8;
+  display: table;
+  border-collapse: separate;
+  flex: 0 0 250px;
+  flex-direction: column;
+  border-spacing: 0;
+}
+
+.profile-bids-table p {
+  font-size: 18px;
+  letter-spacing: 0.63px;
+  margin: 0;
+}
+
+.gray-heading {
+  height: 60px;
+  margin: 0;
+  padding: 11px 2.5%;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 18px;
+  color: #252525;
+  letter-spacing: 0.63px;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+
+}
+
+.bids-table-row {
+  padding: 0 2.5%;
+  box-sizing: border-box;
+  height: 100px;
+  align-items: center;
+  display: flex;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bids-table-item {
+  width: 15%;
+}
+
+.bids-table-name {
+  font-size: 18px;
+  color: #252525;
+  letter-spacing: 0.63px;
+  width: 25%;
+}
+
+.bids-table-left {
+  width: 12%;
+}
+
+.bids-table-price {
+  width: 12%;
+}
+
+.bids-table-bids {
+  width: 12%;
+}
+
+.bids-table-highest {
+  width: 12%;
+}
+
+.bids-table-empty {
+  width: 7%;
+}
+
+.bids-table-img {
+  max-width: 100%;
+  height: 100px;
+}
+
+.purple-id {
+  margin: 0;
+  font-size: 18px;
+  color: #8367d8;
+  letter-spacing: 0.63px;
+}
+
+.green-bold {
+  font-weight: bold;
+  color: #6cc047;
+}
+
+.blue-bold {
+  font-weight: bold;
+  color: #5b9ed6;
+}

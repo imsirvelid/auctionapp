@@ -1,0 +1,25 @@
+.profile-tab-button {
+  border: 0;
+  width: 8.2%;
+  height: 37px;
+  background-color: #F0F0F0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #252525;
+  margin-right: 13px;
+  letter-spacing: 0.56px;
+}
+
+.selected-profile-button {
+  background-color: #8367D8;
+  color: white;
+}
+
+.profile-tab-button:hover {
+  cursor: pointer;
+}
+
+.profile-tab-component {
+  margin-top: 43px;
+  width: 100%;
+}

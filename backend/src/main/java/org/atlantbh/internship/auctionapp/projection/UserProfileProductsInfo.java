@@ -3,7 +3,7 @@ package org.atlantbh.internship.auctionapp.projection;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public interface BidInfo {
+public interface UserProfileProductsInfo {
     String getProductName();
     String getProductThumbnail();
     Long getProductId();

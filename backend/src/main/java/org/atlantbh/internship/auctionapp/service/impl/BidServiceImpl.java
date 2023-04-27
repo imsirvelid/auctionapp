@@ -1,6 +1,6 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
-import org.atlantbh.internship.auctionapp.projection.BidInfo;
+import org.atlantbh.internship.auctionapp.projection.UserProfileProductsInfo;
 import org.atlantbh.internship.auctionapp.repository.BidRepository;
 import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
@@ -26,8 +26,8 @@ public class BidServiceImpl implements BidService {
     }
 
     @Override
-    public List<BidInfo> getBidsForUser(Long userId) {
-        for (var dajmi : bidRepository.getUserBidInfo(userId)){
+    public List<UserProfileProductsInfo> getBidsForUser(Long userId) {
+        for (var dajmi : bidRepository.getUserBids(userId)){
             System.out.println(dajmi.getProductName());
             System.out.println(dajmi.getHighestPrice());
             System.out.println(dajmi.getMyPrice());
@@ -35,7 +35,7 @@ public class BidServiceImpl implements BidService {
             System.out.println(dajmi.getProductThumbnail());
             System.out.println("*******************");
         }
-        System.out.println(bidRepository.getUserBidInfo(userId));
-        return bidRepository.getUserBidInfo(userId);
+        System.out.println(bidRepository.getUserBids(userId));
+        return bidRepository.getUserBids(userId);
     }
 }

@@ -22,3 +22,17 @@ export const searchProducts = async(page, sortBy, orderBy, size = PAGE_SIZE, nam
   const fetchData = await axios.get(URL + "/search", { params: { pageNumber: page, pageSize: size, sortField: sortBy, sortOrder: orderBy, productName: name, categoryId: category }});
   return fetchData.data;
 } 
+
+export const getActiveUserProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/active", {
+    headers: {Authorization: "Bearer " + localStorage.getItem("token")},
+  });
+  return fetchData.data;
+}
+
+export const getSoldUserProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/sold", {
+    headers: {Authorization: "Bearer " + localStorage.getItem("token")},
+  });
+  return fetchData.data;
+}

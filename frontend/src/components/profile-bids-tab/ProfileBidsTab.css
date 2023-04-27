@@ -96,3 +96,21 @@
   font-weight: bold;
   color: #5b9ed6;
 }
+
+.empty-table-bids {
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 13px;
+}
+
+.empty-table-bids p {
+  margin-bottom: 41px;
+}
+
+.purple-icon {
+  color: #8367d8;
+  font-size: 100px;
+  margin-bottom: 31px;
+}

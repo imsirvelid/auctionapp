@@ -4,13 +4,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGavel, faList} from "@fortawesome/free-solid-svg-icons";
 import NavigationCard from "components/navigation-card/NavigationCard";
 import ProfileBidsTab from "components/profile-bids-tab/ProfileBidsTab";
+import ProfileSellerTab from "components/profile-seller-tab/ProfileSellerTab";
 
 function UserProfile() {
   const [currentTab, setCurrentTab] = useState(0);
   const tabs = [
     {
       name: "Seller",
-      component: <div>Seller tab</div>,
+      component: <ProfileSellerTab/>,
       icon: faList,
     },
     {

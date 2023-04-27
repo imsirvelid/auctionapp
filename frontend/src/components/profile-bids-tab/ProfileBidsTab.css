@@ -7,6 +7,7 @@
   flex: 0 0 250px;
   flex-direction: column;
   border-spacing: 0;
+  padding-bottom: 21px;
 }
 
 .profile-bids-table p {
@@ -33,6 +34,7 @@
 .bids-table-row {
   padding: 0 2.5%;
   box-sizing: border-box;
+  margin-bottom: 15px;
   height: 100px;
   align-items: center;
   display: flex;

@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class BooleanString {
+public class SuccessfulAndMessage {
     private Boolean successful;
     private String message;
 }

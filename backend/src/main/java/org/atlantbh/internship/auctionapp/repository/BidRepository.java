@@ -1,7 +1,7 @@
 package org.atlantbh.internship.auctionapp.repository;
 
 import org.atlantbh.internship.auctionapp.entity.BidEntity;
-import org.atlantbh.internship.auctionapp.projection.UserProfileProductsInfo;
+import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -20,6 +20,6 @@ public interface BidRepository extends CrudRepository<BidEntity, Long> {
             FROM ProductEntity pe, ImageEntity img, BidEntity b
             WHERE pe.id = img.product.id and img.featured = true and b.user.id = :userId and b.product.id = pe.id
             """)
-    List<UserProfileProductsInfo> getUserBids(Long userId);
+    List<ProductBidsInfo> getUserBids(Long userId);
 
 }

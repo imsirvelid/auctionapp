@@ -4,7 +4,7 @@ import org.atlantbh.internship.auctionapp.controller.common.PageParams;
 import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.model.Product;
-import org.atlantbh.internship.auctionapp.projection.UserProfileProductsInfo;
+import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 
 import java.util.List;
@@ -15,6 +15,6 @@ public interface ProductService {
     SearchProductResponse search(PageParams pageParams, SortParams sortParams, SearchParams searchParams);
     Optional<Product> findById(Long id);
     Product getRandom();
-    List<UserProfileProductsInfo> getUserActiveProducts(Long userId);
-    List<UserProfileProductsInfo> getUserSoldProducts(Long userId);
+    List<ProductBidsInfo> getUserActiveProducts(Long userId);
+    List<ProductBidsInfo> getUserSoldProducts(Long userId);
 }

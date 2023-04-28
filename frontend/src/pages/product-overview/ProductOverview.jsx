@@ -19,14 +19,13 @@ function ProductOverview() {
   const params = useParams();
   const [product, setProduct] = useState();
   const [productBidInfo, setProductBidInfo] = useState();
-  const [enteredPrice, setPrice] = useState(0);
+  const [enteredPrice, setPrice] = useState("");
   const [message, setMessage] = useState("");
   const [messageStyle, setMessageStyle] = useState("");
   const {user} = useContext(UserContext);
   useEffect(() => {
     const getProduct = async (id) => {
       const res = await getProductById(id);
-      console.log("product is: ", product);
       setProduct(res);
     };
     const getProductBid = async (id) => {
@@ -96,7 +95,7 @@ function ProductOverview() {
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
               { product.user.id !== user.id &&
-                <div>
+                <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}
                     onChange={(e) => setPrice(e.target.value)}
@@ -106,6 +105,7 @@ function ProductOverview() {
                   <Button onClick={placeBid}>
                     PLACE BID <FontAwesomeIcon icon={faAngleRight} />{" "}
                   </Button>
+                  <p>Enter ${productBidInfo ? productBidInfo.highestBid : product.startingPrice } or more</p>
                 </div>
               }
               {productBidInfo && (

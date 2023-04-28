@@ -9,7 +9,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
   const {setUser} = useContext(UserContext);
-  const [errorMessage, setErrorMesage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
 
   const handleRegisterSubmit = async (args) => {
@@ -20,18 +20,18 @@ function Register() {
       localStorage.setItem("user", JSON.stringify(loggedUser.user));
       navigate("/");
     } catch (exception) {
-      setErrorMesage(exception.response.data);
+      setErrorMessage(exception.response.data);
     }
   };
 
   const RegisterSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
+      .min(2, "Name should contain at least 2 characters")
+      .max(50, "Name must contain less than 50 characters")
       .required("Required"),
     surname: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
+      .min(2, "Last name should contain at least 2 characters")
+      .max(50, "Last name must contain less than 50 characters")
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
@@ -39,7 +39,7 @@ function Register() {
       .required("Required")
       .matches(
         /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/,
-        "Password must contain atleast one capitalized one small letter and special character"
+        "Password must contain at least one capitalized one small letter and special character"
       ),
   });
 
@@ -62,7 +62,7 @@ function Register() {
             onSubmit={(values) => handleRegisterSubmit(values)}
             validationSchema={RegisterSchema}
           >
-            {({isSubmitting}) => (
+            {() => (
               <Form className="login-form">
                 <label className="formik-field-label" htmlFor="name">
                   First Name

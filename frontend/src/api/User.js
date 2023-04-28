@@ -8,10 +8,8 @@ export const loginUser = async (request) => {
   return fetchData.data;
 };
 
-export const getCurrentUser = async (token) => {
-  return axios.get(URL + "/getuser", {
-    headers: {Authorization: "Bearer " + token},
-  });
+export const getCurrentUser = async () => {
+  return axios.get(URL + "/getuser");
 };
 
 export const registerUser = async (request) => {

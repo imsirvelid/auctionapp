@@ -16,7 +16,7 @@ function ProfileSellerTab() {
   useEffect(() => {
     const getProducts = async () => {
       let res = []
-      if (currentTab) res = await getActiveUserProducts();
+      if (currentTab === 0) res = await getActiveUserProducts();
       else res = await getSoldUserProducts();
       setProducts(res);
     };

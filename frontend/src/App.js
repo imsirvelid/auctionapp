@@ -20,14 +20,7 @@ function App() {
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
   useEffect(() => {
-    getCurrentUser(localStorage.getItem("token"))
-      .then((response) => {
-        setUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        setUser(null);
-      });
+    setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
   return (

@@ -13,6 +13,7 @@ import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
 import {getCurrentUser} from "api/User";
 import Register from "pages/register/Register";
+import GuestProtected from "components/protected/GuestProtected";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -49,6 +50,9 @@ function App() {
               element={<Search key={window.location.pathname} />}
             />
             <Route path="/user/login" element={<Login />} />
+            <GuestProtected>
+              
+            </GuestProtected>
             <Route path="/user/register" element={<Register />} />
           </Routes>
         </div>

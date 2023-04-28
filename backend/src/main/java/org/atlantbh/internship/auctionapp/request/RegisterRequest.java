@@ -12,8 +12,8 @@ public class RegisterRequest {
     private String name;
 
     @NotBlank(message = "Last name can't be empty")
-    @Size(min = 2, message = "First name must have at least 2 characters")
-    @Size(max = 50, message = "First name can't be longer than 50 characters")
+    @Size(min = 2, message = "Last name must have at least 2 characters")
+    @Size(max = 50, message = "Last name can't be longer than 50 characters")
     private String surname;
 
     @NotBlank(message = "Email can't be empty")
@@ -56,6 +56,7 @@ public class RegisterRequest {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
 
     public String getEmail() {
         return email;

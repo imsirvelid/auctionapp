@@ -9,7 +9,6 @@ import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +44,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/random")
     public ResponseEntity<Product> getRandomProduct() {
         return ResponseEntity.ok(productService.getRandom());

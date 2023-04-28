@@ -91,7 +91,7 @@ function Navbar() {
             {user && (
               <Link
                 to="/user/account"
-                className={`${
+                className={`hidden ${
                   path === "/user/account" ? "selected-route" : ""
                 }`}
               >

@@ -11,9 +11,9 @@ import Search from "pages/search/Search";
 import "./App.css";
 import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
-import {getCurrentUser} from "api/User";
 import Register from "pages/register/Register";
 import GuestRoute from "components/protected/GuestRoute";
+import './api/AxiosInterceptor';
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));

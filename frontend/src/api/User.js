@@ -9,9 +9,7 @@ export const loginUser = async (request) => {
 };
 
 export const getCurrentUser = async () => {
-  return axios.get(URL + "/getuser", {
-    headers: {Authorization: "Bearer " + localStorage.getItem("token")},
-  });
+  return axios.get(URL + "/getuser");
 };
 
 export const registerUser = async (request) => {

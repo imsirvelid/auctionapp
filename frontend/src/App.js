@@ -13,7 +13,7 @@ import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
 import {getCurrentUser} from "api/User";
 import Register from "pages/register/Register";
-import GuestProtected from "components/protected/GuestProtected";
+import GuestRoute from "components/protected/GuestRoute";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -52,17 +52,17 @@ function App() {
             <Route
               path="/user/login"
               element={
-                <GuestProtected>
+                <GuestRoute>
                   <Login />
-                </GuestProtected>
+                </GuestRoute>
               }
             />
             <Route
               path="/user/register"
               element={
-                <GuestProtected>
+                <GuestRoute>
                   <Register />
-                </GuestProtected>
+                </GuestRoute>
               }
             />
           </Routes>

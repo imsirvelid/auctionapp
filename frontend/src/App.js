@@ -49,11 +49,22 @@ function App() {
               path="/search"
               element={<Search key={window.location.pathname} />}
             />
-            <Route path="/user/login" element={<Login />} />
-            <GuestProtected>
-              
-            </GuestProtected>
-            <Route path="/user/register" element={<Register />} />
+            <Route
+              path="/user/login"
+              element={
+                <GuestProtected>
+                  <Login />
+                </GuestProtected>
+              }
+            />
+            <Route
+              path="/user/register"
+              element={
+                <GuestProtected>
+                  <Register />
+                </GuestProtected>
+              }
+            />
           </Routes>
         </div>
         <Footer />

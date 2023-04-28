@@ -37,3 +37,5 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             """)
     Optional<String> searchSimilarProductsName(String name, Long categoryId);
 }
+
+//TEST

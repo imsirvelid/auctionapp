@@ -94,7 +94,7 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              { product.user.id !== user.id &&
+              { user && product.user.id !== user.id &&
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}

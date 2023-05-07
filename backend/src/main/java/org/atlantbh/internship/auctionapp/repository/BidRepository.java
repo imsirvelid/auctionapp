@@ -22,5 +22,4 @@ public interface BidRepository extends CrudRepository<BidEntity, Long> {
               and b.price = (SELECT MAX(bid.price) FROM BidEntity bid WHERE bid.user.id = :userId and bid.product.id = pe.id)
             """)
     List<ProductBidsInfo> getUserBids(Long userId);
-
 }

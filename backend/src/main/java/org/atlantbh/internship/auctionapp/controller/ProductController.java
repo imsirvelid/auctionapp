@@ -7,6 +7,7 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
@@ -59,6 +60,11 @@ public class ProductController {
     @GetMapping(value = "/user/sold")
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) throws BadRequestException{
+        return ResponseEntity.ok(productService.createProduct(request));
     }
 
 }

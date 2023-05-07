@@ -3,16 +3,28 @@ package org.atlantbh.internship.auctionapp.service.impl;
 import org.atlantbh.internship.auctionapp.controller.common.PageParams;
 import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
+import org.atlantbh.internship.auctionapp.entity.ImageEntity;
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
+import org.atlantbh.internship.auctionapp.entity.Status;
+import org.atlantbh.internship.auctionapp.entity.UserEntity;
+import org.atlantbh.internship.auctionapp.exception.BadRequestException;
+import org.atlantbh.internship.auctionapp.model.Image;
+import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.repository.CategoryRepository;
+import org.atlantbh.internship.auctionapp.repository.ImageRepository;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
+import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,9 +33,13 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final ImageRepository imageRepository;
 
-    public ProductServiceImpl(final ProductRepository productRepository) {
+    public ProductServiceImpl(final ProductRepository productRepository, final CategoryRepository categoryRepository, final ImageRepository imageRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -57,6 +73,41 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductBidsInfo> getUserSoldProducts(Long userId) {
         return productRepository.getUserSoldProducts(userId);
+    }
+
+
+    @Override
+    public Product createProduct(CreateProductRequest request) throws BadRequestException {
+        PersonDetails user = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ProductEntity product = ProductEntity.fromRequest(request);
+        product.setUser(UserEntity.fromPersonDetails(user));
+        product.setStatus(Status.ACTIVE);
+        product.setCategory(categoryRepository.findById(request.getCategoryId()).get());
+        product.setImages(Collections.emptyList());
+        product = productRepository.save(product);
+        saveAllImagesForProduct(request.getImages(), request.getFeaturedImg(), product.getId());
+        return product.toDomainModel();
+    }
+
+    @Override
+    public List<Image> saveAllImagesForProduct(List<String> images, int featuredIndex, Long productId) throws BadRequestException {
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new BadRequestException("Product with given ID does not exist"));
+        PersonDetails user = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user.getId() != product.getUser().getId())
+            throw new BadRequestException("You don't have product with given ID");
+        List<ImageEntity> imageEntities = images.stream().map(image ->
+            new ImageEntity(product, image, images.indexOf(image) == featuredIndex)
+        ).collect(Collectors.toList());
+        List<Image> listOfImages = new ArrayList<>();
+        try {
+            listOfImages = imageRepository.saveAll(imageEntities)
+                    .stream().map(ImageEntity::toDomainModel)
+                    .collect(Collectors.toList());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return listOfImages;
     }
 
     @Override

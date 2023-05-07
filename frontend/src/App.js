@@ -16,6 +16,8 @@ import UserProfile from "pages/user-profile/UserProfile";
 import GuestRoute from "components/protected/GuestRoute";
 import "./api/AxiosInterceptor";
 import PrivateRoute from "components/protected/PrivateRoute";
+import Sell from "pages/sell/Sell";
+import PaySuccess from "pages/pay-success/PaySuccess";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -68,6 +70,15 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/user/sell"
+              element={
+                <PrivateRoute>
+                  <Sell />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/payment/success" element={<PaySuccess />}></Route>
           </Routes>
         </div>
         <Footer />

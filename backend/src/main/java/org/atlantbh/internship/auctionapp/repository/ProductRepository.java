@@ -4,8 +4,8 @@ import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends CrudRepository<ProductEntity, Long>, PagingAndSortingRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long>, PagingAndSortingRepository<ProductEntity, Long> {
 
-    @Query(value = "SELECT pe FROM ProductEntity pe left join ImageEntity im on im.product.id = pe.id WHERE im.featured = true")
+    @Query(value = "SELECT pe FROM ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true",
+           countQuery = "select count(pe) from ProductEntity pe left join pe.images im where im.featured = true")
     Page<ProductEntity> getProductsWithThumbnails(Pageable pageable);
 
     @Query("select pe from ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true order by random() limit 1")

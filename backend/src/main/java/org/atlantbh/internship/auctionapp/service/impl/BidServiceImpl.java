@@ -59,4 +59,10 @@ public class BidServiceImpl implements BidService {
         bidRepository.save(bidEntity);
         return new SuccessfulAndMessage(true, "Congrats! You are the highest bidder.");
     }
+
+    @Override
+    public BidEntity getMaxBidPriceForProduct(Long productId) throws BadRequestException{
+        return bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId)
+                .orElseThrow(() -> new BadRequestException("There are no bids for product with given ID"));
+    }
 }

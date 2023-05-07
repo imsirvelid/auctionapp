@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CategoryRepository extends CrudRepository<CategoryEntity, Long> {
     List<CategoryEntity> findAllByParentCategoryIsNull();
+    List<CategoryEntity> findAllByParentCategoryId(Long parentCategoryId);
 }

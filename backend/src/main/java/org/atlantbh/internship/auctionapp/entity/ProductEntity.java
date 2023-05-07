@@ -1,8 +1,11 @@
 package org.atlantbh.internship.auctionapp.entity;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.atlantbh.internship.auctionapp.model.Product;
+import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,7 +22,7 @@ import java.util.stream.Collectors;
 public class ProductEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @ManyToOne
@@ -34,19 +37,19 @@ public class ProductEntity {
     @Column(name = "details")
     private String details;
 
-    @NotBlank
+    @NotNull
     @Column(name = "starting_price")
     private BigDecimal startingPrice;
 
-    @NotBlank
+    @NotNull
     @Column(name = "created")
     private LocalDateTime created;
 
-    @NotBlank
+    @NotNull
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
-    @NotBlank
+    @NotNull
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
@@ -55,7 +58,7 @@ public class ProductEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    @NotBlank
+    @NotNull
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -79,6 +82,17 @@ public class ProductEntity {
         productEntity.setCategory(CategoryEntity.fromDomainModel(product.getCategory()));
         productEntity.setUser(UserEntity.fromDomainModel(product.getUser()));
         return productEntity;
+    }
+
+    public static ProductEntity fromRequest(final CreateProductRequest request){
+        final ProductEntity entity = new ProductEntity();
+        entity.setCreated(LocalDateTime.now());
+        entity.setDetails(request.getDescription());
+        entity.setName(request.getProductName());
+        entity.setStartingPrice(request.getStartingPrice());
+        entity.setStartDate(request.getStartDate());
+        entity.setEndDate(request.getEndDate());
+        return entity;
     }
 }
 

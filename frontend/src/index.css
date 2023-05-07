@@ -12,6 +12,11 @@ code {
   font-family: "Lato";
 }
 
+.successfull-pay-text {
+  text-align: center;
+  color: #8367D8;
+}
+
 .product-link {
   width: 100%;
 }

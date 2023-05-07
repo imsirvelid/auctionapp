@@ -17,8 +17,10 @@ public class User {
     private String address;
     private String phone;
     private String city;
+    private Integer zipCode;
     private String country;
     private String imageUrl;
     private String password;
     private Role role;
+    private String stripeId;
 }

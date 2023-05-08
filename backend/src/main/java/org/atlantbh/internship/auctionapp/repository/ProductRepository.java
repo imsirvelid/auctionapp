@@ -26,7 +26,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, P
                 select pe 
                 from ProductEntity pe 
                 where (:name is null or lower(pe.name) like lower(concat('%', :name, '%'))) and 
-                      (:categoryId is null or :categoryId = pe.category.id)
+                      (:categoryId is null or :categoryId = pe.category.id or :categoryId = pe.category.parentCategory.id)
             """)
     Page<ProductEntity> searchByNameAndCategory(Pageable pageable, String name, Long categoryId);
 

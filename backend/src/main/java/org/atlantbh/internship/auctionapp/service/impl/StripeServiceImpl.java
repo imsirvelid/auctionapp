@@ -5,6 +5,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.checkout.Session;
+import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.atlantbh.internship.auctionapp.entity.BidEntity;
 import org.atlantbh.internship.auctionapp.entity.CreditCardEntity;
@@ -13,16 +14,18 @@ import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.request.CreateCustomerRequest;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
+import org.atlantbh.internship.auctionapp.service.api.StripeService;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.UserContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
-public class StripeServiceImpl {
+public class StripeServiceImpl implements StripeService {
 
 
     private final CreditCardService creditCardService;
@@ -91,6 +94,23 @@ public class StripeServiceImpl {
         params.put("type", "card");
         params.put("card", card);
         return PaymentMethod.create(params);
+    }
+
+    @Override
+    public List<PaymentMethod> getUserPaymentMethod(Long userId) throws StripeException, BadRequestException {
+        PaymentMethodListParams params = PaymentMethodListParams
+                .builder()
+                .setCustomer(getUserCustomerId(userId))
+                .setType(PaymentMethodListParams.Type.CARD)
+                .build();
+        List<PaymentMethod> paymentMethods = PaymentMethod.list(params).getData();
+        return paymentMethods;
+    }
+
+    @Override
+    public String getUserCustomerId(Long userId) throws BadRequestException {
+        UserEntity user = userService.getById(userId);
+        return user.getStripeId();
     }
 
 }

@@ -68,6 +68,8 @@ public class WebSecurityConfiguration {
                 .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and()
                 .authorizeHttpRequests()
+                .requestMatchers("/payment/**", "/creditcard/**", "/user/**")
+                .authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .authenticationManager(authenticationManager);

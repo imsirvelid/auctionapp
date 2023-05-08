@@ -41,20 +41,10 @@ public class AuthController {
         return ResponseEntity.ok(authResponse);
     }
 
-    @PostMapping("/logout")
-    public void fakeLogout() {
-        throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security filters.");
-    }
-
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/getuser")
     public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {
         return ResponseEntity.ok(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/test")
-    public ResponseEntity<String> testMethod(HttpServletRequest request){
-        return ResponseEntity.ok("This is just a test");
-    }
 }

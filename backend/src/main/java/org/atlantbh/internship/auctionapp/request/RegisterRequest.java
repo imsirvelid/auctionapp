@@ -5,17 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class RegisterRequest {
-
     @NotBlank(message = "First name can't be empty")
     @Size(min = 2, message = "First name must have at least 2 characters")
     @Size(max = 50, message = "First name can't be longer than 50 characters")
     private String name;
 
-    @NotBlank(message = "Last name can't be empty")
-    @Size(min = 2, message = "First name must have at least 2 characters")
-    @Size(max = 50, message = "First name can't be longer than 50 characters")
+    @NotBlank(message = "Surname can't be empty")
+    @Size(min = 2, message = "Surname must have at least 2 characters")
+    @Size(max = 50, message = "Surname can't be longer than 50 characters")
     private String surname;
-
     @NotBlank(message = "Email can't be empty")
     @Email(message = "Email format is not valid")
     @Size(max = 320, message = "Email can't be longer than 320 characters")
@@ -30,13 +28,13 @@ public class RegisterRequest {
     }
 
     public RegisterRequest(@NotBlank(message = "First name can't be empty") String name,
-                           @NotBlank(message = "Last name can't be empty") String lastName,
+                           @NotBlank(message = "First name can't be empty") String surname,
                            @NotBlank(message = "Email can't be empty")
                            @Email(message = "Email format is not valid") String email,
                            @NotBlank(message = "Password can't be empty")
                            @Size(min = 8, message = "Password must contain at least 8 characters") String password) {
         this.name = name;
-        this.surname = lastName;
+        this.surname = surname;
         this.email = email;
         this.password = password;
     }

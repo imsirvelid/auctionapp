@@ -80,7 +80,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateAddress(UserAddressRequest request) throws BadRequestException {
-        System.out.println("UserAddressRequest is: " + request);
         PersonDetails person = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity user = userRepository.findById(person.getId()).get();
         user.setAddress(request.getAddress());
@@ -88,7 +87,6 @@ public class UserServiceImpl implements UserService {
         user.setCountry(request.getCountry());
         user.setCity(request.getCity());
         user.setZipCode(request.getZipCode());
-        System.out.println("After populating and before saving is: " + user);
         user = userRepository.save(user);
         return user.toDomainModel();
     }

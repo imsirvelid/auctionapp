@@ -41,7 +41,6 @@ function AddItem(props) {
       setErrorMessage("You have to upload at least 3 photos");
       return;
     }
-    console.log("Add item values: ", values);
     props.onNext();
   };
 

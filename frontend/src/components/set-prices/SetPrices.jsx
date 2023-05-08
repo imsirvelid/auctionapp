@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import "./SetPrices.css";
@@ -8,6 +8,10 @@ function SetPrices(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const digitsOnly = (value) => /^\d+$/.test(value);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const validationSchema = Yup.object().shape({
     startingPrice: Yup.string()
@@ -20,7 +24,6 @@ function SetPrices(props) {
   });
 
   const setPricesSubmit = (values) => {
-    console.log("SetPrices values: ", values);
     props.onNext();
   };
 
@@ -73,10 +76,10 @@ function SetPrices(props) {
                     className="custom-formik-field date-field"
                   />
                   <ErrorMessage
-                name="startDate"
-                component="div"
-                className="formik-error-message"
-              />
+                    name="startDate"
+                    component="div"
+                    className="formik-error-message"
+                  />
                 </div>
                 <div className="date-div">
                   <label
@@ -93,10 +96,10 @@ function SetPrices(props) {
                     className="custom-formik-field date-field"
                   />
                   <ErrorMessage
-                name="endDate"
-                component="div"
-                className="formik-error-message"
-              />
+                    name="endDate"
+                    component="div"
+                    className="formik-error-message"
+                  />
                 </div>
               </div>
               <div className="form-bottom-buttons">

@@ -31,9 +31,9 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public ProductBidResponse getProductBidInfo(Long productId) {
-        BigDecimal price = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId).map(p -> p.getPrice()).orElse(null);
         Integer numberOfBids = bidRepository.countByProductId(productId);
-        return new ProductBidResponse(price, numberOfBids);
+        ProductBidResponse productBidresponse = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId).map(bid -> new ProductBidResponse(bid.getPrice(), numberOfBids, bid.getUser().getId())).orElse(new ProductBidResponse(null, 0, null));
+        return productBidresponse;
     }
 
     @Override

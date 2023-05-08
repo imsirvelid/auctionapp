@@ -31,6 +31,8 @@ function Sell() {
   const [creditCardInfo, setCreditCardInfo] = useState(false);
   const [featured, setFeatured] = useState(0);
   const [creditCardId, setCreditCardId] = useState(null);
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const navigate = useNavigate();
   const handleNextAndTest = () => {
     setCurrentStep(1);
@@ -65,8 +67,8 @@ function Sell() {
     updateOrCreateCreditCardInfo(creditCardRequest).then(response => {
       const shippingInfo = {
         phone: phoneNumber,
-        city: "Sarajevo",
-        zipCode: 71000,
+        city: city,
+        zipCode: zipCode,
         address: address,
         country: country,
         phoneNumber: phoneNumber,
@@ -104,6 +106,8 @@ function Sell() {
       phoneNumber={{value: phoneNumber, set: setPhoneNumber}}
       creditCardInfo={{value: creditCardInfo, set: setCreditCardInfo}}
       creditCardId = {{value: creditCardId, set: setCreditCardId}}
+      city = {{value: city, set: setCity}}
+      zipCode = {{value: zipCode, set: setZipCode}}
       onBack={() => setCurrentStep(1)}
       onDone={() => submitForm()}
     />,

@@ -2,15 +2,15 @@ package org.atlantbh.internship.auctionapp.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class ProductBidResponse {
-    private BigDecimal highestBid;
-    private int numberOfBids;
-    private Long userId;
+public class GeoNamesCountryResponse {
+    private List<GeoNamesCountry> geonames;
 }

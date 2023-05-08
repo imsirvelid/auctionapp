@@ -69,3 +69,21 @@
   letter-spacing: 0.56px;
   line-height: 26px;
 }
+
+.country-city-div {
+  width: 60%;
+  margin-top: 45px;
+  gap: 4%;
+  display: flex;
+}
+
+.country-div {
+  display: flex;
+  width: 48%;
+  flex-wrap: wrap;
+}
+
+.full-width {
+  width: 48%;
+  width: 100%;
+}

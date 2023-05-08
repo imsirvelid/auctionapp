@@ -32,7 +32,6 @@ public class CreditCardController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public ResponseEntity<CreditCardEntity> createOrUpdate(@RequestBody CreditCardRequest request) throws BadRequestException {
-        System.out.println("Request is: " + request);
         return ResponseEntity.ok(creditCardService.createOrUpdate(request));
     }
 

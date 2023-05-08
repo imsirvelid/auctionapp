@@ -86,3 +86,4 @@ export default async function uploadImages(images) {
   const imageRes = await Promise.all(imagePromises);
   return imageRes;
 }
+

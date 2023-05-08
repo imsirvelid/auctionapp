@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import "./LocationAndShipping.css";
 import Button from "components/button/Button";
 import {getUserCreditCardInfo} from "api/CreditCard";
-import {memo} from "react";
+import { getAllCitiesForCountry, getAllCountries } from "api/Country";
 
 function LocationAndShipping(props) {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [allCountries, setAllCountries] = useState([]);
+  const [allCities, setAllCities] = useState([]);
 
   const months = [
     "January",
@@ -25,7 +26,6 @@ function LocationAndShipping(props) {
   ];
 
   const handleLoginSubmit = (values) => {
-    console.log("Location and shipping values are: ", values);
     props.onDone();
   };
   const LoginSchema = Yup.object().shape({
@@ -36,10 +36,16 @@ function LocationAndShipping(props) {
     cardNumber: Yup.string().required("Required"),
     expMonth: Yup.string().required("Required"),
     expYear: Yup.string().required("Required"),
+    zipCode: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
     cvc: Yup.string().required("Requried"),
   });
 
   useEffect(() => {
+    getAllCountries().then(response => {
+      setAllCountries(response);
+    })
+    window.scrollTo(0, 0);
     getUserCreditCardInfo()
       .then((response) => {
         if (props.creditCardInfo.value) return true;
@@ -60,17 +66,23 @@ function LocationAndShipping(props) {
           props.phoneNumber.set(response.user.phone);
           props.cvc.set(response.cvc);
           props.creditCardId.set(response.id);
+          props.zipCode.set(response.user.zipCode);
+          props.city.set(response.user.city)
         }
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   }, []);
+
+  useEffect(() => {
+    getAllCitiesForCountry(props.country.value).then(response => {
+      setAllCities(response);
+    });
+  }, [props.country.value])
 
   return (
     <div className="container-55">
       <div className="form-container">
         <h2 className="form-title"> LOCATION & SHIPPING </h2>
-        {errorMessage && <p className="login-error-message">{errorMessage}</p>}
         <Formik
           enableReinitialize
           initialValues={{
@@ -81,6 +93,8 @@ function LocationAndShipping(props) {
             cardNumber: props.cardNumber.value,
             expMonth: props.expMonth.value,
             expYear: props.expYear.value,
+            city: props.city.value,
+            zipCode: props.zipCode.value,
             cvc: props.cvc.value,
           }}
           validationSchema={LoginSchema}
@@ -104,24 +118,65 @@ function LocationAndShipping(props) {
                 component="div"
                 className="formik-error-message"
               />
+              <div className="country-city-div">
+                <div className="country-div">
+                  <label className="formik-field-label full-width date-label" htmlFor="email">
+                    Country
+                  </label>
+                  <Field
+                    value={props.country.value}
+                    onChange={(e) => props.country.set(e.target.value)}
+                    as="select"
+                    name="country"
+                    placeholder="eg. Spain"
+                    className="custom-formik-field full-width"
+                  >
+                  {allCountries.map((country, index) => 
+                    (<option key={index} value={country.code}>{country.name}</option>)
+                  )}
+                  </Field>
+                  <ErrorMessage
+                    name="country"
+                    component="div"
+                    className="formik-error-message"
+                  />
+                </div>
+                <div className="country-div">
+                  <label className="formik-field-label full-width date-label" htmlFor="email">
+                    City
+                  </label>
+                  <Field
+                    value={props.city.value}
+                    onChange={(e) => props.city.set(e.target.value)}
+                    as="select"
+                    name="country"
+                    placeholder="eg. Madrid"
+                    className="custom-formik-field full-width "
+                  >
+                    {allCities.map((city, index) => 
+                    (<option key={index} value={city}>{city}</option>)
+                  )}
+                  </Field>
+                  <ErrorMessage
+                    name="city"
+                    component="div"
+                    className="formik-error-message"
+                  />
+                </div>
+              </div>
               <label className="formik-field-label" htmlFor="email">
-                Country
+                Zip Code
               </label>
               <Field
-                value={props.country.value}
-                onChange={(e) => props.country.set(e.target.value)}
-                as="select"
-                name="country"
-                placeholder="eg. Spain"
+                value={props.zipCode.value}
+                onChange={(e) => props.zipCode.set(e.target.value)}
+                type="text"
+                name="zipCode"
+                placeholder="eg. 70230"
                 className="custom-formik-field"
-              >
-                <option value="Spain">Spain</option>
-                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                <option value="China">China</option>
-                <option value="Japan">Japan</option>
-              </Field>
+              />
               <ErrorMessage
-                name="country"
+                name="zipCode"
                 component="div"
                 className="formik-error-message"
               />

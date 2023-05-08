@@ -24,3 +24,10 @@
   margin-top: 43px;
   width: 100%;
 }
+
+.right {
+  width: 9%;
+  background-color: #8367D8;
+  color: white;
+  float: right;
+}

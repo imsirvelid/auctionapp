@@ -7,7 +7,6 @@ function DragAndDrop(props) {
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    console.log(event);
   };
 
   const handleDrop = (event) => {

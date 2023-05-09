@@ -7,7 +7,7 @@ import Button from "components/button/Button";
 function SetPrices(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const digitsOnly = (value) => /^\d+$/.test(value);
+  const digitsOnly = (value) => /^\d+(\.\d+)?$/.test(value);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -52,7 +52,7 @@ function SetPrices(props) {
                 name="startingPrice"
                 value={props.startingPrice.value}
                 onChange={(e) => props.startingPrice.set(e.target.value)}
-                placeholder="eg. Targeal 7.1 Surround Sound Gaming Headset for PS4"
+                placeholder="eg. 1500"
                 className="custom-formik-field"
               />
               <ErrorMessage

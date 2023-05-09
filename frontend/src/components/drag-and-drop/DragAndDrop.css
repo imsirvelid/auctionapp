@@ -51,7 +51,38 @@
   flex-wrap: wrap;
 }
 
+.image-ul-container {
+  position: relative;
+}
+
 .image-preview-div {
   margin-top: 35px;
   width: 60%;
+}
+
+.image-options {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white; /* Adjust the color of the overlay content */
+  display: flex;
+  gap: 17px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+}
+
+.orange-icon {
+  color: orange;
+}
+
+.red-icon {
+  color: red;
+}
+
+.clickable-icon:hover {
+  cursor: pointer;
 }

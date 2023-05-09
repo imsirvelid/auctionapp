@@ -5,7 +5,7 @@ import moment from "moment";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "components/image-gallery/ImageGallery";
 import {getProductById} from "api/Product";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {getDateDiffernece} from "utils/DateHelper";
 import {bid, getProductBidInfo} from "api/Bid";
 import NavigationCard from "components/navigation-card/NavigationCard";
@@ -18,7 +18,6 @@ import { getPaymentIntent } from "api/Payment";
 
 function ProductOverview() {
   const params = useParams();
-  const navigate = useNavigate();
   const [product, setProduct] = useState();
   const [productBidInfo, setProductBidInfo] = useState();
   const [enteredPrice, setPrice] = useState("");
@@ -140,7 +139,7 @@ function ProductOverview() {
                   </p>
                 </div>
               )}
-              {productBidInfo && getDateDiffernece(moment(), product.endDate) === 0 && user.id == productBidInfo.userId && (<div className="pay-button-div">
+              {productBidInfo && getDateDiffernece(moment(), product.endDate) === 0 && user.id === productBidInfo.userId && (<div className="pay-button-div">
                 <Button type="white" onClick={handlePayment}>Pay <FontAwesomeIcon icon={faMoneyBill1Wave} /></Button>
               </div>)}
               <div className="tab-container">

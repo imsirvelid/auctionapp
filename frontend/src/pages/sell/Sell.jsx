@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 function Sell() {
   const [currentStep, setCurrentStep] = useState(0);
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(0);
   const [subCategory, setSubCategory] = useState(0);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");

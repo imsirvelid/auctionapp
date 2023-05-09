@@ -27,6 +27,7 @@
     "react-native-aws-signature": "^0.0.9",
     "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
+    "react-select": "^5.7.3",
     "react-stripe-checkout": "^2.6.3",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"

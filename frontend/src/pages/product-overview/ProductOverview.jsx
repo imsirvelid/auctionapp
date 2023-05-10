@@ -109,7 +109,7 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              { user && product.user.id !== user.id &&
+              { user && product.user.id !== user.id && product.endDate > moment() &&
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}
@@ -139,7 +139,7 @@ function ProductOverview() {
                   </p>
                 </div>
               )}
-              {productBidInfo && getDateDiffernece(moment(), product.endDate) === 0 && user.id === productBidInfo.userId && (<div className="pay-button-div">
+              {productBidInfo && getDateDiffernece(moment(), product.endDate) === 0 && user.id === productBidInfo.userId && !product.purchased && (<div className="pay-button-div">
                 <Button type="white" onClick={handlePayment}>Pay <FontAwesomeIcon icon={faMoneyBill1Wave} /></Button>
               </div>)}
               <div className="tab-container">

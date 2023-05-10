@@ -54,7 +54,7 @@ public class StripeServiceImpl implements StripeService {
         SessionCreateParams params =
                 SessionCreateParams.builder()
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("http://localhost:3000/payment/success")
+                        .setSuccessUrl("http://localhost:3000/payment/success/" + productId)
                         .setCancelUrl("http://localhost:3000/payment/cancel")
                         .setCustomer(user.getStripeId())
                         .addLineItem(

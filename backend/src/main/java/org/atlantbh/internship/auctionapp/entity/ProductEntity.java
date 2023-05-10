@@ -63,11 +63,14 @@ public class ProductEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name = "purchased")
+    private Boolean purchased;
+
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<ImageEntity> images;
 
     public Product toDomainModel(){
-        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, category.toDomainModel(), status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()));
+        return new Product(id, user.toDomainModel(), name, details, startingPrice, created, startDate, endDate, category.toDomainModel(), status, images.stream().map(ImageEntity::toDomainModelWithoutProduct).collect(Collectors.toList()), purchased);
     }
 
     public static ProductEntity fromDomainModel(final Product product) {
@@ -81,6 +84,7 @@ public class ProductEntity {
         productEntity.setStatus(product.getStatus());
         productEntity.setCategory(CategoryEntity.fromDomainModel(product.getCategory()));
         productEntity.setUser(UserEntity.fromDomainModel(product.getUser()));
+        productEntity.setPurchased(product.getPurchased());
         return productEntity;
     }
 

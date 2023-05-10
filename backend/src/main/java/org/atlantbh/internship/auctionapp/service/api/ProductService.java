@@ -22,4 +22,5 @@ public interface ProductService {
     List<ProductBidsInfo> getUserSoldProducts(Long userId);
     Product createProduct(CreateProductRequest request) throws BadRequestException;
     List<Image> saveAllImagesForProduct(List<String> images, int featuredIndex, Long productId) throws BadRequestException;
+    Product setPurchased(Long productId);
 }

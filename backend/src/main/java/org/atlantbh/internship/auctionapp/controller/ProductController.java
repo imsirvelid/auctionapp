@@ -67,4 +67,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.createProduct(request));
     }
 
+    @PostMapping(value = "/pay/{productId}")
+    public ResponseEntity<?> setPurchased(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.setPurchased(productId));
+    }
+
 }

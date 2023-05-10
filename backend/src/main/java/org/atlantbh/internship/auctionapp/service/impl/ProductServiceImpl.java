@@ -111,6 +111,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product setPurchased(Long productId) {
+        ProductEntity productEntity = productRepository.findById(productId).get();
+        productEntity.setPurchased(true);
+        productEntity = productRepository.save(productEntity);
+        return productEntity.toDomainModel();
+    }
+
+    @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id).map(ProductEntity::toDomainModel);
     }

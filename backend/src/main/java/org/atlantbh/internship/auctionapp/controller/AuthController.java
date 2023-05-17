@@ -1,7 +1,9 @@
 package org.atlantbh.internship.auctionapp.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
@@ -9,10 +11,9 @@ import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Auth", description = "Authentication and Authorization APIs")
 @RestController
@@ -38,5 +39,12 @@ public class AuthController {
     public ResponseEntity createAccount(@Valid @RequestBody RegisterRequest signUpRequest) throws Exception {
         AuthResponse authResponse = userService.register(signUpRequest);
         return ResponseEntity.ok(authResponse);
+    }
+
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/getuser")
+    public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {
+        return ResponseEntity.ok(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 }

@@ -13,7 +13,6 @@ public class LoginRequest {
     @NotBlank(message = "Password can't be empty")
     @Size(min = 8, message = "Password must contain at least 8 characters")
     private String password;
-
     public LoginRequest() {
     }
 
@@ -39,4 +38,5 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

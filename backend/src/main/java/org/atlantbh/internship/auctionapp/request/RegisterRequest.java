@@ -9,12 +9,12 @@ public class RegisterRequest {
     @NotBlank(message = "First name can't be empty")
     @Size(min = 2, message = "First name must have at least 2 characters")
     @Size(max = 50, message = "First name can't be longer than 50 characters")
-    private String firstName;
+    private String name;
 
     @NotBlank(message = "Last name can't be empty")
-    @Size(min = 2, message = "First name must have at least 2 characters")
-    @Size(max = 50, message = "First name can't be longer than 50 characters")
-    private String lastName;
+    @Size(min = 2, message = "Last name must have at least 2 characters")
+    @Size(max = 50, message = "Last name can't be longer than 50 characters")
+    private String surname;
 
     @NotBlank(message = "Email can't be empty")
     @Email(message = "Email format is not valid")
@@ -29,33 +29,34 @@ public class RegisterRequest {
     public RegisterRequest() {
     }
 
-    public RegisterRequest(@NotBlank(message = "First name can't be empty") String firstName,
+    public RegisterRequest(@NotBlank(message = "First name can't be empty") String name,
                            @NotBlank(message = "Last name can't be empty") String lastName,
                            @NotBlank(message = "Email can't be empty")
                            @Email(message = "Email format is not valid") String email,
                            @NotBlank(message = "Password can't be empty")
                            @Size(min = 8, message = "Password must contain at least 8 characters") String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.surname = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
+
 
     public String getEmail() {
         return email;

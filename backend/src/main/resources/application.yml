@@ -14,4 +14,4 @@ spring:
             ddl-auto: update
 app:
     jwtSecret: ${TOKEN_SECRET}
-    jwtExpiration: 1600000000
+    jwtExpiration: 86400000

@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Email already in use");
         }
         UserEntity user = new UserEntity(
-                registerRequest.getFirstName(),
-                registerRequest.getLastName(),
+                registerRequest.getName(),
+                registerRequest.getSurname(),
                 registerRequest.getEmail(),
                 passwordEncoder.encode(registerRequest.getPassword()),
                 Role.USER);

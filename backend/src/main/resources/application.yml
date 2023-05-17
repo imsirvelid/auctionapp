@@ -12,10 +12,6 @@ spring:
                 globally_quoted_identifiers: true
         hibernate:
             ddl-auto: update
-    resources:
-        static-locations: classpath:/home/velid/Documents/Projekti/auctionapp/backend/
-        staticLocations: classpath:/home/velid/Documents/Projekti/auctionapp/backend/
-        static_locations: classpath:/home/velid/Documents/Projekti/auctionapp/backend/
 app:
     jwtSecret: ${TOKEN_SECRET}
     jwtExpiration: 86400000

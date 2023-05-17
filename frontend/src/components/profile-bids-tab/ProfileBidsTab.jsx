@@ -30,8 +30,8 @@ function ProfileBidsTab() {
         <div className="bids-table-highest">Highest Bid</div>
         <div className="bids-table-empty"></div>
       </div>
-      {bids.length !== 0 ? bids.map((bid, index) => (
-        <div className="bids-table-row" key={index}>
+      {bids.length !== 0 ? bids.map((bid) => (
+        <div className="bids-table-row" key={bid.productId}>
           <div className="bids-table-item">
             <img
               className="bids-table-img"

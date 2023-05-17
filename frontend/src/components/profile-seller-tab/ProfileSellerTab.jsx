@@ -22,16 +22,7 @@ function ProfileSellerTab() {
     };
     getProducts();
   }, [currentTab]);
-  const tabs = [
-    {
-      name: "Active",
-      component: "",
-    },
-    {
-      name: "Sold",
-      component: "",
-    },
-  ];
+  const tabs = ["Acitve", "Sold"];
   return (
     <>
       <div>
@@ -41,9 +32,9 @@ function ProfileSellerTab() {
               index === currentTab && "selected-profile-button"
             }`}
             key={index}
-            onClick={(e) => setCurrentTab(index)}
+            onClick={() => setCurrentTab(index)}
           >
-            {tab.name}
+            {tab}
           </button>
         ))}
         {tabs[currentTab].component}
@@ -58,8 +49,8 @@ function ProfileSellerTab() {
             <div className="bids-table-empty"></div>
           </div>
           {products.length !== 0 ? (
-            products.map((bid, index) => (
-              <div className="bids-table-row" key={index}>
+            products.map((bid) => (
+              <div className="bids-table-row" key={bid.productId}>
                 <div className="bids-table-item">
                   <img
                     className="bids-table-img"

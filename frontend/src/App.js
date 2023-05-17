@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from "react";
+import React, {useState, useMemo} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Footer from "components/footer/Footer";
 import Navbar from "components/navbar/Navbar";
@@ -11,25 +11,15 @@ import Search from "pages/search/Search";
 import "./App.css";
 import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
-import {getCurrentUser} from "api/User";
 import Register from "pages/register/Register";
+import './api/AxiosInterceptor';
+import GuestRoute from "components/protected/GuestRoute";
 import UserProfile from "pages/user-profile/UserProfile";
 import Protected from "components/protected/Protected";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
-
-  useEffect(() => {
-    getCurrentUser(localStorage.getItem("token"))
-      .then((response) => {
-        setUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        setUser(null);
-      });
-  }, []);
 
   return (
     <Router>
@@ -50,8 +40,22 @@ function App() {
               path="/search"
               element={<Search key={window.location.pathname} />}
             />
-            <Route path="/user/login" element={<Login />} />
-            <Route path="/user/register" element={<Register />} />
+            <Route
+              path="/user/login"
+              element={
+                <GuestRoute>
+                  <Login />
+                </GuestRoute>
+              }
+            />
+            <Route
+              path="/user/register"
+              element={
+                <GuestRoute>
+                  <Register />
+                </GuestRoute>
+              }
+            />
             <Route
               path="/user/profile"
               element={

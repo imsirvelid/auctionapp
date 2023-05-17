@@ -46,5 +46,4 @@ public class AuthController {
     public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {
         return ResponseEntity.ok(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
-
 }

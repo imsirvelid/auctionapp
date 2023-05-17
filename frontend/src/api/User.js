@@ -8,12 +8,6 @@ export const loginUser = async (request) => {
   return fetchData.data;
 };
 
-export const getCurrentUser = async (token) => {
-  return axios.get(URL + "/getuser", {
-    headers: {Authorization: "Bearer " + token},
-  });
-};
-
 export const registerUser = async (request) => {
   const fetchData = await axios.post(URL + "/register", request);
   return fetchData.data;

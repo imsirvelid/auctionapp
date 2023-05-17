@@ -109,7 +109,7 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              { user && product.user.id !== user.id && product.endDate > moment() &&
+              { user && product.user.id !== user.id && moment(product.endDate) > moment() &&
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}

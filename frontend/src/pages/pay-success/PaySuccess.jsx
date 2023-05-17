@@ -13,6 +13,13 @@ function PaySuccess() {
     const getProduct = async (id) => {
       const res = await getProductById(id);
       setProduct(res);
+      if (res && res.purchased !== true) {
+        setPurchasedProduct(params.id).then(response => {
+          console.log(response);
+        }).catch(error => {
+          console.log(error);
+        });
+      }
     };
     const getProductBid = async (id) => {
       const res = await getProductBidInfo(id);
@@ -20,14 +27,6 @@ function PaySuccess() {
     };
     getProduct(params.id);
     getProductBid(params.id);
-    if (product && product.purchased !== true) {
-      console.log("PA POZOVI");
-      setPurchasedProduct(params.id).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      });
-    }
   }, []);
 
   return (

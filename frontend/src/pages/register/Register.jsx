@@ -127,7 +127,7 @@ function Register() {
             )}
           </Formik>
           <p className="centered-text">
-            Already have an acount?{" "}
+            Already have an account?{" "}
             <Link className="purple-link" to="/user/login">
               Login
             </Link>

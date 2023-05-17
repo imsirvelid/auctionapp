@@ -9,10 +9,6 @@ export const loginUser = async (request) => {
   return fetchData.data;
 };
 
-export const getCurrentUser = async () => {
-  return axios.get(URL + "/getuser");
-};
-
 export const registerUser = async (request) => {
   const fetchData = await axios.post(AUTH_URL + "/register", request);
   return fetchData.data;

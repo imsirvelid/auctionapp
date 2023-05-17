@@ -135,12 +135,12 @@ function Search() {
             <div className="empty-div"></div>
           </div>
           <div className="right-search-content">
-            <div className="search-sorting-select">
+            {!didYouMean && <div className="search-sorting-select">
               <CustomSelect
                 items={sortingItems}
                 onChange={onSortingChange}
               ></CustomSelect>
-            </div>
+            </div>}
             <div className="search-products-grid">
               {products.length > 0 ? (
                 products.map((product) => (

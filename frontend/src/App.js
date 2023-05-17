@@ -19,10 +19,6 @@ function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
-
   return (
     <Router>
       <UserContext.Provider value={value}>

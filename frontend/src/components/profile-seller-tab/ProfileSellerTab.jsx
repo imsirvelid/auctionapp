@@ -39,52 +39,41 @@ function ProfileSellerTab() {
         ))}
         {tabs[currentTab].component}
         <div className="profile-bids-table">
-          <div className="gray-heading">
-            <div className="bids-table-item">Item</div>
-            <div className="bids-table-name">Name</div>
-            <div className="bids-table-left">Time Left</div>
-            <div className="bids-table-price">Your Price</div>
-            <div className="bids-table-bids">No. Bids</div>
-            <div className="bids-table-highest">Highest Bid</div>
-            <div className="bids-table-empty"></div>
-          </div>
-          {products.length !== 0 ? (
-            products.map((bid) => (
-              <div className="bids-table-row" key={bid.productId}>
-                <div className="bids-table-item">
-                  <img
-                    className="bids-table-img"
-                    alt="Item"
-                    src={bid.productThumbnail}
-                  />
-                </div>
-                <div className="bids-table-name">
-                  <p className="bold">{bid.productName}</p>
-                  <p className="purple-id">#{bid.productId}</p>
-                </div>
-                <div className="bids-table-left">
-                  {getDateDiffernece(moment(), bid.endDate)}
-                </div>
-                <div
-                  className={`bids-table-price ${
-                    bid.myPrice === bid.highestPrice && "green-bold"
-                  }`}
-                >
-                  ${Number(bid.myPrice)}
-                </div>
-                <div className="bids-table-bids">{Number(bid.numberOfBids)}</div>
-                <div
-                  className={`bids-table-price`}
-                >
-                  ${Number(bid.highestPrice)}
-                </div>
-                <div className="bids-table-empty">
-                  <Button type="white">
-                    <Link to={`/products/${bid.productId}`}>VIEW</Link>
-                  </Button>
-                </div>
-              </div>
-            ))
+        {products.length !== 0 ? (
+          <table>
+          <tbody>
+            <tr className="gray-heading">
+            <th></th>
+              <th>Item</th>
+              <th>Name</th>
+              <th>Time left</th>
+              <th>Your price</th>
+              <th>No. Bids</th>
+              <th>Highest Bid</th>
+            </tr>
+          {products.map((product) => (
+            <tr key = {product.productId}>
+            <td></td>
+              <td>
+                <img
+                  className="bids-table-img"
+                  alt="Item"
+                  src={product.productThumbnail}
+                />
+              </td>
+              <td>
+                <p className="bold">{product.productName}</p>
+                <p className="purple-id">#{product.productId}</p>
+              </td>
+              <td>{getDateDiffernece(moment(), product.endDate)}</td>
+              <td>${product.myPrice}</td>
+              <td>{product.numberOfBids}</td>
+              <td>{product.numberOfBids !== 0 ? "$" + product.highestPrice : "/"}</td>
+              <td><Button type="white"><Link to={`/products/${product.productId}`}>VIEW</Link></Button></td>
+            </tr>
+          ))}
+          </tbody>
+          </table>
           ) : (
             <div className="empty-table-bids">
               <FontAwesomeIcon

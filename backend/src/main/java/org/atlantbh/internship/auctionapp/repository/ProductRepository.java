@@ -53,7 +53,8 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             (SELECT MAX(bid.price) FROM  BidEntity bid WHERE bid.product.id = pe.id) as highestPrice, 
             (SELECT COUNT(bid.id) FROM BidEntity bid WHERE bid.product.id = pe.id) as numberOfBids 
             FROM ProductEntity pe, ImageEntity img
-            WHERE pe.id = img.product.id and img.featured = true and pe.user.id = :userId and pe.endDate < CURRENT_DATE
+            WHERE pe.id = img.product.id and img.featured = true and pe.user.id = :userId and pe.endDate < CURRENT_DATE and
+            (SELECT COUNT(bid.id) FROM BidEntity bid WHERE bid.product.id = pe.id) > 0
             """)
     List<UserProfileProductsInfo> getUserSoldProducts(Long userId);
 }

@@ -42,7 +42,7 @@ public class ProductController {
     public ResponseEntity<SearchProductResponse> search(PageParams pageParams,
                                                         SortParams sortParams,
                                                         @RequestParam(required = false) String productName,
-                                                        @RequestParam(required = false) Long categoryId){
+                                                        @RequestParam(required = false) Long categoryId) throws InterruptedException {
         return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 

@@ -4,6 +4,7 @@ import Button from "components/button/Button";
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import React, {useState, useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
+import {MagnifyingGlass} from "react-loader-spinner";
 import "./Search.css";
 
 function Search() {
@@ -14,8 +15,13 @@ function Search() {
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const [didYouMean, setDidYouMean] = useState();
+  const [loader, setLoader] = useState(true);
   const location = useLocation();
   useEffect(() => {
+    console.log("Ovaj se učitava");
+    setProducts([]);
+    setLoader(true);
+    console.log("Loader je: ", loader);
     const params = new URLSearchParams(location.search);
     setNextPage(1);
     setName(params.get("name"));
@@ -37,13 +43,14 @@ function Search() {
       setProducts(res.page.content);
       setDidYouMean(res.didYouMeanSuggestion);
       setHasMore(!res.page.last);
+      setLoader(false);
     };
-    if (categories.length === 0)
-      getCategories();
+    if (categories.length === 0) getCategories();
     getProducts();
   }, [location, categories.length]);
 
   const exploreMore = async () => {
+    setLoader(true);
     const res = await searchProducts(
       nextPage,
       "created",
@@ -56,22 +63,24 @@ function Search() {
     setProducts([...products, ...res.page.content]);
     setDidYouMean(res.didYouMeanSuggestion);
     setHasMore(!res.page.last);
+    setLoader(false);
   };
 
   return (
     <>
-    { 
-      didYouMean && (
-      <div className="did-you-mean-breadcrumb">
-        <p>
-          Did you mean?{" "}
-          <Link className="did-you-mean-link" to={`/search?name=${didYouMean}`}>
-            {didYouMean}
-          </Link>
-        </p>
-      </div>
-      )
-    }
+      {didYouMean && (
+        <div className="did-you-mean-breadcrumb">
+          <p>
+            Did you mean?{" "}
+            <Link
+              className="did-you-mean-link"
+              to={`/search?name=${didYouMean}`}
+            >
+              {didYouMean}
+            </Link>
+          </p>
+        </div>
+      )}
       <div className="container">
         <div className="main-content-search">
           <div className="categories-container">
@@ -98,7 +107,7 @@ function Search() {
           </div>
           <div className="right-search-content">
             <div className="search-products-grid">
-              {products.length > 0 ? (
+              { products.length > 0 ? (
                 products.map((product) => (
                   <div className="search-product-item" key={product.id}>
                     <ProductGridCard
@@ -109,9 +118,23 @@ function Search() {
                     />
                   </div>
                 ))
-              ) : ( <p>No products found</p>)}
+              ) : !loader && (
+                <p>No products found</p>
+              )}
             </div>
-            {hasMore && (
+            <div className="search-loader-div">
+            <MagnifyingGlass
+              visible={loader}
+              height="121"
+              width="121"
+              ariaLabel="MagnifyingGlass-loading"
+              wrapperStyle={{}}
+              wrapperClass="MagnifyingGlass-wrapper"
+              glassColor="#ECECEC"
+              color="#8367D8"
+            />
+            </div>
+            {!loader && hasMore && (
               <Button type="explore-more-btn purple" onClick={exploreMore}>
                 EXPLORE MORE
               </Button>

@@ -58,3 +58,8 @@
 .did-you-mean-link {
   color: #8367D8;
 }
+
+.search-loader-div {
+  width: 121px;
+  margin: 0 auto;
+}

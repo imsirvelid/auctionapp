@@ -18,10 +18,8 @@ function Search() {
   const [loader, setLoader] = useState(true);
   const location = useLocation();
   useEffect(() => {
-    console.log("Ovaj se učitava");
     setProducts([]);
     setLoader(true);
-    console.log("Loader je: ", loader);
     const params = new URLSearchParams(location.search);
     setNextPage(1);
     setName(params.get("name"));

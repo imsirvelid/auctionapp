@@ -41,7 +41,7 @@ function ProfileSellerTab() {
         <div className="profile-bids-table">
         {products.length !== 0 ? (
           <table>
-          <tbody>
+          <thead>
             <tr className="gray-heading">
             <th></th>
               <th>Item</th>
@@ -51,6 +51,8 @@ function ProfileSellerTab() {
               <th>No. Bids</th>
               <th>Highest Bid</th>
             </tr>
+            </thead>
+            <tbody>
           {products.map((product) => (
             <tr key = {product.productId}>
             <td></td>

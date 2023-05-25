@@ -5,7 +5,7 @@ import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import React, {useState, useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import "./Search.css";
-import Loader from "components/Loader/Loader";
+import Loader from "components/loader/Loader";
 
 function Search() {
   const [categories, setCategories] = useState([]);
@@ -125,9 +125,6 @@ function Search() {
               visible={loader}
               height="121"
               width="121"
-              ariaLabel="MagnifyingGlass-loading"
-              wrapperStyle={{}}
-              wrapperClass="MagnifyingGlass-wrapper"
               glassColor="#ECECEC"
               color="#8367D8"
             />

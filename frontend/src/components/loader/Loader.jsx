@@ -7,9 +7,9 @@ function Loader(props) {
       visible={props.visible}
       height={props.height}
       width={props.width}
-      ariaLabel={props.ariaLabel}
+      ariaLabel="MagnifyingGlass-loading"
       wrapperStyle={{}}
-      wrapperClass={props.wrapperClass}
+      wrapperClass="MagnifyingGlass-wrapper"
       glassColor={props.glassColor}
       color={props.color}
     />

@@ -14,6 +14,7 @@ import Input from "components/text-input/Input";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
 import {UserContext} from "context/UserContext";
+import { getErrorMessage } from "utils/ErrorHelper";
 
 function ProductOverview() {
   const params = useParams();
@@ -59,10 +60,7 @@ function ProductOverview() {
       else setMessageStyle("error");
     } catch (exception) {
       setMessageStyle("error");
-      if (exception.response)
-        setMessage(exception.response.data);
-      else 
-        setMessage(exception.message);
+      setMessage(getErrorMessage(exception));
     }
   };
 

@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from "react";
+import React, {useState, useMemo} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Footer from "components/footer/Footer";
 import Navbar from "components/navbar/Navbar";
@@ -12,8 +12,10 @@ import "./App.css";
 import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
 import Register from "pages/register/Register";
-import GuestRoute from "components/protected/GuestRoute";
 import './api/AxiosInterceptor';
+import GuestRoute from "components/protected/GuestRoute";
+import UserProfile from "pages/user-profile/UserProfile";
+import Protected from "components/protected/Protected";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -52,6 +54,14 @@ function App() {
                 <GuestRoute>
                   <Register />
                 </GuestRoute>
+              }
+            />
+            <Route
+              path="/user/profile"
+              element={
+                <Protected>
+                  <UserProfile />
+                </Protected>
               }
             />
           </Routes>

@@ -1,0 +1,22 @@
+.seller-tab-button {
+  width: 8.2%;
+  height: 47px;
+  background: #FAFAFA;
+  border: 1px solid #D8D8D8;
+  border-bottom: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #252525;
+  letter-spacing: 0.56px;
+}
+
+.selected-profile-button {
+  background-color: #8367D8;
+  border: 1px solid #8367D8;
+  color: white;
+}
+
+.seller-tab-button:hover {
+  cursor: pointer;
+}
+

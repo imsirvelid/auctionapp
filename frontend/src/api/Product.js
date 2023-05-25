@@ -49,4 +49,14 @@ export const searchProducts = async (
     },
   });
   return fetchData.data;
-};
+} 
+
+export const getActiveUserProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/active");
+  return fetchData.data;
+}
+
+export const getSoldUserProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/sold");
+  return fetchData.data;
+}

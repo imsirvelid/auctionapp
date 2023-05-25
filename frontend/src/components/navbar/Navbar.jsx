@@ -90,9 +90,9 @@ function Navbar() {
             </Link>
             {user && (
               <Link
-                to="/user/account"
-                className={`hidden ${
-                  path === "/user/account" ? "selected-route" : ""
+                to="/user/profile"
+                className={`${
+                  path === "/user/profile" ? "selected-route" : ""
                 }`}
               >
                 MY ACCOUNT

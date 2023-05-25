@@ -59,7 +59,10 @@ function ProductOverview() {
       else setMessageStyle("error");
     } catch (exception) {
       setMessageStyle("error");
-      setMessage(exception.response.data);
+      if (exception.response)
+        setMessage(exception.response.data);
+      else 
+        setMessage(exception.message);
     }
   };
 

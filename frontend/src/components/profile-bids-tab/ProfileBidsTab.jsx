@@ -23,9 +23,8 @@ function ProfileBidsTab() {
     <div className="profile-bids-table">
         {bids.length !== 0 ? (
           <table>
-          <tbody>
+          <thead>
             <tr className="gray-heading">
-            <th></th>
               <th>Item</th>
               <th>Name</th>
               <th>Time left</th>
@@ -33,9 +32,10 @@ function ProfileBidsTab() {
               <th>No. Bids</th>
               <th>Highest Bid</th>
             </tr>
+          </thead>
+          <tbody>
           {bids.map((bid) => (
-            <tr key={bid.productId}>
-            <td></td>
+            <tr key={bid}>
               <td>
                 <img
                   className="bids-table-img"

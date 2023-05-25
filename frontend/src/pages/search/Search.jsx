@@ -125,8 +125,6 @@ function Search() {
               visible={loader}
               height="121"
               width="121"
-              glassColor="#ECECEC"
-              color="#8367D8"
             />
             </div>
             {!loader && hasMore && (

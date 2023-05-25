@@ -10,8 +10,8 @@ function Loader(props) {
       ariaLabel="MagnifyingGlass-loading"
       wrapperStyle={{}}
       wrapperClass="MagnifyingGlass-wrapper"
-      glassColor={props.glassColor}
-      color={props.color}
+      glassColor="#ECECEC"
+      color="#8367D8"
     />
   );
 }

@@ -13,7 +13,7 @@ import Button from "components/button/Button";
 import Input from "components/text-input/Input";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "context/UserContext";
+import {UserContext} from "context/UserContext";
 
 function ProductOverview() {
   const params = useParams();
@@ -49,12 +49,6 @@ function ProductOverview() {
   ];
 
   const placeBid = async () => {
-    if (enteredPrice < product.startingPrice) {
-      setMessage(
-        "There are higher bids than yours. You could give a second try."
-      );
-      setMessageStyle("error");
-    }
     try {
       const bidResponse = await bid({
         productId: product.id,
@@ -94,20 +88,27 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              { product.user.id !== user.id &&
+              {user && product.user.id !== user.id && (
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}
                     onChange={(e) => setPrice(e.target.value)}
                     width="111px"
                     type="gray"
-                  ></Input>
+                  />
                   <Button onClick={placeBid}>
                     PLACE BID <FontAwesomeIcon icon={faAngleRight} />{" "}
                   </Button>
-                  <p>Enter ${productBidInfo ? productBidInfo.highestBid : product.startingPrice } or more</p>
+                  <p>
+                    Enter{" "}
+                    {productBidInfo
+                      ? productBidInfo.highestBid
+                        ? " price greater than $" + productBidInfo.highestBid
+                        : "$" + product.startingPrice + " or more "
+                      : ""}
+                  </p>
                 </div>
-              }
+              )}
               {productBidInfo && (
                 <div className="product-overview-bid-info">
                   <p>

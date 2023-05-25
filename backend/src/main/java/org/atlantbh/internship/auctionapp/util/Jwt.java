@@ -36,6 +36,11 @@ public class Jwt {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    public static PersonDetails getCurrentUser() {
+        PersonDetails userPrincipal = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userPrincipal;
+    }
+
     public static Long getCurrentUserId() {
         PersonDetails userPrincipal = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userPrincipal.getId();

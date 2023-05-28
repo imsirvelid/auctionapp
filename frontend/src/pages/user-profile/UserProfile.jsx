@@ -35,13 +35,13 @@ function UserProfile() {
               index === currentTab && "selected-profile-button"
             }`}
             key={index}
-            onClick={(e) => setCurrentTab(index)}
+            onClick={() => setCurrentTab(index)}
           >
             <FontAwesomeIcon icon={tab.icon} /> &nbsp;
             {tab.name}
           </button>
         ))}
-        <div className="profile-tab-component"></div>
+        <div className="profile-tab-component" />
         {tabs[currentTab].component}
       </div>
     </>

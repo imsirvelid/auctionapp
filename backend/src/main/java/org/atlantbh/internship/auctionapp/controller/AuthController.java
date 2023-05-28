@@ -41,7 +41,6 @@ public class AuthController {
         return ResponseEntity.ok(authResponse);
     }
 
-
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/getuser")
     public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {

@@ -11,6 +11,7 @@ import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,6 +60,12 @@ public class ProductController {
     @GetMapping(value = "/user/sold")
     public ResponseEntity<List<UserProfileProductsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(value = "/user/recommended")
+    public ResponseEntity<List<Product>> getRecommendedProducts() {
+        return ResponseEntity.ok(productService.getRecommendedProducts(Jwt.getCurrentUserId()));
     }
 
 }

@@ -60,3 +60,8 @@ export const getSoldUserProducts = async() => {
   const fetchData = await axios.get(URL + "/user/sold");
   return fetchData.data;
 }
+
+export const getRecommendedProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/recommended");
+  return fetchData.data;
+}

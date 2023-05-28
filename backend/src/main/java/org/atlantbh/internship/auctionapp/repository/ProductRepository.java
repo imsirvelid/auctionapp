@@ -57,4 +57,13 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             (SELECT COUNT(bid.id) FROM BidEntity bid WHERE bid.product.id = pe.id) > 0
             """)
     List<UserProfileProductsInfo> getUserSoldProducts(Long userId);
+
+    @Query("""
+            SELECT pe FROM ProductEntity pe
+            WHERE pe.user.id != :userId AND pe.endDate > CURRENT_DATE
+            ORDER BY (SELECT COUNT(*) FROM BidEntity be WHERE be.user.id = :userId AND be.product.category.id = pe.category.id) * 10
+                  +  (SELECT COUNT(*) FROM UserClickedProducts ucp WHERE ucp.userId = :userId AND ucp.product.category.id = pe.category.id)
+            DESC LIMIT 3 
+           """)
+    List<ProductEntity> getUserRecommendedProducts(Long userId);
 }

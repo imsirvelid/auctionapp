@@ -12,9 +12,9 @@ import NavigationCard from "components/navigation-card/NavigationCard";
 import Button from "components/button/Button";
 import Input from "components/text-input/Input";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleRight, faMoneyBill1Wave} from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "context/UserContext";
-import { getPaymentIntent } from "api/Payment";
+import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import {UserContext} from "context/UserContext";
+import { getErrorMessage } from "utils/ErrorHelper";
 
 function ProductOverview() {
   const params = useParams();
@@ -49,22 +49,7 @@ function ProductOverview() {
     },
   ];
 
-  const handlePayment = async() => {
-    const getPaymentRoute = async (request) => {
-      const res = await getPaymentIntent(request);
-      window.location.replace(res);
-    }
-
-    getPaymentRoute(params.id);
-  }
-
   const placeBid = async () => {
-    if (enteredPrice < product.startingPrice) {
-      setMessage(
-        "There are higher bids than yours. You could give a second try."
-      );
-      setMessageStyle("error");
-    }
     try {
       const bidResponse = await bid({
         productId: product.id,
@@ -75,13 +60,8 @@ function ProductOverview() {
       else setMessageStyle("error");
     } catch (exception) {
       setMessageStyle("error");
-      setMessage(exception.response.data);
+      setMessage(getErrorMessage(exception));
     }
-    const getProductBid = async (id) => {
-      const res = await getProductBidInfo(id);
-      setProductBidInfo(res);
-    };
-    getProductBid(params.id);
   };
 
   return (
@@ -109,20 +89,27 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              { user && product.user.id !== user.id && product.endDate > moment() &&
+              {user && product.user.id !== user.id && (
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}
                     onChange={(e) => setPrice(e.target.value)}
                     width="111px"
                     type="gray"
-                  ></Input>
+                  />
                   <Button onClick={placeBid}>
                     PLACE BID <FontAwesomeIcon icon={faAngleRight} />{" "}
                   </Button>
-                  <p>Enter ${productBidInfo && productBidInfo.highestBid !== null ? productBidInfo.highestBid : product.startingPrice } or more</p>
+                  <p>
+                    Enter{" "}
+                    {productBidInfo
+                      ? productBidInfo.highestBid
+                        ? " price greater than $" + productBidInfo.highestBid
+                        : "$" + product.startingPrice + " or more "
+                      : ""}
+                  </p>
                 </div>
-              }
+              )}
               {productBidInfo && (
                 <div className="product-overview-bid-info">
                   <p>
@@ -139,9 +126,6 @@ function ProductOverview() {
                   </p>
                 </div>
               )}
-              {productBidInfo && getDateDiffernece(moment(), product.endDate) === 0 && user.id === productBidInfo.userId && !product.purchased && (<div className="pay-button-div">
-                <Button type="white" onClick={handlePayment}>Pay <FontAwesomeIcon icon={faMoneyBill1Wave} /></Button>
-              </div>)}
               <div className="tab-container">
                 <TabView tabs={tabs} />
               </div>

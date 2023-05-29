@@ -10,7 +10,7 @@ import org.atlantbh.internship.auctionapp.repository.BidRepository;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.request.BidRequest;
 import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
-import org.atlantbh.internship.auctionapp.response.SuccessfulAndMessage;
+import org.atlantbh.internship.auctionapp.response.ResponseMessage;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.springframework.stereotype.Service;
 
@@ -42,27 +42,27 @@ public class BidServiceImpl implements BidService {
     }
 
     @Override
-    public SuccessfulAndMessage bid(BidRequest bidRequest, PersonDetails user) throws BadRequestException {
-        ProductEntity product = productRepository.findById(bidRequest.getProductId())
-                .orElseThrow(() -> new BadRequestException("Product with given id does not exist."));
-        if (product.getUser().getId().equals(user.getId()))
-            throw new BadRequestException("You can't bid to your own products");
-        BigDecimal currentHighest = bidRepository.findFirst1ByProductIdOrderByPriceDesc(bidRequest.getProductId())
-                .map(BidEntity::getPrice).orElse(product.getStartingPrice());
-        if (product.getEndDate().isBefore(LocalDateTime.now()))
-            return new SuccessfulAndMessage(false, "You can no longer bid on this product");
-        if (bidRequest.getPrice().compareTo(product.getStartingPrice()) <= 0)
-            return new SuccessfulAndMessage(false, "You have to provide value grater than starting price.");
-        if (bidRequest.getPrice().compareTo(currentHighest) <= 0)
-            return new SuccessfulAndMessage(false, "There are higher bids than yours. You could give a second try.");
-        BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
-        bidRepository.save(bidEntity);
-        return new SuccessfulAndMessage(true, "Congrats! You are the highest bidder.");
+    public BidEntity getMaxBidPriceForProduct(Long productId) throws BadRequestException {
+        return bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId)
+                .orElseThrow(() -> new BadRequestException("There are no bids for product with given ID"));
     }
 
     @Override
-    public BidEntity getMaxBidPriceForProduct(Long productId) throws BadRequestException{
-        return bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId)
-                .orElseThrow(() -> new BadRequestException("There are no bids for product with given ID"));
+    public ResponseMessage bid(BidRequest bidRequest, PersonDetails user) throws BadRequestException {
+        ProductEntity product = productRepository.findById(bidRequest.getProductId())
+                .orElseThrow(() -> new BadRequestException("Product with given id does not exist."));
+        if (product.getUser().getId().equals(user.getId()))
+            throw new BadRequestException("You can't bid on your own products");
+        if (product.getEndDate().isBefore(LocalDateTime.now()))
+            return new ResponseMessage(false, "You can no longer bid on this product");
+        if (bidRequest.getPrice().compareTo(product.getStartingPrice()) < 0)
+            return new ResponseMessage(false, "You can't provide value less than starting price.");
+        BigDecimal currentHighest = bidRepository.findFirst1ByProductIdOrderByPriceDesc(bidRequest.getProductId())
+                .map(BidEntity::getPrice).orElse(product.getStartingPrice());
+        if (bidRequest.getPrice().compareTo(currentHighest) <= 0)
+            return new ResponseMessage(false, "There are higher bids than yours. You could give a second try.");
+        BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
+        bidRepository.save(bidEntity);
+        return new ResponseMessage(true, "Congrats! You are the highest bidder.");
     }
 }

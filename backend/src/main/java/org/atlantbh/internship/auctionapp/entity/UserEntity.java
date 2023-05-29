@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.model.User;
 
 @NoArgsConstructor
@@ -78,6 +79,17 @@ public class UserEntity {
         userEntity.setImageUrl(user.getImageUrl());
         userEntity.setPassword(user.getPassword());
         userEntity.setRole(user.getRole());
+        return userEntity;
+    }
+
+    public static UserEntity fromPersonDetails(final PersonDetails personDetails) {
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setId(personDetails.getId());
+        userEntity.setRole(personDetails.getRole());
+        userEntity.setEmail(personDetails.getEmail());
+        userEntity.setPassword(personDetails.getPassword());
+        userEntity.setName(personDetails.getName());
+        userEntity.setSurname(personDetails.getSurname());
         return userEntity;
     }
 }

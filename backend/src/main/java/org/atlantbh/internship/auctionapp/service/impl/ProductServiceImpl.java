@@ -5,7 +5,7 @@ import org.atlantbh.internship.auctionapp.controller.common.SearchParams;
 import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.model.Product;
-import org.atlantbh.internship.auctionapp.projection.UserProfileProductsInfo;
+import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
@@ -50,12 +50,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<UserProfileProductsInfo> getUserActiveProducts(Long userId) {
+    public List<ProductBidsInfo> getUserActiveProducts(Long userId) {
         return productRepository.getUserActiveProducts(userId);
     }
 
     @Override
-    public List<UserProfileProductsInfo> getUserSoldProducts(Long userId) {
+    public List<ProductBidsInfo> getUserSoldProducts(Long userId) {
         return productRepository.getUserSoldProducts(userId);
     }
 

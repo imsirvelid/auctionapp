@@ -1,8 +1,10 @@
 .current-location {
   width: 100%;
-  margin: 37px auto;
+  margin: 0 auto;
+  margin-top: 57px;
   font-size: 18px;
   padding: 0px;
+  height: 57px;
   background: #fafafa;
 }
 
@@ -20,6 +22,8 @@
 
 .current-location-flexdiv {
   width: 75%;
+  height: 100%;
+  align-items: center;
   margin: 0 auto;
   display: flex;
 }

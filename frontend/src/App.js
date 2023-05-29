@@ -15,7 +15,7 @@ import Register from "pages/register/Register";
 import './api/AxiosInterceptor';
 import GuestRoute from "components/protected/GuestRoute";
 import UserProfile from "pages/user-profile/UserProfile";
-import Protected from "components/protected/Protected";
+import PrivateRoute from "components/protected/PrivateRoute";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -59,9 +59,9 @@ function App() {
             <Route
               path="/user/profile"
               element={
-                <Protected>
+                <PrivateRoute>
                   <UserProfile />
-                </Protected>
+                </PrivateRoute>
               }
             />
           </Routes>

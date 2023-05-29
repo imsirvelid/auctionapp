@@ -90,4 +90,4 @@ export default async function uploadImages(images) {
 export const setPurchasedProduct = async (productId) => {
   const fetchData = await axios.post(URL + "/pay/" + productId);
   return fetchData.data;
-}
+};

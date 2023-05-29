@@ -11,6 +11,12 @@
   padding-bottom: 21px;
 }
 
+table {
+  table-layout: auto;
+  width: 100%;
+  padding: 0 20px;
+}
+
 .profile-bids-table p {
   font-size: 18px;
   letter-spacing: 0.63px;
@@ -27,53 +33,6 @@
   color: #252525;
   letter-spacing: 0.63px;
   background-color: #fafafa;
-  display: flex;
-  align-items: center;
-
-}
-
-.bids-table-row {
-  padding: 0 2.5%;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-  height: 100px;
-  align-items: center;
-  display: flex;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.bids-table-item {
-  width: 15%;
-}
-
-.bids-table-name {
-  font-size: 18px;
-  color: #252525;
-  letter-spacing: 0.63px;
-  width: 25%;
-}
-
-.bids-table-left {
-  width: 15%;
-}
-
-.bids-table-price {
-  width: 13%;
-}
-
-.bids-table-bids {
-  width: 10%;
-}
-
-.bids-table-highest {
-  width: 13%;
-}
-
-.bids-table-empty {
-  width: 4%;
 }
 
 .bids-table-img {

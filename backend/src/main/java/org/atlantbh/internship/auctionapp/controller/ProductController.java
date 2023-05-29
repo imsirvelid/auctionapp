@@ -43,7 +43,7 @@ public class ProductController {
     public ResponseEntity<SearchProductResponse> search(PageParams pageParams,
                                                         SortParams sortParams,
                                                         @RequestParam(required = false) String productName,
-                                                        @RequestParam(required = false) Long categoryId){
+                                                        @RequestParam(required = false) Long categoryId) {
         return ResponseEntity.ok(productService.search(pageParams, sortParams, new SearchParams(productName, categoryId)));
     }
 
@@ -71,5 +71,4 @@ public class ProductController {
     public ResponseEntity<?> setPurchased(@PathVariable Long productId){
         return ResponseEntity.ok(productService.setPurchased(productId));
     }
-
 }

@@ -36,7 +36,7 @@ function UserProfile() {
               index === currentTab && "selected-profile-button"
             }`}
             key={index}
-            onClick={(e) => setCurrentTab(index)}
+            onClick={() => setCurrentTab(index)}
           >
             <FontAwesomeIcon icon={tab.icon} /> &nbsp;
             {tab.name}

@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from "react";
+import React, {useState, useMemo} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Footer from "components/footer/Footer";
 import Navbar from "components/navbar/Navbar";
@@ -22,10 +22,6 @@ import PaySuccess from "pages/pay-success/PaySuccess";
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
 
   return (
     <Router>

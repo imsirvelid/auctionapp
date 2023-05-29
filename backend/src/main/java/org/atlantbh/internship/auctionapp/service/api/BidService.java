@@ -9,7 +9,6 @@ import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.response.SuccessfulAndMessage;
 
 import java.util.List;
-
 public interface BidService {
     ProductBidResponse getProductBidInfo(Long productId);
     List<ProductBidsInfo> getBidsForUser(Long userId);

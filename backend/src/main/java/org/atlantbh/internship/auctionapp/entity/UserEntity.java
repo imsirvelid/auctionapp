@@ -99,16 +99,4 @@ public class UserEntity {
         userEntity.setSurname(personDetails.getSurname());
         return userEntity;
     }
-
-    /*
-    public static UserEntity fromPersonDetails(final PersonDetails personDetails) {
-        final UserEntity userEntity = new UserEntity();
-        userEntity.setId(personDetails.getId());
-        userEntity.setRole(personDetails.getRole());
-        userEntity.setEmail(personDetails.getEmail());
-        userEntity.setPassword(personDetails.getPassword());
-        userEntity.setName(personDetails.getName());
-        userEntity.setSurname(personDetails.getSurname());
-        return userEntity;
-    }*/
 }

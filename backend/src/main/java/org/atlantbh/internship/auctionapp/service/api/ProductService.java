@@ -9,12 +9,13 @@ import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<Product> getAll(PageParams pageParams, SortParams sortParams);
+    Page<Product> getAll(PageParams pageParams, SortParams sortParams);
     SearchProductResponse search(PageParams pageParams, SortParams sortParams, SearchParams searchParams);
     Optional<Product> findById(Long id);
     Product getRandom();

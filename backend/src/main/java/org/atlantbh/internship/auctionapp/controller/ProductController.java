@@ -11,6 +11,7 @@ import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams){
+    public ResponseEntity<Page<Product>> getProducts(PageParams pageParams, SortParams sortParams){
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
@@ -68,7 +69,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/pay/{productId}")
-    public ResponseEntity<?> setPurchased(@PathVariable Long productId){
+    public ResponseEntity<Product> setPurchased(@PathVariable Long productId){
         return ResponseEntity.ok(productService.setPurchased(productId));
     }
 }

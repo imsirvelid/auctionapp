@@ -5,7 +5,7 @@ import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.User;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
-import org.atlantbh.internship.auctionapp.request.UserAddressRequest;
+import org.atlantbh.internship.auctionapp.request.UserContactInfoRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
 
 public interface UserService {
@@ -13,7 +13,7 @@ public interface UserService {
     AuthResponse login(LoginRequest request) throws Exception;
     boolean existsByEmail(String email);
     User getByEmail(String email);
-    User updateAddress(UserAddressRequest request) throws BadRequestException;
+    User updateAddress(UserContactInfoRequest request) throws BadRequestException;
     UserEntity getById(Long userId) throws BadRequestException;
     UserEntity updateUser(UserEntity user) throws BadRequestException;
 }

@@ -13,7 +13,8 @@ function NewArrivals() {
   useEffect(() => {
     const getLatest = async () => {
       const res = await getLatestProducts(0, "created", "desc");
-      setProductList(res);
+      setProductList(res.content);
+      setEnd(res.last);
     };
     getLatest();
     setInitial(true);
@@ -22,8 +23,8 @@ function NewArrivals() {
   const fetchData = async () => {
     if (end || !initial) return;
     const res = await getLatestProducts(page, "created", "desc");
-    if (res.length === 0) setEnd(true);
-    setProductList([...productList, ...res]);
+    setEnd(res.last);
+    setProductList([...productList, ...res.content]);
     setPage(page + 1);
   };
   return (
@@ -32,7 +33,7 @@ function NewArrivals() {
       dataLength={productList.length}
       next={fetchData}
       hasMore={!end}
-      loader={<h4></h4>}
+      loader={<h4>Loading...</h4>}
     >
       {productList.map((product) => (
         <div className="product-item" key={product.id}>

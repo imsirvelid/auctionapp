@@ -1,6 +1,6 @@
 package org.atlantbh.internship.auctionapp.request;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -14,7 +14,7 @@ import org.atlantbh.internship.auctionapp.entity.UserEntity;
 public class CreateCustomerRequest {
 
     @NotNull
-    @Min(4)
+    @Email
     private String email;
 
     @NotNull

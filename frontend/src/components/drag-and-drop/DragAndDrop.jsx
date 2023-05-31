@@ -33,7 +33,6 @@ function DragAndDrop(props) {
   };
   return (
     <>
-      {true && (
         <div
           className="dropdown-zone"
           onDragOver={handleDragOver}
@@ -47,18 +46,17 @@ function DragAndDrop(props) {
               Upload Photos
             </p>
             <p className="black-text">or just drag and drop</p>
-            <p className="margin-text-0">(Add at least 3 photos)</p>
+            <p className="margin-text-0">(Add at least {props.minImages} photos)</p>
           </span>
           <input
             type="file"
-            accept=".jpg,.png"
+            accept="image/*"
             multiple
             onChange={(event) => props.files.set(event.target.files)}
             hidden
             ref={inputRef}
-          ></input>
+          />
         </div>
-      )}
       {props.files.value.length !== 0 && (
         <div className="image-preview-div">
           <div className="image-preview-ul">
@@ -67,7 +65,7 @@ function DragAndDrop(props) {
                 <img
                   src={showImage(file)}
                   className="image-preview"
-                ></img>
+                />
                 <div className="image-options">
                   <div>
                     <FontAwesomeIcon

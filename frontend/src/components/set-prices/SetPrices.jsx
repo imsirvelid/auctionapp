@@ -5,7 +5,6 @@ import "./SetPrices.css";
 import Button from "components/button/Button";
 
 function SetPrices(props) {
-  const [errorMessage, setErrorMessage] = useState("");
 
   const digitsOnly = (value) => /^\d+(\.\d+)?$/.test(value);
 
@@ -31,7 +30,6 @@ function SetPrices(props) {
     <div className="container-55">
       <div className="form-container">
         <h2 className="form-title"> SET PRICES </h2>
-        {errorMessage && <p className="login-error-message">{errorMessage}</p>}
         <Formik
           enableReinitialize
           initialValues={{

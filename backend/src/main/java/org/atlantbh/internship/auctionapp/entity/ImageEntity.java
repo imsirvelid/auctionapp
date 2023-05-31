@@ -31,11 +31,11 @@ public class ImageEntity {
 
     @NotNull
     @Column(name = "featured")
-    private Boolean featured;
+    private boolean featured;
 
     @Override
     public String toString(){
-        return featured.toString();
+        return url;
     }
 
     public Image toDomainModel(){

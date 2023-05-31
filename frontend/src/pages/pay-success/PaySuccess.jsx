@@ -21,12 +21,7 @@ function PaySuccess() {
     getProduct(params.id);
     getProductBid(params.id);
     if (product && product.purchased !== true) {
-      console.log("PA POZOVI");
-      setPurchasedProduct(params.id).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      });
+      setPurchasedProduct(params.id);
     }
   }, []);
 

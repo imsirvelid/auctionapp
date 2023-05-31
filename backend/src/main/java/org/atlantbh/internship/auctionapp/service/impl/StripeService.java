@@ -14,9 +14,9 @@ import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.request.CreateCustomerRequest;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
-import org.atlantbh.internship.auctionapp.service.api.StripeService;
+import org.atlantbh.internship.auctionapp.service.api.PaymentService;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
-import org.atlantbh.internship.auctionapp.util.UserContext;
+import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class StripeServiceImpl implements StripeService {
+public class StripeService implements PaymentService {
 
 
     private final CreditCardService creditCardService;
@@ -33,19 +33,20 @@ public class StripeServiceImpl implements StripeService {
     private final UserService userService;
 
     @Value("${app.stripeSecret}")
-    private String STRIPE_API_SECRET;
+    private static String STRIPE_API_SECRET;
 
 
-    public StripeServiceImpl(final CreditCardService creditCardService, BidService bidService, UserService userService) {
+    public StripeService(final CreditCardService creditCardService, BidService bidService, UserService userService) {
         this.creditCardService = creditCardService;
         this.bidService = bidService;
         this.userService = userService;
+        System.out.println("STRIPE API SECRET IS: " + STRIPE_API_SECRET);
         Stripe.apiKey = "sk_test_51N3bRHLCipJXkJNqB3dJdUOG7yqoF8Tq90PPL2Mgv3PmLCwrqvPu61PfrJ75sqQQTWR8Lqw6z7r9ATiGMhQ0V1CY00ogdCPbuK";
     }
 
     public String createPaymentIntent(Long productId) throws StripeException, BadRequestException {
         BidEntity bid = bidService.getMaxBidPriceForProduct(productId);
-        UserEntity user = userService.getById(UserContext.getCurrentUserId());
+        UserEntity user = userService.getById(Jwt.getCurrentUserId());
         if (user.getStripeId() == null){
             Customer customer = createCustomer(CreateCustomerRequest.fromUser(user));
             user.setStripeId(customer.getId());
@@ -76,7 +77,7 @@ public class StripeServiceImpl implements StripeService {
 
     public Customer createCustomer(CreateCustomerRequest request) throws StripeException {
         Map<String, Object> params = new HashMap<>();
-        CreditCardEntity creditCard = creditCardService.getUserCreditCardInfo(UserContext.getCurrentUserId());
+        CreditCardEntity creditCard = creditCardService.getUserCreditCardInfo(Jwt.getCurrentUserId());
         if (creditCard != null)
             params.put("payment_method", createPaymentMethod(creditCard).getId());
         params.put("name", request.getName());

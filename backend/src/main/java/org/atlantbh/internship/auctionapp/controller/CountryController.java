@@ -2,11 +2,11 @@ package org.atlantbh.internship.auctionapp.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.response.GeoNamesCountryResponse;
+import org.atlantbh.internship.auctionapp.service.api.CountryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Tag(name = "Credit Card", description = "Credit Card APIs")
@@ -14,29 +14,19 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/country")
 public class CountryController {
 
-    private final WebClient webClient;
+    private final CountryService countryService;
 
-    public CountryController(WebClient webClient) {
-        this.webClient = webClient;
+    public CountryController(CountryService countryService) {
+        this.countryService = countryService;
     }
 
     @GetMapping
     public Mono<GeoNamesCountryResponse> getAllCountries() {
-        String url = "http://api.geonames.org/countryInfoJSON?username=vimsir";
-
-        return webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(GeoNamesCountryResponse.class);
+        return countryService.getAllCountries();
     }
 
     @GetMapping("/{countryCode}")
     public Mono<String> getCitiesForCountry(@PathVariable String countryCode){
-        String url = "http://api.geonames.org/searchJSON?country=" + countryCode + "&username=vimsir";
-
-        return webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(String.class);
+        return countryService.getCitiesForCountry(countryCode);
     }
 }

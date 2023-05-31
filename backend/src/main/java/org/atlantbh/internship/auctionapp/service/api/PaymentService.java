@@ -9,7 +9,7 @@ import org.atlantbh.internship.auctionapp.request.CreateCustomerRequest;
 
 import java.util.List;
 
-public interface StripeService {
+public interface PaymentService {
 
     String createPaymentIntent(Long productId) throws StripeException, BadRequestException;
     Customer createCustomer(CreateCustomerRequest request) throws StripeException;

@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserAddressRequest {
+public class UserContactInfoRequest {
 
     @NotBlank(message = "Address can't be empty")
     @Size(min = 2, message = "Address must have at least 2 characters")

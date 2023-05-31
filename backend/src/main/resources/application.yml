@@ -15,4 +15,4 @@ spring:
 app:
     jwtSecret: ${TOKEN_SECRET}
     jwtExpiration: 86400000
-    stripeSecret: sk_test_51N3bRHLCipJXkJNqB3dJdUOG7yqoF8Tq90PPL2Mgv3PmLCwrqvPu61PfrJ75sqQQTWR8Lqw6z7r9ATiGMhQ0V1CY00ogdCPbuK
+    stripeSecret: ${STRIPE_SECRET}

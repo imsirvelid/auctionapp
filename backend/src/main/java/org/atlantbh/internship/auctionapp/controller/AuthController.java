@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
+import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
@@ -12,7 +13,6 @@ import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Auth", description = "Authentication and Authorization APIs")
@@ -43,7 +43,7 @@ public class AuthController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/getuser")
-    public ResponseEntity<?> validateToken(HttpServletRequest request) throws BadRequestException {
-        return ResponseEntity.ok(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public ResponseEntity<PersonDetails> getUser(HttpServletRequest request) throws BadRequestException {
+        return ResponseEntity.ok(Jwt.getCurrentUser());
     }
 }

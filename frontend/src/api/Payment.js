@@ -5,10 +5,6 @@ const URL = BASE_URL + "/payment";
 
 
 export const getPaymentIntent = async (request) => {
-  const fetchData = await axios.post(URL + "/create-payment-intent", request, {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+  const fetchData = await axios.post(URL + "/create-payment-intent", request);
   return fetchData.data;
 }

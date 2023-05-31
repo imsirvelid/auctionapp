@@ -43,9 +43,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAll(PageParams pageParams, SortParams sortParams) {
+    public Page<Product> getAll(PageParams pageParams, SortParams sortParams) {
+        var returned = productRepository.getProductsWithThumbnails(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()))
+                .map(ProductEntity::toDomainModel);
+        System.out.println("Vračeno mi je ovo");
+        System.out.println("Ima li narednog? " + returned.hasNext());
         return productRepository.getProductsWithThumbnails(PageRequest.of(pageParams.getPageNumber(), pageParams.getPageSize(), sortParams.getSort()))
-                .stream().map(ProductEntity::toDomainModel).collect(Collectors.toList());
+                .map(ProductEntity::toDomainModel);
     }
 
     @Override

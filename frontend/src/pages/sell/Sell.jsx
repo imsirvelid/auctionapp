@@ -1,5 +1,4 @@
 import React from "react";
-import "./Sell.css";
 import AddItem from "components/add-item/AddItem";
 import SetPrices from "components/set-prices/SetPrices";
 import LocationAndShipping from "components/location-and-shipping/LocationAndShipping";
@@ -11,7 +10,7 @@ import { updateUserAddress } from "api/User";
 import { useNavigate } from "react-router-dom";
 
 function Sell() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
   const [name, setName] = useState("");
   const [category, setCategory] = useState(0);
   const [subCategory, setSubCategory] = useState(0);

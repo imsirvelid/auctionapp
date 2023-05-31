@@ -36,6 +36,7 @@ public class BidController {
         return ResponseEntity.ok(bidService.getBidsForUser(Jwt.getCurrentUserId()));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/bid")
     public ResponseEntity<ResponseMessage> bid(@RequestBody BidRequest bidRequest) throws BadRequestException {
         return ResponseEntity.ok(bidService.bid(bidRequest, Jwt.getCurrentUser()));

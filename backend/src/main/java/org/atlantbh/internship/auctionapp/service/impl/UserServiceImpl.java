@@ -8,7 +8,7 @@ import org.atlantbh.internship.auctionapp.model.User;
 import org.atlantbh.internship.auctionapp.repository.UserRepository;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
-import org.atlantbh.internship.auctionapp.request.UserAddressRequest;
+import org.atlantbh.internship.auctionapp.request.UserContactInfoRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateAddress(UserAddressRequest request) throws BadRequestException {
+    public User updateAddress(UserContactInfoRequest request) throws BadRequestException {
         PersonDetails person = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity user = userRepository.findById(person.getId()).get();
         user.setAddress(request.getAddress());

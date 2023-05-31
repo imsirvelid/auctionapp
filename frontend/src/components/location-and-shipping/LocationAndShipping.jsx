@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import "./LocationAndShipping.css";
 import Button from "components/button/Button";
 import {getUserCreditCardInfo} from "api/CreditCard";
-import { getAllCitiesForCountry, getAllCountries } from "api/Country";
+import {getAllCitiesForCountry, getAllCountries} from "api/Country";
 
 function LocationAndShipping(props) {
   const [allCountries, setAllCountries] = useState([]);
@@ -42,9 +42,9 @@ function LocationAndShipping(props) {
   });
 
   useEffect(() => {
-    getAllCountries().then(response => {
+    getAllCountries().then((response) => {
       setAllCountries(response);
-    })
+    });
     window.scrollTo(0, 0);
     getUserCreditCardInfo()
       .then((response) => {
@@ -67,17 +67,18 @@ function LocationAndShipping(props) {
           props.cvc.set(response.cvc);
           props.creditCardId.set(response.id);
           props.zipCode.set(response.user.zipCode);
-          props.city.set(response.user.city)
+          props.city.set(response.user.city);
         }
       })
       .catch((error) => {});
   }, []);
 
   useEffect(() => {
-    getAllCitiesForCountry(props.country.value).then(response => {
-      setAllCities(response);
-    });
-  }, [props.country.value])
+    if (props.country.value)
+      getAllCitiesForCountry(props.country.value).then((response) => {
+        setAllCities(response);
+      });
+  }, [props.country.value]);
 
   return (
     <div className="container-55">
@@ -120,7 +121,10 @@ function LocationAndShipping(props) {
               />
               <div className="country-city-div">
                 <div className="country-div">
-                  <label className="formik-field-label full-width date-label" htmlFor="email">
+                  <label
+                    className="formik-field-label full-width date-label"
+                    htmlFor="email"
+                  >
                     Country
                   </label>
                   <Field
@@ -131,9 +135,11 @@ function LocationAndShipping(props) {
                     placeholder="eg. Spain"
                     className="custom-formik-field full-width"
                   >
-                  {allCountries.map((country, index) => 
-                    (<option key={index} value={country.code}>{country.name}</option>)
-                  )}
+                    {allCountries.map((country, index) => (
+                      <option key={index} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
                   </Field>
                   <ErrorMessage
                     name="country"
@@ -142,7 +148,10 @@ function LocationAndShipping(props) {
                   />
                 </div>
                 <div className="country-div">
-                  <label className="formik-field-label full-width date-label" htmlFor="email">
+                  <label
+                    className="formik-field-label full-width date-label"
+                    htmlFor="email"
+                  >
                     City
                   </label>
                   <Field
@@ -153,9 +162,11 @@ function LocationAndShipping(props) {
                     placeholder="eg. Madrid"
                     className="custom-formik-field full-width "
                   >
-                    {allCities.map((city, index) => 
-                    (<option key={index} value={city}>{city}</option>)
-                  )}
+                    {allCities.map((city, index) => (
+                      <option key={index} value={city}>
+                        {city}
+                      </option>
+                    ))}
                   </Field>
                   <ErrorMessage
                     name="city"

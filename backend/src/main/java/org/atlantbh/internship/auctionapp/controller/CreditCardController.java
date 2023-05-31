@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/creditcard")
 public class CreditCardController {
 
-    final private CreditCardService creditCardService;
+    private final CreditCardService creditCardService;
 
     public CreditCardController(CreditCardService creditCardService) {
         this.creditCardService = creditCardService;
@@ -24,7 +24,7 @@ public class CreditCardController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
-    public ResponseEntity<CreditCardEntity> logIn() throws Exception {
+    public ResponseEntity<CreditCardEntity> getUserCreditCardInfo() throws Exception {
         PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(creditCardService.getUserCreditCardInfo(personDetails.getId()));
     }

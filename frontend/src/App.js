@@ -74,7 +74,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/payment/success/:id" element={<PaySuccess />}></Route>
+            <Route path="/payment/success/:id" element={<PaySuccess />} />
           </Routes>
         </div>
         <Footer />

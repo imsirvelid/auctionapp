@@ -18,6 +18,7 @@ import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
 import org.atlantbh.internship.auctionapp.service.api.PaymentService;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -32,6 +33,9 @@ public class StripeService implements PaymentService {
     private final BidService bidService;
     private final UserService userService;
 
+    @Value("${app.successPaymentUrl}")
+    private String successPaymentUrl;
+
     private final ExternalProperties externalProperties;
 
 
@@ -40,6 +44,7 @@ public class StripeService implements PaymentService {
         this.bidService = bidService;
         this.userService = userService;
         this.externalProperties = externalProperties;
+        System.out.println("SUCCESS IS: " + successPaymentUrl);
         Stripe.apiKey = externalProperties.getStripe().getStripeSecret();
     }
 
@@ -54,8 +59,7 @@ public class StripeService implements PaymentService {
         SessionCreateParams params =
                 SessionCreateParams.builder()
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("http://localhost:3000/payment/success/" + productId)
-                        .setCancelUrl("http://localhost:3000/payment/cancel")
+                        .setSuccessUrl(successPaymentUrl + productId)
                         .setCustomer(user.getStripeId())
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()

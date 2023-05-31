@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateAddress(UserContactInfoRequest request) throws BadRequestException {
+    public User updateAddress(UserContactInfoRequest request) {
         PersonDetails person = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity user = userRepository.findById(person.getId()).get();
         user.setAddress(request.getAddress());
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity updateUser(UserEntity user) throws BadRequestException {
+    public UserEntity updateUser(UserEntity user) {
         user = userRepository.save(user);
         return user;
     }

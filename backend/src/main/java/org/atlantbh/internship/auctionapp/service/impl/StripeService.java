@@ -7,6 +7,7 @@ import com.stripe.model.PaymentMethod;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.checkout.SessionCreateParams;
+import org.atlantbh.internship.auctionapp.config.ExternalProperties;
 import org.atlantbh.internship.auctionapp.entity.BidEntity;
 import org.atlantbh.internship.auctionapp.entity.CreditCardEntity;
 import org.atlantbh.internship.auctionapp.entity.UserEntity;
@@ -17,7 +18,6 @@ import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
 import org.atlantbh.internship.auctionapp.service.api.PaymentService;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -32,16 +32,15 @@ public class StripeService implements PaymentService {
     private final BidService bidService;
     private final UserService userService;
 
-    @Value("${app.stripeSecret}")
-    private static String STRIPE_API_SECRET;
+    private final ExternalProperties externalProperties;
 
 
-    public StripeService(final CreditCardService creditCardService, BidService bidService, UserService userService) {
+    public StripeService(final CreditCardService creditCardService, BidService bidService, UserService userService, ExternalProperties externalProperties) {
         this.creditCardService = creditCardService;
         this.bidService = bidService;
         this.userService = userService;
-        System.out.println("STRIPE API SECRET IS: " + STRIPE_API_SECRET);
-        Stripe.apiKey = "sk_test_51N3bRHLCipJXkJNqB3dJdUOG7yqoF8Tq90PPL2Mgv3PmLCwrqvPu61PfrJ75sqQQTWR8Lqw6z7r9ATiGMhQ0V1CY00ogdCPbuK";
+        this.externalProperties = externalProperties;
+        Stripe.apiKey = externalProperties.getStripe().getStripeSecret();
     }
 
     public String createPaymentIntent(Long productId) throws StripeException, BadRequestException {

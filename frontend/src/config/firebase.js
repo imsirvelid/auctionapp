@@ -4,8 +4,14 @@ import {getAnalytics} from "firebase/analytics";
 import {getStorage} from "firebase/storage";
 import {getFirebaseConfig} from "api/Firebase";
 
-const firebaseConfig = getFirebaseConfig();
+export let app;
+export let analytics;
+export let storage;
 
-export const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-export const storage = getStorage(app);
+(async () => {
+  const firebaseConfig = await getFirebaseConfig();
+  app = initializeApp(firebaseConfig);
+  analytics = getAnalytics(app);
+  storage = getStorage(app);
+})();
+

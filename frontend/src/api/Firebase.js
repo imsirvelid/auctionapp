@@ -6,6 +6,5 @@ const URL = BASE_URL + "/firebase";
 
 export const getFirebaseConfig = async () => {
   const fetchData = await axios.get(URL);
-  console.log("Firbase config is: ", fetchData.data);
   return fetchData.data;
 }

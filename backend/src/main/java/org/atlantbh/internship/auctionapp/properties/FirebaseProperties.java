@@ -13,6 +13,7 @@ public class FirebaseProperties {
     private String projectId;
     private String storageBucket;
     private String messagingSenderId;
+    private String appId;
     private String measurementId;
 }
 

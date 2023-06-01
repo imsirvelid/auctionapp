@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getRecommendedProducts(Long userId) {
-        return productRepository.getUserRecommendedProducts(userId).stream()
+        return productRepository.getUserRecommendedProducts(userId, LocalDateTime.now().minusMonths(2)).stream()
                 .map(ProductEntity::toDomainModel).collect(Collectors.toList());
     }
 
@@ -80,7 +80,12 @@ public class ProductServiceImpl implements ProductService {
             UserClickedProducts ucp = userClickedProductsRepository.findByUserIdAndProductId(currentUserId, id);
             if (ucp == null)
                 userClickedProductsRepository.save(new UserClickedProducts(product.orElseThrow(() -> new BadRequestException("Product with given id does not exist")),
-                        currentUserId, LocalDateTime.now()));
+                        currentUserId, 0, LocalDateTime.now()));
+            else {
+                ucp.setCount(ucp.getCount() + 1);
+                ucp.setDateClicked(LocalDateTime.now());
+                userClickedProductsRepository.save(ucp);
+            }
         }
         return product.map(ProductEntity::toDomainModel);
     }

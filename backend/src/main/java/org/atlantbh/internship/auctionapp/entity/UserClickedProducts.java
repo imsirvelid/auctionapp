@@ -27,12 +27,17 @@ public class UserClickedProducts {
     private Long userId;
 
     @NotNull
+    @Column(name = "count")
+    private Integer count;
+
+    @NotNull
     @Column(name = "date_clicked")
     private LocalDateTime dateClicked;
 
-    public UserClickedProducts(ProductEntity product, Long userId, LocalDateTime dateClicked) {
+    public UserClickedProducts(ProductEntity product, Long userId, Integer count, LocalDateTime dateClicked) {
         this.product = product;
         this.userId = userId;
+        this.count = count;
         this.dateClicked = dateClicked;
     }
 }

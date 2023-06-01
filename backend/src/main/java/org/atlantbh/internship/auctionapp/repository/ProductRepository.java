@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,8 +63,9 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             SELECT pe FROM ProductEntity pe
             WHERE pe.user.id != :userId AND pe.endDate > CURRENT_DATE
             ORDER BY (SELECT COUNT(*) FROM BidEntity be WHERE be.user.id = :userId AND be.product.category.id = pe.category.id) * 10
-                  +  (SELECT COUNT(*) FROM UserClickedProducts ucp WHERE ucp.userId = :userId AND ucp.product.category.id = pe.category.id)
+                  +  (SELECT CASE WHEN ucp.dateClicked >= :dateTreshold THEN ucp.count * 5 ELSE ucp.count END
+                  FROM UserClickedProducts ucp WHERE ucp.userId = :userId AND ucp.product.category.id = pe.category.id) 
             DESC LIMIT 3 
            """)
-    List<ProductEntity> getUserRecommendedProducts(Long userId);
+    List<ProductEntity> getUserRecommendedProducts(Long userId, LocalDateTime dateTreshold);
 }

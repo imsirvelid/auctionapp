@@ -13,3 +13,8 @@ export const getBidsForUser = async () => {
   const fetchData = await axios.get(URL + "/user");
   return fetchData.data;
 };
+
+export const bid = async (bidRequest) => {
+  const response = await axios.post(URL + "/bid", bidRequest);
+  return response.data;
+}

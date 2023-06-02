@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import "./SetPrices.css";
@@ -22,7 +22,7 @@ function SetPrices(props) {
     endDate: Yup.date().required("Required"),
   });
 
-  const setPricesSubmit = (values) => {
+  const setPricesSubmit = () => {
     props.onNext();
   };
 

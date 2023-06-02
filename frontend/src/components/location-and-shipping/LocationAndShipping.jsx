@@ -42,10 +42,13 @@ function LocationAndShipping(props) {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     getAllCountries().then((response) => {
       setAllCountries(response);
     });
-    window.scrollTo(0, 0);
     getUserCreditCardInfo()
       .then((response) => {
         if (props.creditCardInfo.value) return true;
@@ -70,8 +73,8 @@ function LocationAndShipping(props) {
           props.city.set(response.user.city);
         }
       })
-      .catch((error) => {});
-  }, []);
+      .catch(() => {});
+  });
 
   useEffect(() => {
     if (props.country.value)

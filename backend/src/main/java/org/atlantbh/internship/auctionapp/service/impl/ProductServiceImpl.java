@@ -18,9 +18,9 @@ import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
+import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(CreateProductRequest request) throws BadRequestException {
-        PersonDetails user = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PersonDetails user = Jwt.getCurrentUser();
         ProductEntity product = ProductEntity.fromRequest(request);
         product.setUser(UserEntity.fromPersonDetails(user));
         product.setStatus(Status.ACTIVE);
@@ -93,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Image> saveAllImagesForProduct(List<String> images, int featuredIndex, Long productId) throws BadRequestException {
         ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new BadRequestException("Product with given ID does not exist"));
-        PersonDetails user = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PersonDetails user = Jwt.getCurrentUser();
         if (user.getId() != product.getUser().getId())
             throw new BadRequestException("You don't have product with given ID");
         List<ImageEntity> imageEntities = images.stream().map(image ->

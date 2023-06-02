@@ -13,6 +13,7 @@ import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,21 +54,25 @@ public class ProductController {
         return ResponseEntity.ok(productService.getRandom());
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/user/active")
     public ResponseEntity<List<ProductBidsInfo>> getUserActiveProducts(){
         return ResponseEntity.ok(productService.getUserActiveProducts(Jwt.getCurrentUserId()));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/user/sold")
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/create")
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) throws BadRequestException{
         return ResponseEntity.ok(productService.createProduct(request));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/pay/{productId}")
     public ResponseEntity<Product> setPurchased(@PathVariable Long productId){
         return ResponseEntity.ok(productService.setPurchased(productId));

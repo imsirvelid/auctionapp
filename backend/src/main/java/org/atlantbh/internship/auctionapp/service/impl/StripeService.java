@@ -44,7 +44,6 @@ public class StripeService implements PaymentService {
         this.bidService = bidService;
         this.userService = userService;
         this.externalProperties = externalProperties;
-        System.out.println("SUCCESS IS: " + successPaymentUrl);
         Stripe.apiKey = externalProperties.getStripe().getStripeSecret();
     }
 
@@ -56,6 +55,7 @@ public class StripeService implements PaymentService {
             user.setStripeId(customer.getId());
             userService.updateUser(user);
         }
+        System.out.println("Paymen url is: " + successPaymentUrl);
         SessionCreateParams params =
                 SessionCreateParams.builder()
                         .setMode(SessionCreateParams.Mode.PAYMENT)

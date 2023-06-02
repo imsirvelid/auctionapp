@@ -3,11 +3,11 @@ import AddItem from "components/add-item/AddItem";
 import SetPrices from "components/set-prices/SetPrices";
 import LocationAndShipping from "components/location-and-shipping/LocationAndShipping";
 import {useState} from "react";
-import { createProduct, uploadProductImages } from "api/Product";
+import {createProduct, uploadProductImages} from "api/Product";
 import moment from "moment/moment";
-import { updateOrCreateCreditCardInfo } from "api/CreditCard";
-import { updateUserAddress } from "api/User";
-import { useNavigate } from "react-router-dom";
+import {updateOrCreateCreditCardInfo} from "api/CreditCard";
+import {updateUserAddress} from "api/User";
+import {useNavigate} from "react-router-dom";
 
 function Sell() {
   const [currentStep, setCurrentStep] = useState(2);
@@ -37,22 +37,20 @@ function Sell() {
     setCurrentStep(1);
   };
 
-  const submitForm = () => {
-    uploadProductImages(files).then(response => {
-      const productRequest = {
-        productName: name,
-        categoryId: subCategory,
-        startDate: moment(startDate).toISOString(),
-        description: description,
-        endDate: moment(endDate).toISOString(),
-        startingPrice: startingPrice,
-        featuredImg: featured,
-        images: response
-      };
-      createProduct(productRequest).then(response => {
-        navigate("/products/" + response.id);
-      });
-    });
+  const submitForm = async () => {
+    const productImages = await uploadProductImages(files);
+    const productRequest = {
+      productName: name,
+      categoryId: subCategory,
+      startDate: moment(startDate).toISOString(),
+      description: description,
+      endDate: moment(endDate).toISOString(),
+      startingPrice: startingPrice,
+      featuredImg: featured,
+      images: productImages,
+    };
+
+    const createdProduct = await createProduct(productRequest);
 
     const creditCardRequest = {
       id: creditCardId,
@@ -60,21 +58,20 @@ function Sell() {
       cardNumber: cardNumber,
       expirationMonth: expMonth,
       expirationYear: expYear,
-      cvc: cvc
+      cvc: cvc,
     };
 
-    updateOrCreateCreditCardInfo(creditCardRequest).then(response => {
-      const shippingInfo = {
-        phone: phoneNumber,
-        city: city,
-        zipCode: zipCode,
-        address: address,
-        country: country,
-        phoneNumber: phoneNumber,
-      };
-      updateUserAddress(shippingInfo).then(response => {
-      });
-    });
+    await updateOrCreateCreditCardInfo(creditCardRequest);
+    const shippingInfo = {
+      phone: phoneNumber,
+      city: city,
+      zipCode: zipCode,
+      address: address,
+      country: country,
+      phoneNumber: phoneNumber,
+    };
+    await updateUserAddress(shippingInfo);
+    navigate("/products/" + createdProduct.id);
   };
 
   const steps = [
@@ -104,9 +101,9 @@ function Sell() {
       cvc={{value: cvc, set: setCvc}}
       phoneNumber={{value: phoneNumber, set: setPhoneNumber}}
       creditCardInfo={{value: creditCardInfo, set: setCreditCardInfo}}
-      creditCardId = {{value: creditCardId, set: setCreditCardId}}
-      city = {{value: city, set: setCity}}
-      zipCode = {{value: zipCode, set: setZipCode}}
+      creditCardId={{value: creditCardId, set: setCreditCardId}}
+      city={{value: city, set: setCity}}
+      zipCode={{value: zipCode, set: setZipCode}}
       onBack={() => setCurrentStep(1)}
       onDone={() => submitForm()}
     />,

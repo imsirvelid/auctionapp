@@ -7,7 +7,7 @@ import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.repository.CreditCardRepository;
 import org.atlantbh.internship.auctionapp.request.CreditCardRequest;
 import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,7 +27,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     @Override
     public CreditCardEntity createOrUpdate(CreditCardRequest request) throws BadRequestException {
-        PersonDetails user = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PersonDetails user = Jwt.getCurrentUser();
         CreditCardEntity creditCard = new CreditCardEntity(request.getId(), UserEntity.fromPersonDetails(user), request.getNameOnCard(), request.getCardNumber(), request.getExpirationMonth(), request.getExpirationYear(), request.getCvc());
         creditCard = creditCardRepository.save(creditCard);
         return creditCard;

@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateAddress(UserContactInfoRequest request) {
-        PersonDetails person = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PersonDetails person = Jwt.getCurrentUser();
         UserEntity user = userRepository.findById(person.getId()).get();
         user.setAddress(request.getAddress());
         user.setPhone(request.getPhone());

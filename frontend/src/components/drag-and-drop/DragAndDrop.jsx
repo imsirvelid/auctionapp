@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./DragAndDrop.css";
 import {useRef} from "react";
 import {faStar, faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -65,6 +65,7 @@ function DragAndDrop(props) {
                 <img
                   src={showImage(file)}
                   className="image-preview"
+                  alt="preview"
                 />
                 <div className="image-options">
                   <div>

@@ -23,7 +23,7 @@ function PaySuccess() {
     if (product && product.purchased !== true) {
       setPurchasedProduct(params.id);
     }
-  }, []);
+  }, [params.id, product]);
 
   return (
     <div className="container">
@@ -34,7 +34,7 @@ function PaySuccess() {
             <span className="purple-text">{product.name}</span> for $
             {productBidInfo.highestBid}
           </h1>
-          <img className="successfull-pay-img" src={product.images[0].url}></img>
+          <img alt="product" className="successfull-pay-img" src={product.images[0].url} />
         </>
       )}
     </div>

@@ -43,7 +43,7 @@ function UserProfile() {
           </button>
         ))}
         <button className="profile-tab-button right"><Link to={"/user/sell"}><FontAwesomeIcon icon={faPlus} /> ADD ITEM</Link></button>
-        <div className="profile-tab-component"></div>
+        <div className="profile-tab-component" />
         {tabs[currentTab].component}
       </div>
     </>

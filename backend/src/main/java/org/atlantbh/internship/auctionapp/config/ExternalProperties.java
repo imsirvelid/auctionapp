@@ -14,8 +14,4 @@ import org.springframework.stereotype.Component;
 public class ExternalProperties {
     private FirebaseProperties firebase;
     private StripeProperties stripe;
-
-    public FirebaseProperties getFirebase() {
-        return firebase;
-    }
 }

@@ -56,11 +56,11 @@ function Landing() {
             </Link>
           ))}
         </div>
-        <div className="empty-div"></div>
+        <div className="empty-div" />
         </div>
         <div className="random-product-landing">
           {randomProduct && (
-            <RandomProductCard product={randomProduct}></RandomProductCard>
+            <RandomProductCard product={randomProduct} /> 
           )}
         </div>
       </div>

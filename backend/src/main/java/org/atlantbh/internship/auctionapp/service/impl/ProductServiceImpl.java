@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getRecommendedProducts(Long userId) {
-        return productRepository.getUserRecommendedProducts(userId, LocalDateTime.now().minusMonths(2)).stream()
+        return productRepository.getUserRecommendedProducts(userId).stream()
                 .map(ProductEntity::toDomainModel).collect(Collectors.toList());
     }
 

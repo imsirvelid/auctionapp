@@ -9,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,13 +57,21 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             """)
     List<ProductBidsInfo> getUserSoldProducts(Long userId);
 
-    @Query("""
-            SELECT pe FROM ProductEntity pe
-            WHERE pe.user.id != :userId AND pe.endDate > CURRENT_DATE
-            ORDER BY (SELECT COUNT(*) FROM BidEntity be WHERE be.user.id = :userId AND be.product.category.id = pe.category.id) * 10
-                  +  (SELECT CASE WHEN ucp.dateClicked >= :dateTreshold THEN ucp.count * 5 ELSE ucp.count END
-                  FROM UserClickedProducts ucp WHERE ucp.userId = :userId AND ucp.product.category.id = pe.category.id) 
-            DESC LIMIT 3 
-           """)
-    List<ProductEntity> getUserRecommendedProducts(Long userId, LocalDateTime dateTreshold);
+    @Query(value = """
+             SELECT pe.*
+              FROM product pe
+              WHERE pe.user_id <> :userId AND pe.end_date > CURRENT_DATE
+              ORDER BY (
+                SELECT COUNT(*)
+                FROM bid be
+                WHERE be.user_id = :userId AND be.product_category_id = pe.category_id
+              ) * 10
+              + (
+                ucp.count * 10 / ((EXTRACT(year FROM age(CURRENT_DATE, ucp.date_clicked)) * 12) + EXTRACT(month FROM age(CURRENT_DATE, ucp.date_clicked)))
+                FROM user_clicked_products ucp
+                WHERE ucp.user_id = :userId AND ucp.product_category_id = pe.category_id
+              ) DESC
+              LIMIT 3;
+            """, nativeQuery = true)
+    List<ProductEntity> getUserRecommendedProducts(Long userId);
 }

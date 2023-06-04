@@ -1,11 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faSearch, faBell} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {UserContext} from "context/UserContext";
+import NotificationBadge from "react-notification-badge";
+import {Effect} from "react-notification-badge";
 
 function Navbar() {
   const {user, setUser} = useContext(UserContext);
@@ -40,12 +42,20 @@ function Navbar() {
           </div>
           <div className="div-right">
             {user ? (
-              <p className="login-options">
-                {`Hi, ${user.name} ${user.surname}`} &nbsp; &nbsp;{" "}
-                <span className="custom-p-button" onClick={handleLogout}>
-                  Logout
-                </span>
-              </p>
+              <div className="login-options">
+                <div className="icon-wrapper notification-icon">
+                  <FontAwesomeIcon className="fa" icon={faBell}>
+                  </FontAwesomeIcon>
+                  <span className="badge" />
+
+                </div>
+                <p className="login-options">
+                  {`Hi, ${user.name} ${user.surname}`} &nbsp; &nbsp;{" "}
+                  <span className="custom-p-button" onClick={handleLogout}>
+                    Logout
+                  </span>
+                </p>
+              </div>
             ) : (
               <p className="login-options">
                 <Link to="user/login">Login</Link> or{" "}

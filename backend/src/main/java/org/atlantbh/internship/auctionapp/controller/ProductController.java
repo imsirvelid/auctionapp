@@ -7,10 +7,14 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.request.TextMessageDTO;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +25,10 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
+
+    @Autowired
+    SimpMessagingTemplate template;
 
     public ProductController(final ProductService productService) {
         this.productService = productService;
@@ -34,7 +42,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams){
+    public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams) throws Exception {
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
@@ -60,5 +68,33 @@ public class ProductController {
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
     }
+
+    @PostMapping("/send")
+    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
+        //template.convertAndSend("/topic/notifications", textMessageDTO);
+        String username = Jwt.getCurrentUser().getUsername();
+        template.convertAndSendToUser(username, "/queue", textMessageDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /*
+    @SendTo("/topic/notifications")
+    public TextMessageDTO broadcastMessage(@Payload TextMessageDTO textMessageDTO) {
+        Principal user = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        template.convertAndSendToUser(user.getName(), "/reply", textMessageDTO);
+        return textMessageDTO;
+    }
+
+    @MessageMapping("/secured/room")
+    public void sendSpecific(
+            @Payload Message msg,
+            Principal user,
+            @Header("simpSessionId") String sessionId) throws Exception {
+        TextMessageDTO out = new TextMessageDTO(
+                "Da li radi",
+                LocalDateTime.now(),
+                1l);
+        template.convertAndSendToUser("velid", "/secured/user/queue/specific-user", out);
+    }*/
 
 }

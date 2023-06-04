@@ -1,8 +1,6 @@
 package org.atlantbh.internship.auctionapp.service.impl;
 
-import org.atlantbh.internship.auctionapp.entity.BidEntity;
-import org.atlantbh.internship.auctionapp.entity.ProductEntity;
-import org.atlantbh.internship.auctionapp.entity.UserEntity;
+import org.atlantbh.internship.auctionapp.entity.*;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
@@ -12,6 +10,8 @@ import org.atlantbh.internship.auctionapp.request.BidRequest;
 import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.response.ResponseMessage;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
+import org.atlantbh.internship.auctionapp.service.api.NotificationService;
+import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,9 +24,12 @@ public class BidServiceImpl implements BidService {
     private final BidRepository bidRepository;
     private final ProductRepository productRepository;
 
-    public BidServiceImpl(final BidRepository bidRepository, final ProductRepository productRepository) {
+    private final NotificationService notificationService;
+
+    public BidServiceImpl(final BidRepository bidRepository, final ProductRepository productRepository, NotificationService notificationService) {
         this.bidRepository = bidRepository;
         this.productRepository = productRepository;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -51,12 +54,21 @@ public class BidServiceImpl implements BidService {
             return new ResponseMessage(false, "You can no longer bid on this product");
         if (bidRequest.getPrice().compareTo(product.getStartingPrice()) < 0)
             return new ResponseMessage(false, "You can't provide value less than starting price.");
-        BigDecimal currentHighest = bidRepository.findFirst1ByProductIdOrderByPriceDesc(bidRequest.getProductId())
-                .map(BidEntity::getPrice).orElse(product.getStartingPrice());
-        if (bidRequest.getPrice().compareTo(currentHighest) <= 0)
+        BidEntity highestBid = bidRepository.findFirst1ByProductIdOrderByPriceDesc(bidRequest.getProductId())
+                .orElse(null);
+        BigDecimal currentHighest = product.getStartingPrice();
+        if (highestBid != null)
+            currentHighest = highestBid.getPrice();
+        if (highestBid != null && bidRequest.getPrice().compareTo(currentHighest) <= 0)
             return new ResponseMessage(false, "There are higher bids than yours. You could give a second try.");
         BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
+        if (highestBid != null){
+            NotificationEntity notification = new NotificationEntity(UserEntity.fromPersonDetails(Jwt.getCurrentUser()), product, NotificationType.OUTBID,
+                    "You are outbided on product " + product.getName(), LocalDateTime.now(), false);
+            notificationService.sendNotification(notification);
+        }
         bidRepository.save(bidEntity);
+
         return new ResponseMessage(true, "Congrats! You are the highest bidder.");
     }
 }

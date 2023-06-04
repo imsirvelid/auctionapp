@@ -37,6 +37,31 @@
   cursor: pointer;
 }
 
+.login-options {
+  display: flex;
+  height: 100%;
+}
+
+.notification-icon {
+  height: 80%;
+  width: 50px;
+  margin: auto;
+}
+
+.notification-badge {
+  height: 7px;
+  min-width: 7px !important;
+  color: red;
+  width: 7px;
+  
+}
+
+.notification-icon svg {
+  width: 100%;
+  color: white;
+  height: 23px;
+}
+
 .navbar-logo {
   width: 30%;
   font-size: 24px;
@@ -107,4 +132,30 @@
 .selected-route{
   font-weight: bold;
   color: #8367D8 !important;
+}
+
+.icon-wrapper{
+  position:relative;
+  float:left;
+}
+
+
+.fa {
+  position: relative;
+}
+
+.badge {
+  font-size: .25em;
+  
+  display: block;
+  position: absolute;
+  top: -.75em;
+  right: +2em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 0, 0, 0.988);
 }

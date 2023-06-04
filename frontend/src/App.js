@@ -12,64 +12,123 @@ import "./App.css";
 import Login from "pages/login/Login";
 import {UserContext} from "context/UserContext";
 import Register from "pages/register/Register";
-import './api/AxiosInterceptor';
+import "./api/AxiosInterceptor";
 import GuestRoute from "components/protected/GuestRoute";
 import UserProfile from "pages/user-profile/UserProfile";
 import PrivateRoute from "components/protected/PrivateRoute";
+import {Stomp} from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import {NotificationContainer, NotificationManager} from "react-notifications";
+import "../node_modules/react-notifications/lib/notifications.css";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
+  const sockJS = new SockJS("http://localhost:8080/ws-message");
+
+  const stompClient = Stomp.over(() => sockJS);
+
+  const createNotification = (message, type) => {
+    console.log("Napravi notifikciaju: ", type);
+    return () => {
+      switch (type) {
+        case "info":
+          NotificationManager.info(message);
+          break;
+        case "success":
+          NotificationManager.success("Success message", "Title here");
+          break;
+        case "warning":
+          NotificationManager.warning(
+            "Warning message",
+            "Close after 3000ms",
+            3000
+          );
+          break;
+        case "error":
+          NotificationManager.error("Error message", "Click me!", 5000, () => {
+            alert("callback");
+          });
+          break;
+      }
+    };
+  };
+
+  stompClient.connect({}, () => {
+    console.log("Connected");
+    stompClient.subscribe("/user/queue", (message) => {
+      const payload = JSON.parse(message.body);
+      console.log("Received message:", payload);
+      createNotification(payload.message, "info")();
+    });
+    console.log("Here again");
+  });
+
   return (
-    <Router>
-      <UserContext.Provider value={value}>
-        <Navbar />
-        <div className="App">
-          <Routes>
-            <Route path="/" exact element={<Landing />} />
-            <Route path="/" exact element={<h1>Test</h1>} />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/terms-and-conditions"
-              element={<TermsAndConditions />}
-            />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/products/:id" element={<ProductOverview />} />
-            <Route
-              path="/search"
-              element={<Search key={window.location.pathname} />}
-            />
-            <Route
-              path="/user/login"
-              element={
-                <GuestRoute>
-                  <Login />
-                </GuestRoute>
-              }
-            />
-            <Route
-              path="/user/register"
-              element={
-                <GuestRoute>
-                  <Register />
-                </GuestRoute>
-              }
-            />
-            <Route
-              path="/user/profile"
-              element={
-                <PrivateRoute>
-                  <UserProfile />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </div>
-        <Footer />
-      </UserContext.Provider>
-    </Router>
+    <>
+      <NotificationContainer />
+      <Router>
+        <UserContext.Provider value={value}>
+          <Navbar />
+          <div className="App">
+            <Routes>
+              <Route path="/" exact element={<Landing />} />
+              <Route path="/" exact element={<h1>Test</h1>} />
+              <Route path="/about" element={<About />} />
+              <Route
+                path="/terms-and-conditions"
+                element={<TermsAndConditions />}
+              />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/products/:id" element={<ProductOverview />} />
+              <Route
+                path="/search"
+                element={<Search key={window.location.pathname} />}
+              />
+              <Route
+                path="/user/login"
+                element={
+                  <GuestRoute>
+                    <Login />
+                  </GuestRoute>
+                }
+              />
+              <Route
+                path="/user/register"
+                element={
+                  <GuestRoute>
+                    <Register />
+                  </GuestRoute>
+                }
+              />
+              <Route
+                path="/user/profile"
+                element={
+                  <PrivateRoute>
+                    <UserProfile />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </div>
+          <Footer />
+        </UserContext.Provider>
+      </Router>
+    </>
   );
 }
 
 export default App;
+
+/*
+
+<SockJsClient
+        url={"http://localhost:8080/ws-message"}
+        topics={["/secured/user/topic/private"]}
+        onConnect={onConnected}
+        onDisconnect={console.log("Disconnected!")}
+        onMessage={(msg) => onMessageReceived(msg)}
+        debug={false}
+      />
+*/

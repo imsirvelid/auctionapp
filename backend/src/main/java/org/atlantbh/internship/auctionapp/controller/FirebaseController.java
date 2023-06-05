@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.config.ExternalProperties;
 import org.atlantbh.internship.auctionapp.properties.FirebaseProperties;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class FirebaseController {
         this.externalProperties = externalProperties;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<FirebaseProperties> getFirebaseConfiguration() {
         return ResponseEntity.ok(externalProperties.getFirebase());

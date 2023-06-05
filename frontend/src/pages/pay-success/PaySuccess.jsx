@@ -10,7 +10,6 @@ function PaySuccess() {
   const [productBidInfo, setProductBidInfo] = useState();
 
   useEffect(() => {
-    console.log("Evo ovamo");
     const getProduct = async (id) => {
       const res = await getProductById(id);
       setProduct(res);

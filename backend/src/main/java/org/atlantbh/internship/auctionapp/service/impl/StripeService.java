@@ -5,13 +5,13 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.checkout.Session;
-import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.atlantbh.internship.auctionapp.config.ExternalProperties;
 import org.atlantbh.internship.auctionapp.entity.BidEntity;
 import org.atlantbh.internship.auctionapp.entity.CreditCardEntity;
 import org.atlantbh.internship.auctionapp.entity.UserEntity;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
+import org.atlantbh.internship.auctionapp.exception.PaymentException;
 import org.atlantbh.internship.auctionapp.request.CreateCustomerRequest;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -47,35 +46,38 @@ public class StripeService implements PaymentService {
         Stripe.apiKey = externalProperties.getStripe().getStripeSecret();
     }
 
-    public String createPaymentIntent(Long productId) throws StripeException, BadRequestException {
+    public String createPaymentIntent(Long productId) throws PaymentException, BadRequestException {
         BidEntity bid = bidService.getMaxBidPriceForProduct(productId);
         UserEntity user = userService.getById(Jwt.getCurrentUserId());
-        if (user.getStripeId() == null){
-            Customer customer = createCustomer(CreateCustomerRequest.fromUser(user));
-            user.setStripeId(customer.getId());
-            userService.updateUser(user);
+        try {
+            if (user.getStripeId() == null){
+                Customer customer = createCustomer(CreateCustomerRequest.fromUser(user));
+                user.setStripeId(customer.getId());
+                userService.updateUser(user);
+            }
+            SessionCreateParams params =
+                    SessionCreateParams.builder()
+                            .setMode(SessionCreateParams.Mode.PAYMENT)
+                            .setSuccessUrl(successPaymentUrl + productId)
+                            .setCustomer(user.getStripeId())
+                            .addLineItem(
+                                    SessionCreateParams.LineItem.builder()
+                                            .setQuantity(1L)
+                                            .setPriceData(
+                                                    SessionCreateParams.LineItem.PriceData.builder()
+                                                            .setCurrency("usd")
+                                                            .setUnitAmount(bid.getPrice().longValue() * 100L)
+                                                            .setProductData(
+                                                                    SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                                            .setName(bid.getProduct().getName())
+                                                                            .build())
+                                                            .build())
+                                            .build())
+                            .build();
+            return Session.create(params).getUrl();
+        } catch (StripeException e) {
+            throw new PaymentException(e.getMessage());
         }
-        System.out.println("Paymen url is: " + successPaymentUrl);
-        SessionCreateParams params =
-                SessionCreateParams.builder()
-                        .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl(successPaymentUrl + productId)
-                        .setCustomer(user.getStripeId())
-                        .addLineItem(
-                                SessionCreateParams.LineItem.builder()
-                                        .setQuantity(1L)
-                                        .setPriceData(
-                                                SessionCreateParams.LineItem.PriceData.builder()
-                                                        .setCurrency("usd")
-                                                        .setUnitAmount(bid.getPrice().longValue() * 100L)
-                                                        .setProductData(
-                                                                SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                                        .setName(bid.getProduct().getName())
-                                                                        .build())
-                                                        .build())
-                                        .build())
-                        .build();
-        return Session.create(params).getUrl();
     }
 
     public Customer createCustomer(CreateCustomerRequest request) throws StripeException {
@@ -98,23 +100,6 @@ public class StripeService implements PaymentService {
         params.put("type", "card");
         params.put("card", card);
         return PaymentMethod.create(params);
-    }
-
-    @Override
-    public List<PaymentMethod> getUserPaymentMethod(Long userId) throws StripeException, BadRequestException {
-        PaymentMethodListParams params = PaymentMethodListParams
-                .builder()
-                .setCustomer(getUserCustomerId(userId))
-                .setType(PaymentMethodListParams.Type.CARD)
-                .build();
-        List<PaymentMethod> paymentMethods = PaymentMethod.list(params).getData();
-        return paymentMethods;
-    }
-
-    @Override
-    public String getUserCustomerId(Long userId) throws BadRequestException {
-        UserEntity user = userService.getById(userId);
-        return user.getStripeId();
     }
 
 }

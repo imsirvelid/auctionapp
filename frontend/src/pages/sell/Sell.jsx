@@ -2,12 +2,13 @@ import React from "react";
 import AddItem from "components/add-item/AddItem";
 import SetPrices from "components/set-prices/SetPrices";
 import LocationAndShipping from "components/location-and-shipping/LocationAndShipping";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {createProduct, uploadProductImages} from "api/Product";
 import moment from "moment/moment";
 import {updateOrCreateCreditCardInfo} from "api/CreditCard";
 import {updateUserAddress} from "api/User";
 import {useNavigate} from "react-router-dom";
+import { setupFirebaseConfig } from "config/firebase";
 
 function Sell() {
   const [currentStep, setCurrentStep] = useState(2);
@@ -73,6 +74,10 @@ function Sell() {
     await updateUserAddress(shippingInfo);
     navigate("/products/" + createdProduct.id);
   };
+
+  useEffect(() => {
+    setupFirebaseConfig();
+  }, [])
 
   const steps = [
     <AddItem

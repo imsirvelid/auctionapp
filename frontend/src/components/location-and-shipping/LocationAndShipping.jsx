@@ -43,12 +43,12 @@ function LocationAndShipping(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     getAllCountries().then((response) => {
       setAllCountries(response);
     });
+  }, []);
+
+  useEffect(() => {
     getUserCreditCardInfo()
       .then((response) => {
         if (props.creditCardInfo.value) return true;

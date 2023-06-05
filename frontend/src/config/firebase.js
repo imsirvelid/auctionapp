@@ -8,10 +8,9 @@ export let app;
 export let analytics;
 export let storage;
 
-(async () => {
+export const setupFirebaseConfig = async () => {
   const firebaseConfig = await getFirebaseConfig();
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(app);
   storage = getStorage(app);
-})();
-
+};

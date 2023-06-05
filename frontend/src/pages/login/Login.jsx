@@ -7,6 +7,7 @@ import {UserContext} from "context/UserContext";
 import * as Yup from "yup";
 import {useNavigate} from "react-router-dom";
 import { setupFirebaseConfig } from "config/firebase";
+import Button from "components/button/Button";
 
 function Login() {
   const {setUser} = useContext(UserContext);
@@ -100,9 +101,9 @@ function Login() {
                     Remember me
                   </label>
                 </div>
-                <button className="submit-login-form-button" type="submit">
+                <Button className="submit-login-form-button" type="white purple-border" buttonType="submit">
                   LOGIN
-                </button>
+                </Button>
               </Form>
             )}
           </Formik>

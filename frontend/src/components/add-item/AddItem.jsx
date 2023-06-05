@@ -150,9 +150,9 @@ function AddItem(props) {
               />
               <div className="add-item-bottom-buttons">
                 <Button type="white">CANCEL</Button>
-                <button type="submit" className="button purple">
+                <Button buttonType="submit" className="button purple">
                   NEXT
-                </button>
+                </Button>
               </div>
             </Form>
           )}

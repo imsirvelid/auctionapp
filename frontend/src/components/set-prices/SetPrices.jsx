@@ -104,9 +104,9 @@ function SetPrices(props) {
                 <Button type="white">CANCEL</Button>
                 <div className="right-form-buttons">
                   <Button onClick={props.onBack}>BACK</Button>
-                  <button className="button purple" type="submit">
+                  <Button className="button purple" buttonType="submit">
                     NEXT
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Form>

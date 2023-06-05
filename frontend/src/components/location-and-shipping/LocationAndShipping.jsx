@@ -328,9 +328,9 @@ function LocationAndShipping(props) {
                   <Button type="white" onClick={props.onBack}>
                     BACK
                   </Button>
-                  <button type="submit" className="button purple">
+                  <Button type="purple" className="button purple" buttonType="submit">
                     DONE
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Form>

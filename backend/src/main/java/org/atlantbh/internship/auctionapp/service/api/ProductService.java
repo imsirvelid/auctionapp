@@ -6,6 +6,7 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface ProductService {
     SearchProductResponse search(PageParams pageParams, SortParams sortParams, SearchParams searchParams);
     Optional<Product> findById(Long id) throws BadRequestException;
     Product getRandom();
-    List<Product> getRecommendedProducts(Long userId);
+    List<RecommendedProduct> getRecommendedProducts(Long userId);
     List<ProductBidsInfo> getUserActiveProducts(Long userId);
     List<ProductBidsInfo> getUserSoldProducts(Long userId);
 }

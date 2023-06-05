@@ -74,13 +74,13 @@ function Landing() {
           <p className="featured-products-landing-p">Featured Products</p>
         </div>
         <div className="featured-products">
-          {recommendedProducts.map((product) => (
-            <div className="featured-product-item" key={product.id}>
+          {recommendedProducts.map((product, index) => (
+            <div className="featured-product-item" key={index}>
               <ProductGridCard
                 linkTo={`/products/${product.id}`}
-                thumbnailUrl={product.images[0].url}
-                productTitle={product.name}
-                startsFrom={product.startingPrice}
+                thumbnailUrl={product.productThumbnail}
+                productTitle={product.productName}
+                startsFrom={product.productPrice}
                 key={product.id}
               />
             </div>

@@ -8,6 +8,7 @@ import org.atlantbh.internship.auctionapp.entity.UserClickedProducts;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.repository.UserClickedProductsRepository;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
@@ -67,9 +68,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getRecommendedProducts(Long userId) {
-        return productRepository.getUserRecommendedProducts(userId).stream()
-                .map(ProductEntity::toDomainModel).collect(Collectors.toList());
+    public List<RecommendedProduct> getRecommendedProducts(Long userId) {
+        return productRepository.getUserRecommendedProducts(userId);
     }
 
     @Override

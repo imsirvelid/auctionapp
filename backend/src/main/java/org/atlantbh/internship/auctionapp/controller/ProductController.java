@@ -7,6 +7,7 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
@@ -64,7 +65,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/user/recommended")
-    public ResponseEntity<List<Product>> getRecommendedProducts() {
+    public ResponseEntity<List<RecommendedProduct>> getRecommendedProducts() {
         return ResponseEntity.ok(productService.getRecommendedProducts(Jwt.getCurrentUserId()));
     }
 

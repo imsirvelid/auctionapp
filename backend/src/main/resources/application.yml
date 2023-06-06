@@ -15,3 +15,17 @@ spring:
 app:
     jwtSecret: ${TOKEN_SECRET}
     jwtExpiration: 86400000
+    stripeSecret: ${STRIPE_SECRET}
+    successPaymentUrl: "http://localhost:3000/payment/success/"
+
+external:
+    firebase:
+        apiKey: ${FIREBASE_API_KEY}
+        authDomain: auctionapp-bdab8.firebaseapp.com
+        projectId: auctionapp-bdab8
+        storageBucket: auctionapp-bdab8.appspot.com
+        messagingSenderId: 784939104553
+        appId: 1:784939104553:web:c0ec95994284dca21b1f38
+        measurementId: G-2TNKQ0LQWR
+    stripe:
+        stripeSecret: ${STRIPE_SECRET}

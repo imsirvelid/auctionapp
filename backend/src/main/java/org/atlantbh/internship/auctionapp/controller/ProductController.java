@@ -7,14 +7,18 @@ import org.atlantbh.internship.auctionapp.controller.common.SortParams;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
+import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
 import org.atlantbh.internship.auctionapp.request.TextMessageDTO;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +46,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Product>> getProducts(PageParams pageParams, SortParams sortParams) throws Exception {
+    public ResponseEntity<Page<Product>> getProducts(PageParams pageParams, SortParams sortParams){
         return ResponseEntity.ok(productService.getAll(pageParams, sortParams));
     }
 
@@ -59,11 +63,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.getRandom());
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/user/active")
     public ResponseEntity<List<ProductBidsInfo>> getUserActiveProducts(){
         return ResponseEntity.ok(productService.getUserActiveProducts(Jwt.getCurrentUserId()));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/user/sold")
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
@@ -76,5 +82,21 @@ public class ProductController {
         System.out.println("Send to: " + username);
         template.convertAndSendToUser(username, "/queue", textMessageDTO);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(value = "/create")
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) throws BadRequestException{
+        return ResponseEntity.ok(productService.createProduct(request));
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(value = "/pay/{productId}")
+    public ResponseEntity<Product> setPurchased(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.setPurchased(productId));
+    }
+    @GetMapping(value = "/user/recommended")
+    public ResponseEntity<List<RecommendedProduct>> getRecommendedProducts() {
+        return ResponseEntity.ok(productService.getRecommendedProducts(Jwt.getCurrentUserId()));
     }
 }

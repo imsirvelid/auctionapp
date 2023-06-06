@@ -33,14 +33,20 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public ProductBidResponse getProductBidInfo(Long productId) {
-        BigDecimal price = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId).map(p -> p.getPrice()).orElse(null);
         Integer numberOfBids = bidRepository.countByProductId(productId);
-        return new ProductBidResponse(price, numberOfBids);
+        ProductBidResponse productBidresponse = bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId).map(bid -> new ProductBidResponse(bid.getPrice(), numberOfBids, bid.getUser().getId())).orElse(new ProductBidResponse(null, 0, null));
+        return productBidresponse;
     }
 
     @Override
     public List<ProductBidsInfo> getBidsForUser(Long userId) {
         return bidRepository.getUserBids(userId);
+    }
+
+    @Override
+    public BidEntity getMaxBidPriceForProduct(Long productId) throws BadRequestException {
+        return bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId)
+                .orElseThrow(() -> new BadRequestException("There are no bids for product with given ID"));
     }
 
     @Override
@@ -67,7 +73,6 @@ public class BidServiceImpl implements BidService {
             notificationService.sendNotification(notification);
         }
         bidRepository.save(bidEntity);
-
         return new ResponseMessage(true, "Congrats! You are the highest bidder.");
     }
 }

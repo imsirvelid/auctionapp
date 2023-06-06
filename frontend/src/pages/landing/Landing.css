@@ -8,6 +8,17 @@
   max-width: 23%;
 }
 
+.featured-products {
+  width: 100%;
+  display: flex;
+  gap: 5%;
+}
+
+.featured-product-item {
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
 .main-content-landing {
   display: flex;
   flex: 0 0 250px;
@@ -61,4 +72,11 @@
 a {
   text-decoration: none;
   color: unset;
+}
+
+.featured-products-landing-p {
+  font-size: 28px;
+  color: #252525;
+  margin: 12px 0;
+  letter-spacing: 0.98px;
 }

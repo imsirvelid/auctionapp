@@ -12,6 +12,25 @@ code {
   font-family: "Lato";
 }
 
+.successfull-pay-text {
+  text-align: center;
+  font-size: 24px;
+  color: #9b9b9b;
+  letter-spacing: 0.49px;
+}
+
+.successfull-pay-img {
+  display: block;
+  margin: auto;
+  margin-top: 41px;
+  width: 480px;
+
+}
+
 .product-link {
   width: 100%;
+}
+
+button:hover {
+  cursor: pointer;
 }

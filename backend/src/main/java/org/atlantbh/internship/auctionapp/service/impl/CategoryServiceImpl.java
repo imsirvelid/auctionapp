@@ -22,4 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getParentCategories() {
         return categoryRepository.findAllByParentCategoryIsNull().stream().map(CategoryEntity::toDomainModel).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Category> getSubCategories(Long parentCategoryId) {
+        return categoryRepository.findAllByParentCategoryId(parentCategoryId).stream().map(CategoryEntity::toDomainModel).collect(Collectors.toList());
+    }
 }

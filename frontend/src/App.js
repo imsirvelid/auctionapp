@@ -15,12 +15,15 @@ import Register from "pages/register/Register";
 import "./api/AxiosInterceptor";
 import GuestRoute from "components/protected/GuestRoute";
 import UserProfile from "pages/user-profile/UserProfile";
+import "./api/AxiosInterceptor";
 import PrivateRoute from "components/protected/PrivateRoute";
 import {Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "../node_modules/react-notifications/lib/notifications.css";
 import Notifications from "pages/notifications/Notifications";
+import Sell from "pages/sell/Sell";
+import PaySuccess from "pages/pay-success/PaySuccess";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -113,6 +116,15 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route
+              path="/user/sell"
+              element={
+                <PrivateRoute>
+                  <Sell />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/payment/success/:id" element={<PaySuccess />} />
               <Route
                 path="/user/notifications"
                 element={

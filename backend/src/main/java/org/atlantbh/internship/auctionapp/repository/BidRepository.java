@@ -20,6 +20,7 @@ public interface BidRepository extends CrudRepository<BidEntity, Long> {
             FROM ProductEntity pe, ImageEntity img, BidEntity b
             WHERE pe.id = img.product.id and img.featured = true and b.user.id = :userId and b.product.id = pe.id
               and b.price = (SELECT MAX(bid.price) FROM BidEntity bid WHERE bid.user.id = :userId and bid.product.id = pe.id)
+            ORDER BY b.created DESC
             """)
     List<ProductBidsInfo> getUserBids(Long userId);
 }

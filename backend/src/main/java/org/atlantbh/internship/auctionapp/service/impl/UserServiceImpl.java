@@ -3,10 +3,12 @@ package org.atlantbh.internship.auctionapp.service.impl;
 import org.atlantbh.internship.auctionapp.entity.Role;
 import org.atlantbh.internship.auctionapp.entity.UserEntity;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
+import org.atlantbh.internship.auctionapp.model.PersonDetails;
 import org.atlantbh.internship.auctionapp.model.User;
 import org.atlantbh.internship.auctionapp.repository.UserRepository;
 import org.atlantbh.internship.auctionapp.request.LoginRequest;
 import org.atlantbh.internship.auctionapp.request.RegisterRequest;
+import org.atlantbh.internship.auctionapp.request.UserContactInfoRequest;
 import org.atlantbh.internship.auctionapp.response.AuthResponse;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
@@ -74,5 +76,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {
         return userRepository.findByEmail(email).map(UserEntity::toDomainModel).orElse(null);
+    }
+
+    @Override
+    public User updateContactInfo(UserContactInfoRequest request) {
+        PersonDetails person = Jwt.getCurrentUser();
+        UserEntity user = userRepository.findById(person.getId()).get();
+        user.setAddress(request.getAddress());
+        user.setPhone(request.getPhone());
+        user.setCountry(request.getCountry());
+        user.setCity(request.getCity());
+        user.setZipCode(request.getZipCode());
+        user = userRepository.save(user);
+        return user.toDomainModel();
+    }
+
+    @Override
+    public UserEntity getById(Long userId) throws BadRequestException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new BadRequestException("User with given ID does not exist"));
+    }
+
+    @Override
+    public UserEntity updateUser(UserEntity user) {
+        user = userRepository.save(user);
+        return user;
     }
 }

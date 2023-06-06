@@ -2,6 +2,7 @@ package org.atlantbh.internship.auctionapp.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,17 +29,23 @@ public class ImageEntity {
     @Column(name = "url")
     private String url;
 
-    @NotBlank
+    @NotNull
     @Column(name = "featured")
-    private Boolean featured;
+    private boolean featured;
 
     @Override
     public String toString(){
-        return featured.toString();
+        return url;
     }
 
     public Image toDomainModel(){
         return new Image(this.id, this.url, this.featured, this.product.toDomainModel());
+    }
+
+    public ImageEntity(ProductEntity product, String url, boolean featured) {
+        this.product = product;
+        this.url = url;
+        this.featured = featured;
     }
 
     public static ImageEntity fromDomainModel(final Image image){

@@ -6,6 +6,7 @@ import NavigationCard from "components/navigation-card/NavigationCard";
 import {registerUser} from "api/User";
 import {UserContext} from "context/UserContext";
 import {Link, useNavigate} from "react-router-dom";
+import Button from "components/button/Button";
 
 function Register() {
   const {setUser} = useContext(UserContext);
@@ -120,9 +121,10 @@ function Register() {
                   component="div"
                   className="formik-error-message"
                 />
-                <button className="submit-register-form-button" type="submit">
+                <div className="empty-div"></div>
+                <Button className="submit-register-form-button" type="white purple-border" buttonType="submit">
                   REGISTER
-                </button>
+                </Button>
               </Form>
             )}
           </Formik>

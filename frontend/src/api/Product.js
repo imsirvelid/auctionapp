@@ -1,5 +1,7 @@
 import axios from "axios";
 import {BASE_URL, PAGE_SIZE} from "./Commons";
+import { storage } from "config/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const URL = BASE_URL + "/products";
 
@@ -49,14 +51,47 @@ export const searchProducts = async (
     },
   });
   return fetchData.data;
-} 
+};
 
-export const getActiveUserProducts = async() => {
+export const getActiveUserProducts = async () => {
   const fetchData = await axios.get(URL + "/user/active");
   return fetchData.data;
+};
+
+export const getSoldUserProducts = async () => {
+  const fetchData = await axios.get(URL + "/user/sold");
+  return fetchData.data;
+};
+
+export const createProduct = async (request) => {
+  const fetchData = await axios.post(URL + "/create", request);
+  return fetchData.data;
+};
+
+export const uploadProductImages = async (files) => {
+  return uploadImages(files);
 }
 
-export const getSoldUserProducts = async() => {
-  const fetchData = await axios.get(URL + "/user/sold");
+async function uploadImage(image) {
+  const storageRef = ref(storage, `/products/${Date.now()}-${image.name}`);
+
+  const response = await uploadBytes(storageRef, image);
+  const url = await getDownloadURL(response.ref);
+  return url;
+}
+
+export default async function uploadImages(images) {
+  const imagePromises = Array.from(images, (image) => uploadImage(image));
+
+  const imageRes = await Promise.all(imagePromises);
+  return imageRes;
+}
+
+export const setPurchasedProduct = async (productId) => {
+  const fetchData = await axios.post(URL + "/pay/" + productId);
+  return fetchData.data;
+};
+export const getRecommendedProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/recommended");
   return fetchData.data;
 }

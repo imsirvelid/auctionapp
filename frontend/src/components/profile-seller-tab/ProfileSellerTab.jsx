@@ -43,7 +43,6 @@ function ProfileSellerTab() {
           <table>
           <thead>
             <tr className="gray-heading">
-            <th></th>
               <th>Item</th>
               <th>Name</th>
               <th>Time left</th>
@@ -55,7 +54,6 @@ function ProfileSellerTab() {
             <tbody>
           {products.map((product) => (
             <tr key = {product.productId}>
-            <td></td>
               <td>
                 <img
                   className="bids-table-img"

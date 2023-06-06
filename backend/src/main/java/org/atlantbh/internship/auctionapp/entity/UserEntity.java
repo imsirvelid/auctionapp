@@ -41,6 +41,9 @@ public class UserEntity {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "zip_code")
+    private Integer zipCode;
+
     @Column(name = "country")
     private String country;
 
@@ -53,6 +56,8 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String stripeId;
+
     public UserEntity(String name, String surname,
                       String email,String password, Role role) {
         this.name = name;
@@ -63,7 +68,7 @@ public class UserEntity {
     }
 
     public User toDomainModel() {
-        return new User(id, name, surname, email, address, phone, city, country, imageUrl, password, role);
+        return new User(id, name, surname, email, address, phone, city, zipCode, country, imageUrl, password, role, stripeId);
     }
 
     public static UserEntity fromDomainModel(final User user){
@@ -78,7 +83,9 @@ public class UserEntity {
         userEntity.setCountry(user.getCountry());
         userEntity.setImageUrl(user.getImageUrl());
         userEntity.setPassword(user.getPassword());
+        userEntity.setZipCode(user.getZipCode());
         userEntity.setRole(user.getRole());
+        userEntity.setStripeId(user.getStripeId());
         return userEntity;
     }
 

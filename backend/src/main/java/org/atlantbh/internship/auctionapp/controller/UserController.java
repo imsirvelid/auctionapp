@@ -26,6 +26,6 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/address")
     public ResponseEntity<User> updateContactInfo(@RequestBody UserContactInfoRequest request) throws BadRequestException {
-        return ResponseEntity.ok(userService.updateAddress(request));
+        return ResponseEntity.ok(userService.updateContactInfo(request));
     }
 }

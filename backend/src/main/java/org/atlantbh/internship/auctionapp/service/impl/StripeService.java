@@ -53,7 +53,7 @@ public class StripeService implements PaymentService {
             if (user.getStripeId() == null){
                 Customer customer = createCustomer(CreateCustomerRequest.fromUser(user));
                 user.setStripeId(customer.getId());
-                userService.updateContactInfo(user);
+                userService.updateUser(user);
             }
             SessionCreateParams params =
                     SessionCreateParams.builder()

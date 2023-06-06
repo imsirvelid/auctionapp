@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateAddress(UserContactInfoRequest request) {
+    public User updateContactInfo(UserContactInfoRequest request) {
         PersonDetails person = Jwt.getCurrentUser();
         UserEntity user = userRepository.findById(person.getId()).get();
         user.setAddress(request.getAddress());
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity updateContactInfo(UserEntity user) {
+    public UserEntity updateUser(UserEntity user) {
         user = userRepository.save(user);
         return user;
     }

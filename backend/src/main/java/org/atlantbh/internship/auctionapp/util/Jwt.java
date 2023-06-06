@@ -14,6 +14,7 @@ import java.util.Date;
 @Component
 public class Jwt {
     private static final Logger logger = LoggerFactory.getLogger(Jwt.class);
+
     @Value("${app.jwtSecret}")
     private String jwtSecret;
     @Value("${app.jwtExpiration}")
@@ -34,6 +35,11 @@ public class Jwt {
 
     public String getEmailFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public static PersonDetails getCurrentUser() {
+        PersonDetails userPrincipal = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userPrincipal;
     }
 
     public static Long getCurrentUserId() {

@@ -26,7 +26,7 @@ public class CreateProductRequest {
     private Long categoryId;
 
     @NotBlank(message = "Description can't be empty")
-    @Size(max = 320, message = "Description can't be longer than 700 characters")
+    @Size(max = 700, message = "Description can't be longer than 700 characters")
     private String description;
 
     @NotBlank(message = "Starting price can't be empty")

@@ -36,14 +36,14 @@ function UserProfile() {
               index === currentTab && "selected-profile-button"
             }`}
             key={index}
-            onClick={(e) => setCurrentTab(index)}
+            onClick={() => setCurrentTab(index)}
           >
             <FontAwesomeIcon icon={tab.icon} /> &nbsp;
             {tab.name}
           </button>
         ))}
         <button className="profile-tab-button right"><Link to={"/user/sell"}><FontAwesomeIcon icon={faPlus} /> ADD ITEM</Link></button>
-        <div className="profile-tab-component"></div>
+        <div className="profile-tab-component" />
         {tabs[currentTab].component}
       </div>
     </>

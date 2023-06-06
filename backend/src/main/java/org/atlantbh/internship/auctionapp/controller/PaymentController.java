@@ -1,32 +1,30 @@
 package org.atlantbh.internship.auctionapp.controller;
 
-import com.stripe.exception.StripeException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
-import org.atlantbh.internship.auctionapp.service.api.StripeService;
-import org.atlantbh.internship.auctionapp.service.impl.StripeServiceImpl;
-import org.atlantbh.internship.auctionapp.util.Jwt;
+import org.atlantbh.internship.auctionapp.exception.PaymentException;
+import org.atlantbh.internship.auctionapp.service.api.PaymentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Payment", description = "Payment APIs")
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
 
-    final private StripeService stripeService;
+    private final PaymentService paymentService;
 
-    public PaymentController(StripeServiceImpl stripeService) {
-        this.stripeService = stripeService;
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create-payment-intent")
-    public ResponseEntity<?> createPaymentIntent(@RequestBody Long productId) throws StripeException, BadRequestException {
-        return ResponseEntity.ok(stripeService.createPaymentIntent(productId));
-    }
-
-    @GetMapping("/user/payment-methods")
-    public ResponseEntity<?> getUserPaymentMethods() throws StripeException, BadRequestException {
-        return ResponseEntity.ok(stripeService.getUserPaymentMethod(Jwt.getCurrentUserId()));
+    public ResponseEntity<String> createPaymentIntent(@RequestBody Long productId) throws PaymentException, BadRequestException {
+        return ResponseEntity.ok(paymentService.createPaymentIntent(productId));
     }
 }

@@ -142,7 +142,7 @@ function AddItem(props) {
                 component="div"
                 className="formik-error-message"
               />
-              <DragAndDrop files={props.files} featured={{value: props.featured.value, set: props.featured.set}}/>
+              <DragAndDrop files={props.files} minImages={3} featured={{value: props.featured.value, set: props.featured.set}}/>
               <ErrorMessage
                 name="files"
                 component="div"
@@ -150,9 +150,9 @@ function AddItem(props) {
               />
               <div className="add-item-bottom-buttons">
                 <Button type="white">CANCEL</Button>
-                <button type="submit" className="button purple">
+                <Button buttonType="submit" className="button purple">
                   NEXT
-                </button>
+                </Button>
               </div>
             </Form>
           )}

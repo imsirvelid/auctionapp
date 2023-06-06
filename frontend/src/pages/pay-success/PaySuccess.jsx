@@ -13,13 +13,6 @@ function PaySuccess() {
     const getProduct = async (id) => {
       const res = await getProductById(id);
       setProduct(res);
-      if (res && res.purchased !== true) {
-        setPurchasedProduct(params.id).then(response => {
-          console.log(response);
-        }).catch(error => {
-          console.log(error);
-        });
-      }
     };
     const getProductBid = async (id) => {
       const res = await getProductBidInfo(id);
@@ -27,7 +20,10 @@ function PaySuccess() {
     };
     getProduct(params.id);
     getProductBid(params.id);
-  }, []);
+    if (product && product.purchased !== true) {
+      setPurchasedProduct(params.id);
+    }
+  });
 
   return (
     <div className="container">
@@ -38,7 +34,7 @@ function PaySuccess() {
             <span className="purple-text">{product.name}</span> for $
             {productBidInfo.highestBid}
           </h1>
-          <img className="successfull-pay-img" src={product.images[0].url}></img>
+          <img alt="product" className="successfull-pay-img" src={product.images[0].url} />
         </>
       )}
     </div>

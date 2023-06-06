@@ -2,6 +2,7 @@ package org.atlantbh.internship.auctionapp.repository;
 
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -58,4 +59,22 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, P
             WHERE pe.id = img.product.id and img.featured = true and pe.user.id = :userId and pe.endDate < CURRENT_DATE
             """)
     List<ProductBidsInfo> getUserSoldProducts(Long userId);
+
+    @Query(value = """
+             SELECT pe.name as productName, img.url as productThumbnail, pe.starting_price as productPrice
+              FROM product pe, image img 
+              WHERE pe.id = img.product_id AND img.featured = true AND pe.user_id <> :userId AND pe.end_date > CURRENT_DATE
+              ORDER BY (
+                SELECT COUNT(*)
+                FROM bid be, product p1
+                WHERE be.user_id = :userId AND be.product_id = p1.id AND p1.category_id = pe.category_id
+              ) * 10
+              + (SELECT
+                ucp.count * 10 / ((EXTRACT(year FROM age(CURRENT_DATE, ucp.date_clicked)) * 12) + EXTRACT(month FROM age(CURRENT_DATE, ucp.date_clicked)) + 1)
+                FROM user_clicked_products ucp, product p1
+                WHERE ucp.user_id = :userId AND ucp.product_id = p1.id AND p1.category_id = pe.category_id
+              ) DESC
+              LIMIT 3;
+            """, nativeQuery = true)
+    List<RecommendedProduct> getUserRecommendedProducts(Long userId);
 }

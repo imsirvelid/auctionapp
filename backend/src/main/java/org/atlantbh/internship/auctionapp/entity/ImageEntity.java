@@ -31,18 +31,18 @@ public class ImageEntity {
 
     @NotNull
     @Column(name = "featured")
-    private Boolean featured;
+    private boolean featured;
 
     @Override
     public String toString(){
-        return featured.toString();
+        return url;
     }
 
     public Image toDomainModel(){
         return new Image(this.id, this.url, this.featured, this.product.toDomainModel());
     }
 
-    public ImageEntity(ProductEntity product, String url, Boolean featured) {
+    public ImageEntity(ProductEntity product, String url, boolean featured) {
         this.product = product;
         this.url = url;
         this.featured = featured;

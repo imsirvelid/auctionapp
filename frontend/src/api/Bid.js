@@ -10,15 +10,11 @@ export const getProductBidInfo = async (productId) => {
 };
 
 export const getBidsForUser = async () => {
-  const fetchData = await axios.get(URL + "/user", {
-    headers: {Authorization: "Bearer " + localStorage.getItem("token")},
-  });
+  const fetchData = await axios.get(URL + "/user");
   return fetchData.data;
 };
 
 export const bid = async (bidRequest) => {
-  const response = await axios.post(URL + "/bid", bidRequest, {
-    headers: { Authorization: "Bearer " + localStorage.getItem("token")},
-  });
+  const response = await axios.post(URL + "/bid", bidRequest);
   return response.data;
-}
+};

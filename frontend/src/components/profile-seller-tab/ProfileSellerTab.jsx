@@ -16,22 +16,13 @@ function ProfileSellerTab() {
   useEffect(() => {
     const getProducts = async () => {
       let res = []
-      if (currentTab === 0) res = await getActiveUserProducts();
+      if (!currentTab) res = await getActiveUserProducts();
       else res = await getSoldUserProducts();
       setProducts(res);
     };
     getProducts();
   }, [currentTab]);
-  const tabs = [
-    {
-      name: "Active",
-      component: "",
-    },
-    {
-      name: "Sold",
-      component: "",
-    },
-  ];
+  const tabs = ["Acitve", "Sold"];
   return (
     <>
       <div>
@@ -41,59 +32,48 @@ function ProfileSellerTab() {
               index === currentTab && "selected-profile-button"
             }`}
             key={index}
-            onClick={(e) => setCurrentTab(index)}
+            onClick={() => setCurrentTab(index)}
           >
-            {tab.name}
+            {tab}
           </button>
         ))}
         {tabs[currentTab].component}
         <div className="profile-bids-table">
-          <div className="gray-heading">
-            <div className="bids-table-item">Item</div>
-            <div className="bids-table-name">Name</div>
-            <div className="bids-table-left">Time Left</div>
-            <div className="bids-table-price">Your Price</div>
-            <div className="bids-table-bids">No. Bids</div>
-            <div className="bids-table-highest">Highest Bid</div>
-            <div className="bids-table-empty"></div>
-          </div>
-          {products.length !== 0 ? (
-            products.map((bid, index) => (
-              <div className="bids-table-row" key={index}>
-                <div className="bids-table-item">
-                  <img
-                    className="bids-table-img"
-                    alt="Item"
-                    src={bid.productThumbnail}
-                  />
-                </div>
-                <div className="bids-table-name">
-                  <p className="bold">{bid.productName}</p>
-                  <p className="purple-id">#{bid.productId}</p>
-                </div>
-                <div className="bids-table-left">
-                  {getDateDiffernece(moment(), bid.endDate)}
-                </div>
-                <div
-                  className={`bids-table-price ${
-                    bid.myPrice === bid.highestPrice && "green-bold"
-                  }`}
-                >
-                  ${Number(bid.myPrice)}
-                </div>
-                <div className="bids-table-bids">{Number(bid.numberOfBids)}</div>
-                <div
-                  className={`bids-table-price`}
-                >
-                  ${Number(bid.highestPrice)}
-                </div>
-                <div className="bids-table-empty">
-                  <Button type="white">
-                    <Link to={`/products/${bid.productId}`}>VIEW</Link>
-                  </Button>
-                </div>
-              </div>
-            ))
+        {products.length !== 0 ? (
+          <table>
+          <thead>
+            <tr className="gray-heading">
+              <th>Item</th>
+              <th>Name</th>
+              <th>Time left</th>
+              <th>Your price</th>
+              <th>No. Bids</th>
+              <th>Highest Bid</th>
+            </tr>
+            </thead>
+            <tbody>
+          {products.map((product) => (
+            <tr key = {product.productId}>
+              <td>
+                <img
+                  className="bids-table-img"
+                  alt="Item"
+                  src={product.productThumbnail}
+                />
+              </td>
+              <td>
+                <p className="bold">{product.productName}</p>
+                <p className="purple-id">#{product.productId}</p>
+              </td>
+              <td>{getDateDiffernece(moment(), product.endDate)}</td>
+              <td>${product.myPrice}</td>
+              <td>{product.numberOfBids}</td>
+              <td>{product.numberOfBids !== 0 ? "$" + product.highestPrice : "/"}</td>
+              <td><Button type="white"><Link to={`/products/${product.productId}`}>VIEW</Link></Button></td>
+            </tr>
+          ))}
+          </tbody>
+          </table>
           ) : (
             <div className="empty-table-bids">
               <FontAwesomeIcon

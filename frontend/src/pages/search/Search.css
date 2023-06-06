@@ -76,3 +76,8 @@
   letter-spacing: 0.56px;
   padding: 21px;
 }
+
+.search-loader-div {
+  width: 121px;
+  margin: 0 auto;
+}

@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import "./SetPrices.css";
 import Button from "components/button/Button";
 
 function SetPrices(props) {
-  const [errorMessage, setErrorMessage] = useState("");
 
   const digitsOnly = (value) => /^\d+(\.\d+)?$/.test(value);
 
@@ -23,7 +22,7 @@ function SetPrices(props) {
     endDate: Yup.date().required("Required"),
   });
 
-  const setPricesSubmit = (values) => {
+  const setPricesSubmit = () => {
     props.onNext();
   };
 
@@ -31,7 +30,6 @@ function SetPrices(props) {
     <div className="container-55">
       <div className="form-container">
         <h2 className="form-title"> SET PRICES </h2>
-        {errorMessage && <p className="login-error-message">{errorMessage}</p>}
         <Formik
           enableReinitialize
           initialValues={{
@@ -106,9 +104,9 @@ function SetPrices(props) {
                 <Button type="white">CANCEL</Button>
                 <div className="right-form-buttons">
                   <Button onClick={props.onBack}>BACK</Button>
-                  <button className="button purple" type="submit">
+                  <Button className="button purple" buttonType="submit">
                     NEXT
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Form>

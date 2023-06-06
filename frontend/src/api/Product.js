@@ -90,4 +90,8 @@ export default async function uploadImages(images) {
 export const setPurchasedProduct = async (productId) => {
   const fetchData = await axios.post(URL + "/pay/" + productId);
   return fetchData.data;
+};
+export const getRecommendedProducts = async() => {
+  const fetchData = await axios.get(URL + "/user/recommended");
+  return fetchData.data;
 }

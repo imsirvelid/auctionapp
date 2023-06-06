@@ -3,7 +3,7 @@ package org.atlantbh.internship.auctionapp.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.atlantbh.internship.auctionapp.exception.BadRequestException;
 import org.atlantbh.internship.auctionapp.model.User;
-import org.atlantbh.internship.auctionapp.request.UserAddressRequest;
+import org.atlantbh.internship.auctionapp.request.UserContactInfoRequest;
 import org.atlantbh.internship.auctionapp.service.api.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +25,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/address")
-    public ResponseEntity<User> updateAddress(@RequestBody UserAddressRequest request) throws BadRequestException {
-        return ResponseEntity.ok(userService.updateAddress(request));
+    public ResponseEntity<User> updateContactInfo(@RequestBody UserContactInfoRequest request) throws BadRequestException {
+        return ResponseEntity.ok(userService.updateContactInfo(request));
     }
 }

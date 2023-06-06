@@ -4,9 +4,9 @@ import Button from "components/button/Button";
 import ProductGridCard from "components/product-grid-card/ProductGridCard";
 import React, {useState, useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
-import {Formik, Form, Field, ErrorMessage} from "formik";
 import "./Search.css";
 import CustomSelect from "components/custom-select/CustomSelect";
+import Loader from "components/loader/Loader";
 
 function Search() {
   const [categories, setCategories] = useState([]);
@@ -16,6 +16,7 @@ function Search() {
   const [name, setName] = useState("");
   const [categoryId, setCategory] = useState();
   const [didYouMean, setDidYouMean] = useState();
+  const [loader, setLoader] = useState(true);
   const location = useLocation();
   const [sorting, setSorting] = useState(0);
 
@@ -54,6 +55,8 @@ function Search() {
   };
 
   useEffect(() => {
+    setProducts([]);
+    setLoader(true);
     const params = new URLSearchParams(location.search);
     setNextPage(1);
     setName(params.get("name"));
@@ -75,12 +78,14 @@ function Search() {
       setProducts(res.page.content);
       setDidYouMean(res.didYouMeanSuggestion);
       setHasMore(!res.page.last);
+      setLoader(false);
     };
     if (categories.length === 0) getCategories();
     getProducts();
   }, [location, categories.length]);
 
   const exploreMore = async () => {
+    setLoader(true);
     const res = await searchProducts(
       nextPage,
       "created",
@@ -93,6 +98,7 @@ function Search() {
     setProducts([...products, ...res.page.content]);
     setDidYouMean(res.didYouMeanSuggestion);
     setHasMore(!res.page.last);
+    setLoader(false);
   };
 
   return (
@@ -132,7 +138,7 @@ function Search() {
                 </Link>
               ))}
             </div>
-            <div className="empty-div"></div>
+            <div className="empty-div" />
           </div>
           <div className="right-search-content">
             {!didYouMean && <div className="search-sorting-select">
@@ -142,7 +148,7 @@ function Search() {
               ></CustomSelect>
             </div>}
             <div className="search-products-grid">
-              {products.length > 0 ? (
+              { products.length > 0 ? (
                 products.map((product) => (
                   <div className="search-product-item" key={product.id}>
                     <ProductGridCard
@@ -157,7 +163,14 @@ function Search() {
                 <p>No products found</p>
               )}
             </div>
-            {hasMore && (
+            <div className="search-loader-div">
+            <Loader
+              visible={loader}
+              height="121"
+              width="121"
+            />
+            </div>
+            {!loader && hasMore && (
               <Button type="explore-more-btn purple" onClick={exploreMore}>
                 EXPLORE MORE
               </Button>

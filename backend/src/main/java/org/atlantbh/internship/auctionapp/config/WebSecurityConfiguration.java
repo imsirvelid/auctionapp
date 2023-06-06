@@ -68,7 +68,7 @@ public class WebSecurityConfiguration {
                 .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and()
                 .authorizeHttpRequests()
-                .requestMatchers("/payment/**", "/creditcard/**", "/user/**")
+                .requestMatchers("/payment/**", "/creditcard/**", "/user/**", "/products/user/**", "/products/create", "/products/pay/**", "/firebase")
                 .authenticated()
                 .anyRequest().permitAll()
                 .and()

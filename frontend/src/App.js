@@ -36,11 +36,11 @@ function App() {
     console.log("Napravi notifikciaju: ", type);
     return () => {
       switch (type) {
-        case "info":
+        case "INFO":
           NotificationManager.info(message);
           break;
-        case "success":
-          NotificationManager.success("Success message", "Title here");
+        case "SUCCESS":
+          NotificationManager.success(message, "You won");
           break;
         case "warning":
           NotificationManager.warning(
@@ -63,7 +63,7 @@ function App() {
     stompClient.subscribe("/user/queue", (message) => {
       const payload = JSON.parse(message.body);
       console.log("Received message:", payload);
-      createNotification(payload.message, "info")();
+      createNotification(payload.message, "INFO")();
     });
     console.log("Here again");
   });

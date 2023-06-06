@@ -40,7 +40,7 @@ function Notifications() {
   return (
     <div className='container'>
       { notifications.map(notification => (
-          <NotificationCard key={notification.id} icon = {notification.image} message = {notification.message} date = {notification.receivedTime} />
+          <NotificationCard data={notification} />
       ))}
     </div>
   )

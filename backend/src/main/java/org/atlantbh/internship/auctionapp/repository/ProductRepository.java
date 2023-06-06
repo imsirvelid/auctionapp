@@ -2,6 +2,7 @@ package org.atlantbh.internship.auctionapp.repository;
 
 import org.atlantbh.internship.auctionapp.entity.ProductEntity;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
+import org.atlantbh.internship.auctionapp.projection.ProductHighestBid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -56,4 +57,12 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
             WHERE pe.id = img.product.id and img.featured = true and pe.user.id = :userId and pe.endDate < CURRENT_DATE
             """)
     List<ProductBidsInfo> getUserSoldProducts(Long userId);
+
+    @Query("""
+            SELECT pe as product, be as bid FROM ProductEntity pe, BidEntity be
+            WHERE be.product.id = pe.id AND be.price = (SELECT MAX(be1.price) FROM BidEntity be1 WHERE be1.product.id = pe.id) AND 
+            pe.endDate <= CURRENT_DATE AND 
+            NOT EXISTS (SELECT ne FROM NotificationEntity ne WHERE pe.id = ne.product.id AND ne.type = 'SUCCESS')
+            """)
+    List<ProductHighestBid> getEndedProductsWithoutNotification();
 }

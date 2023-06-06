@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "./Notification.css";
 import notificationIcon from "assets/img/icons8-notification-96.png";
 import Notifications from "react-notifications-menu";
-import {getUserUnreadNotifications} from "api/Notifications";
+import {deleteUserNotification, getUserUnreadNotifications, setNotificationAsReaded} from "api/Notifications";
 import {NotificationManager, NotificationContainer} from "react-notifications";
 import {Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -18,9 +19,13 @@ const images = [
 
 function Notification() {
   const [notifications, setNotifications] = useState([]);
+  const navigate = useNavigate();
+
+  const viewAll = () => {
+    navigate("/user/notifications");
+  }
 
   const getIconByKey = (key) => {
-    console.log(infoIcon);
     const icon = images.find((item) => item.key === key);
     if (key === "INFO")
       return icon.image.infoIcon;
@@ -65,6 +70,9 @@ function Notification() {
         return {
           id: notification.id,
           image: getIconByKey(notification.type),
+          userId: notification.user.id,
+          productId: notification.product.id,
+          type: notification.type,
           message: notification.message,
           receivedTime: moment(notification.date).format("DD-MM-YYYY"),
         };
@@ -73,17 +81,29 @@ function Notification() {
     });
   }, []);
 
+  const markNotification = (notificationId) => {
+    setNotifications(notifications.filter(notification => notification.id !== notificationId));
+    setNotificationAsReaded(notificationId);
+  }
+
+  const deleteNotification = (notificationId) => {
+    setNotifications(notifications.filter(notification => notification.id !== notificationId));
+    deleteUserNotification(notificationId);
+  }
+
   return (
     <>
     <Notifications
       data={notifications}
       icon={notificationIcon}
       notificationCard={NotificationCard}
+      checkFunction={markNotification}
+      trashFunction={deleteNotification}
       header={{
         title: "Notifications",
         option: {
           text: "View All",
-          onClick: () => console.log("Clicked"),
+          onClick: () => viewAll(),
         },
       }}
       markAsRead={(data) => {

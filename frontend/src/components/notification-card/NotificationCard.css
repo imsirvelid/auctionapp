@@ -2,12 +2,17 @@
   display: flex;
   margin: auto;
   color: black;
-  height: 60px;
+  margin-top: 11px;
+  height: 70px;
 }
 
 .notification-card:hover {
   cursor: pointer;
   opacity: 0.87;
+}
+
+.notification-card-sub {
+  width: 60%;
 }
 
 .notification-card img {
@@ -19,7 +24,7 @@
   color: gray !important;
 }
 
-.notification-message {
+.notification-card-sub .notification-message {
   color: #8367d8 !important;
 }
 

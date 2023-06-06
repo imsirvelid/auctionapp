@@ -17,3 +17,8 @@ export const setNotificationAsReaded = async (id) => {
   const fetchData = await axios.post(URL + "/read/" + id);
   return fetchData.data;
 }
+
+export const deleteUserNotification = async (id) => {
+  const fetchData = await axios.post(URL + "/delete/" + id);
+  return fetchData.data;
+}

@@ -11,7 +11,6 @@ import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.response.ResponseMessage;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.atlantbh.internship.auctionapp.service.api.NotificationService;
-import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -63,7 +62,7 @@ public class BidServiceImpl implements BidService {
             return new ResponseMessage(false, "There are higher bids than yours. You could give a second try.");
         BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
         if (highestBid != null){
-            NotificationEntity notification = new NotificationEntity(UserEntity.fromPersonDetails(Jwt.getCurrentUser()), product, NotificationType.INFO,
+            NotificationEntity notification = new NotificationEntity(highestBid.getUser(), product, NotificationType.INFO,
                     "You are outbided on product " + product.getName() + "($" + bidRequest.getPrice() + ")", LocalDateTime.now(), false);
             notificationService.sendNotification(notification);
         }

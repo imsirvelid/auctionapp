@@ -34,4 +34,10 @@ public class NotificationController {
     public ResponseEntity<Notification> setUserNotificationAsRead(@PathVariable Long id) {
         return ResponseEntity.ok(notificationService.setNotificationAsRead(id));
     }
+
+    @PostMapping(value = "/delete/{id}")
+    public ResponseEntity<String> deleteUserNotification(@PathVariable Long id){
+        notificationService.deleteUserNotification(id);
+        return ResponseEntity.ok("Notification deleted successfully");
+    }
 }

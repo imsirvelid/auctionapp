@@ -33,7 +33,7 @@ function NewArrivals() {
       dataLength={productList.length}
       next={fetchData}
       hasMore={!end}
-      loader={<h4></h4>}
+      loader={<h4>Loading...</h4>}
     >
       {productList.map((product) => (
         <div className="product-item" key={product.id}>

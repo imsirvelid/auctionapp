@@ -18,7 +18,6 @@ function Search() {
   const [didYouMean, setDidYouMean] = useState();
   const [loader, setLoader] = useState(true);
   const location = useLocation();
-  const [sorting, setSorting] = useState(0);
 
   const sortingItems = [
     {value: 0, label: "Default Sorting"},
@@ -29,7 +28,6 @@ function Search() {
   ];
 
   const onSortingChange = (value) => {
-    setSorting(value.value);
     const sortingParams = [
       {field: "created", order: "desc"},
       {field: "created", order: "desc"},

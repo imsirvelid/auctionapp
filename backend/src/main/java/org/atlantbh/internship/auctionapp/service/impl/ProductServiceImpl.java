@@ -75,18 +75,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> findById(Long id) throws BadRequestException {
         Long currentUserId = Jwt.getCurrentUserId();
-        Optional<ProductEntity> product = productRepository.findById(id);
+        ProductEntity product = productRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Product with given id does not exist"));
         if (currentUserId != null){
-            UserClickedProducts ucp = userClickedProductsRepository.findByUserIdAndProductId(currentUserId, id);
-            if (ucp == null)
-                userClickedProductsRepository.save(new UserClickedProducts(product.orElseThrow(() -> new BadRequestException("Product with given id does not exist")),
-                        currentUserId, 0, LocalDateTime.now()));
-            else {
-                ucp.setCount(ucp.getCount() + 1);
-                ucp.setDateClicked(LocalDateTime.now());
-                userClickedProductsRepository.save(ucp);
-            }
+            UserClickedProducts ucp = userClickedProductsRepository.findByUserIdAndProductId(currentUserId, id).orElse(
+                    new UserClickedProducts(product, currentUserId, 0, LocalDateTime.now()));
+            ucp.setCount(ucp.getCount() + 1);
+            ucp.setDateClicked(LocalDateTime.now());
+            userClickedProductsRepository.save(ucp);
         }
-        return product.map(ProductEntity::toDomainModel);
+        return Optional.of(product.toDomainModel());
     }
 }

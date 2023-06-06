@@ -73,28 +73,8 @@ public class ProductController {
     public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
         //template.convertAndSend("/topic/notifications", textMessageDTO);
         String username = Jwt.getCurrentUser().getUsername();
+        System.out.println("Send to: " + username);
         template.convertAndSendToUser(username, "/queue", textMessageDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    /*
-    @SendTo("/topic/notifications")
-    public TextMessageDTO broadcastMessage(@Payload TextMessageDTO textMessageDTO) {
-        Principal user = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        template.convertAndSendToUser(user.getName(), "/reply", textMessageDTO);
-        return textMessageDTO;
-    }
-
-    @MessageMapping("/secured/room")
-    public void sendSpecific(
-            @Payload Message msg,
-            Principal user,
-            @Header("simpSessionId") String sessionId) throws Exception {
-        TextMessageDTO out = new TextMessageDTO(
-                "Da li radi",
-                LocalDateTime.now(),
-                1l);
-        template.convertAndSendToUser("velid", "/secured/user/queue/specific-user", out);
-    }*/
-
 }

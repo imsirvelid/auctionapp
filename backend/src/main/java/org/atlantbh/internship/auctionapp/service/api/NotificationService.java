@@ -8,5 +8,6 @@ import java.util.List;
 public interface NotificationService {
     List<Notification> getUserNotifications(Long userId);
     List<Notification> getUserUnreadNotifications(Long userId);
+    Notification setNotificationAsRead(Long notificationId);
     void sendNotification(NotificationEntity notification);
 }

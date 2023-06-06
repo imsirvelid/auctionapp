@@ -20,14 +20,17 @@ import {Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "../node_modules/react-notifications/lib/notifications.css";
+import Notifications from "pages/notifications/Notifications";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
+  
   const sockJS = new SockJS("http://localhost:8080/ws-message");
 
   const stompClient = Stomp.over(() => sockJS);
+  
 
   const createNotification = (message, type) => {
     console.log("Napravi notifikciaju: ", type);
@@ -107,6 +110,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <UserProfile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/user/notifications"
+                element={
+                  <PrivateRoute>
+                    <Notifications />
                   </PrivateRoute>
                 }
               />

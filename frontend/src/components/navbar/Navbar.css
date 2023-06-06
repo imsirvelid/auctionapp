@@ -129,6 +129,34 @@
   align-items: center;
 }
 
+.notifications .icon:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.notifications {
+  margin-right: 11px;
+}
+
+.notifications .icon {
+  margin: auto;
+  height: 100% !important;
+  display: flex;
+}
+
+.notifications .icon .count {
+  top: 5px !important;
+  background-color: red !important;
+}
+
+.notifications .icon img {
+  margin: auto;
+}
+
+.notifications .container {
+  transform: translateX(-150px) !important;
+}
+
 .selected-route{
   font-weight: bold;
   color: #8367D8 !important;
@@ -139,23 +167,3 @@
   float:left;
 }
 
-
-.fa {
-  position: relative;
-}
-
-.badge {
-  font-size: .25em;
-  
-  display: block;
-  position: absolute;
-  top: -.75em;
-  right: +2em;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
-  border-radius: 50%;
-  text-align: center;
-  color: #fff;
-  background: rgba(255, 0, 0, 0.988);
-}

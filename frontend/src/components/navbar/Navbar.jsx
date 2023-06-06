@@ -6,11 +6,19 @@ import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {UserContext} from "context/UserContext";
-import NotificationBadge from "react-notification-badge";
-import {Effect} from "react-notification-badge";
+import Notification from "components/notification/Notification";
+
+const DEFAULT_NOTIFICATION = {
+  image:
+    "https://cutshort-data.s3.amazonaws.com/cloudfront/public/companies/5809d1d8af3059ed5b346ed1/logo-1615367026425-logo-v6.png",
+  message: "Notification one.",
+  detailPage: "/events",
+  receivedTime: "12h ago"
+};
 
 function Navbar() {
   const {user, setUser} = useContext(UserContext);
+  const [data, setData] = useState([DEFAULT_NOTIFICATION]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,12 +51,7 @@ function Navbar() {
           <div className="div-right">
             {user ? (
               <div className="login-options">
-                <div className="icon-wrapper notification-icon">
-                  <FontAwesomeIcon className="fa" icon={faBell}>
-                  </FontAwesomeIcon>
-                  <span className="badge" />
-
-                </div>
+                  <Notification></Notification>
                 <p className="login-options">
                   {`Hi, ${user.name} ${user.surname}`} &nbsp; &nbsp;{" "}
                   <span className="custom-p-button" onClick={handleLogout}>

@@ -49,7 +49,7 @@ public class NotificationEntity {
     }
 
     public Notification toDomainModel() {
-        return new Notification(user.toDomainModel(), product.toDomainModel(), type, message, date, readed);
+        return new Notification(id, user.toDomainModel(), product.toDomainModel(), type, message, date, readed);
     }
 
     public static NotificationEntity fromDomainModel(Notification notification) {

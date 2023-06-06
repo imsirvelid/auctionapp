@@ -10,6 +10,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -24,12 +25,22 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<Notification> getUserNotifications(Long userId) {
-        return null;
+        return notificationRepository.findAllByUserId(userId).stream()
+                .map(NotificationEntity::toDomainModel).collect(Collectors.toList());
     }
 
     @Override
     public List<Notification> getUserUnreadNotifications(Long userId) {
-        return null;
+        return notificationRepository.findAllByUserIdAndReadedIsFalse(userId).stream()
+                .map(NotificationEntity::toDomainModel).collect(Collectors.toList());
+    }
+
+    @Override
+    public Notification setNotificationAsRead(Long notificationId) {
+        NotificationEntity notification = notificationRepository.findById(notificationId).get();
+        notification.setReaded(true);
+        notification = notificationRepository.save(notification);
+        return notification.toDomainModel();
     }
 
     @Override

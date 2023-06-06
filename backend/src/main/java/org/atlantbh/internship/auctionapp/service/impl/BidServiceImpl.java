@@ -63,8 +63,8 @@ public class BidServiceImpl implements BidService {
             return new ResponseMessage(false, "There are higher bids than yours. You could give a second try.");
         BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
         if (highestBid != null){
-            NotificationEntity notification = new NotificationEntity(UserEntity.fromPersonDetails(Jwt.getCurrentUser()), product, NotificationType.OUTBID,
-                    "You are outbided on product " + product.getName(), LocalDateTime.now(), false);
+            NotificationEntity notification = new NotificationEntity(UserEntity.fromPersonDetails(Jwt.getCurrentUser()), product, NotificationType.INFO,
+                    "You are outbided on product " + product.getName() + "($" + bidRequest.getPrice() + ")", LocalDateTime.now(), false);
             notificationService.sendNotification(notification);
         }
         bidRepository.save(bidEntity);

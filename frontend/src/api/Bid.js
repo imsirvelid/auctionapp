@@ -17,4 +17,4 @@ export const getBidsForUser = async () => {
 export const bid = async (bidRequest) => {
   const response = await axios.post(URL + "/bid", bidRequest);
   return response.data;
-}
+};

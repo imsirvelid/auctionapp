@@ -1,0 +1,36 @@
+.date-field {
+  width: 100%;
+}
+
+.select-dates {
+  width: 60%;
+  margin-top: 45px;
+  display: flex;
+  gap: 4%;
+}
+
+.form-bottom-buttons {
+  margin-top: 45px;
+  width: 60%;
+  display: flex;
+}
+
+.right-form-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 23px;
+}
+
+.date-div label {
+  display: block;
+}
+
+.date-div {
+  width: 48%;
+}
+
+.date-label {
+  margin: 0;
+  padding: 10px 0;
+}
+

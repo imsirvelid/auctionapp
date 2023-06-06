@@ -25,5 +25,5 @@ public class Product {
     private Category category;
     private Status status;
     private List<Image> images;
-
+    private Boolean purchased;
 }

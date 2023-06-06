@@ -12,4 +12,5 @@ import java.math.BigDecimal;
 public class ProductBidResponse {
     private BigDecimal highestBid;
     private int numberOfBids;
+    private Long userId;
 }

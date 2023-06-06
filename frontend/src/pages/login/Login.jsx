@@ -6,6 +6,8 @@ import {loginUser} from "api/User";
 import {UserContext} from "context/UserContext";
 import * as Yup from "yup";
 import {useNavigate} from "react-router-dom";
+import { setupFirebaseConfig } from "config/firebase";
+import Button from "components/button/Button";
 
 function Login() {
   const {setUser} = useContext(UserContext);
@@ -25,6 +27,7 @@ function Login() {
     try {
       const loggedUser = await loginUser(args);
       setUser(loggedUser.user);
+      setupFirebaseConfig();
       localStorage.setItem("token", loggedUser.token);
       localStorage.setItem("user", JSON.stringify(loggedUser.user));
       if (args.remindMe) localStorage.setItem("email", args.email);
@@ -98,9 +101,9 @@ function Login() {
                     Remember me
                   </label>
                 </div>
-                <button className="submit-login-form-button" type="submit">
+                <Button className="submit-login-form-button" type="white purple-border" buttonType="submit">
                   LOGIN
-                </button>
+                </Button>
               </Form>
             )}
           </Formik>

@@ -5,8 +5,8 @@ import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends CrudRepository<ProductEntity, Long>, PagingAndSortingRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long>, PagingAndSortingRepository<ProductEntity, Long> {
 
-    @Query(value = "SELECT pe FROM ProductEntity pe left join ImageEntity im on im.product.id = pe.id WHERE im.featured = true")
+    @Query(value = "SELECT pe FROM ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true and pe.endDate > CURRENT_DATE",
+           countQuery = "select count(pe) from ProductEntity pe left join pe.images im where im.featured = true")
     Page<ProductEntity> getProductsWithThumbnails(Pageable pageable);
 
     @Query("select pe from ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true order by random() limit 1")
@@ -26,14 +27,15 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>, 
                 select pe 
                 from ProductEntity pe 
                 where (:name is null or lower(pe.name) like lower(concat('%', :name, '%'))) and 
-                      (:categoryId is null or :categoryId = pe.category.id)
+                      (:categoryId is null or :categoryId = pe.category.id or :categoryId = pe.category.parentCategory.id) and
+                      pe.endDate > CURRENT_DATE                      
             """)
     Page<ProductEntity> searchByNameAndCategory(Pageable pageable, String name, Long categoryId);
 
     @Query("""
                 SELECT pe.name
                 FROM ProductEntity pe
-                WHERE (:categoryId is null or :categoryId = pe.category.id) and levenshtein(pe.name, :name) < 6
+                WHERE (:categoryId is null or :categoryId = pe.category.id) and levenshtein(pe.name, :name) < 6 and pe.endDate > CURRENT_DATE
                 GROUP BY pe.name
                 ORDER BY COUNT(pe.name) * 1.0 / (levenshtein(pe.name, :name) + 1) DESC
                 LIMIT 1

@@ -5,6 +5,7 @@ import org.atlantbh.internship.auctionapp.model.Category;
 import org.atlantbh.internship.auctionapp.service.api.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +25,10 @@ public class CategoryController {
     @GetMapping(value = "/parent")
     public ResponseEntity<List<Category>> getParentCategories(){
         return ResponseEntity.ok(categoryService.getParentCategories());
+    }
+
+    @GetMapping(value = "/subcategories/{id}")
+    public ResponseEntity<List<Category>> getSubCategories(@PathVariable Long id){
+        return ResponseEntity.ok(categoryService.getSubCategories(id));
     }
 }

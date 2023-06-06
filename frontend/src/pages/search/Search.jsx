@@ -101,7 +101,7 @@ function Search() {
                 </Link>
               ))}
             </div>
-            <div className="empty-div"></div>
+            <div className="empty-div" />
           </div>
           <div className="right-search-content">
             <div className="search-products-grid">

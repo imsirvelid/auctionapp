@@ -1,0 +1,45 @@
+.add-item-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-dropdowns {
+  flex-wrap: wrap;
+  width: 60%;
+  margin-top: 45px;
+  display: flex;
+  gap: 20%;
+}
+
+.category-dropdown {
+  width: 40%;
+}
+
+.add-item-file {
+  margin-top: 45px;
+  width: 60%;
+}
+
+.add-item-bottom-buttons {
+  margin-top: 45px;
+  width: 60%;
+  display: flex;
+  gap: 10%;
+  box-sizing: border-box;
+  flex-basis: auto;
+}
+
+.add-item-bottom-buttons button {
+  width: 45%;
+}
+
+.custom-text-area {
+  height: 177px;
+  resize: none;
+}
+
+.smaller {
+  width: 40%;
+}

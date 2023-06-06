@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import "./UserProfile.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGavel, faList} from "@fortawesome/free-solid-svg-icons";
+import {faGavel, faList, faPlus} from "@fortawesome/free-solid-svg-icons";
 import NavigationCard from "components/navigation-card/NavigationCard";
 import ProfileBidsTab from "components/profile-bids-tab/ProfileBidsTab";
 import ProfileSellerTab from "components/profile-seller-tab/ProfileSellerTab";
+import { Link } from "react-router-dom";
 
 function UserProfile() {
   const [currentTab, setCurrentTab] = useState(0);
@@ -41,6 +42,7 @@ function UserProfile() {
             {tab.name}
           </button>
         ))}
+        <button className="profile-tab-button right"><Link to={"/user/sell"}><FontAwesomeIcon icon={faPlus} /> ADD ITEM</Link></button>
         <div className="profile-tab-component" />
         {tabs[currentTab].component}
       </div>

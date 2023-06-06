@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import "./SetPrices.css";
+import moment from "moment";
 import Button from "components/button/Button";
 
 function SetPrices(props) {
@@ -68,6 +69,7 @@ function SetPrices(props) {
                   </label>
                   <Field
                     value={props.startDate.value}
+                    min={moment().format("YYYY-MM-DD")}
                     onChange={(e) => props.startDate.set(e.target.value)}
                     type="date"
                     name="startDate"
@@ -84,10 +86,11 @@ function SetPrices(props) {
                     className="formik-field-label date-label"
                     htmlFor="start-date"
                   >
-                    Start date
+                    End date
                   </label>
                   <Field
                     value={props.endDate.value}
+                    min={props.startDate.value}
                     onChange={(e) => props.endDate.set(e.target.value)}
                     type="date"
                     name="endDate"

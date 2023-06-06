@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity updateUser(UserEntity user) {
+    public UserEntity updateContactInfo(UserEntity user) {
         user = userRepository.save(user);
         return user;
     }

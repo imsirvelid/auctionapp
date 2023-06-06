@@ -42,7 +42,7 @@ public class ImageEntity {
         return new Image(this.id, this.url, this.featured, this.product.toDomainModel());
     }
 
-    public ImageEntity(ProductEntity product, String url, Boolean featured) {
+    public ImageEntity(ProductEntity product, String url, boolean featured) {
         this.product = product;
         this.url = url;
         this.featured = featured;

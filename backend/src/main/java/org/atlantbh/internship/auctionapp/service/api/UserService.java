@@ -15,5 +15,5 @@ public interface UserService {
     User getByEmail(String email);
     User updateAddress(UserContactInfoRequest request);
     UserEntity getById(Long userId) throws BadRequestException;
-    UserEntity updateUser(UserEntity user);
+    UserEntity updateContactInfo(UserEntity user);
 }

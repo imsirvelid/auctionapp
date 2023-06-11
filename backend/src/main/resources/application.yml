@@ -12,10 +12,10 @@ spring:
                 globally_quoted_identifiers: true
         hibernate:
             ddl-auto: update
+
 app:
     jwtSecret: ${TOKEN_SECRET}
     jwtExpiration: 86400000
-    stripeSecret: ${STRIPE_SECRET}
     successPaymentUrl: "http://localhost:3000/payment/success/"
 
 external:

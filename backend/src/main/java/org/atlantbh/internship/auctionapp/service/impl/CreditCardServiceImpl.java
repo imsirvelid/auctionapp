@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
 
-    private final CreditCardRepository creditCardRepository;
+    final private CreditCardRepository creditCardRepository;
 
 
     public CreditCardServiceImpl(CreditCardRepository creditCardRepository) {

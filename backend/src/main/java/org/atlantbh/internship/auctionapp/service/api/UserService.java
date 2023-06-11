@@ -13,7 +13,7 @@ public interface UserService {
     AuthResponse login(LoginRequest request) throws Exception;
     boolean existsByEmail(String email);
     User getByEmail(String email);
-    User updateContactInfo(UserContactInfoRequest request);
     UserEntity getById(Long userId) throws BadRequestException;
-    UserEntity updateUser(UserEntity user);
+    UserEntity updateUser(UserEntity user) throws BadRequestException;
+    User updateContactInfo(UserContactInfoRequest request);
 }

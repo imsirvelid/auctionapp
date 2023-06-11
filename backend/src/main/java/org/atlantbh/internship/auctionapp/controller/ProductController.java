@@ -66,7 +66,6 @@ public class ProductController {
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
     }
-
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/create")
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) throws BadRequestException{
@@ -78,6 +77,7 @@ public class ProductController {
     public ResponseEntity<Product> setPurchased(@PathVariable Long productId){
         return ResponseEntity.ok(productService.setPurchased(productId));
     }
+
     @GetMapping(value = "/user/recommended")
     public ResponseEntity<List<RecommendedProduct>> getRecommendedProducts() {
         return ResponseEntity.ok(productService.getRecommendedProducts(Jwt.getCurrentUserId()));

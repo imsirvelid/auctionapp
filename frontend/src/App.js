@@ -24,6 +24,7 @@ import "../node_modules/react-notifications/lib/notifications.css";
 import Notifications from "pages/notifications/Notifications";
 import Sell from "pages/sell/Sell";
 import PaySuccess from "pages/pay-success/PaySuccess";
+import { StompSessionProvider, useSubscription} from "react-stomp-hooks";
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -62,10 +63,9 @@ function App() {
   };
 
   stompClient.connect({}, () => {
-    console.log("Connected");
-    stompClient.subscribe("/user/queue", (message) => {
+    stompClient.subscribe("/user/" + user.email + "/queue", (message) => {
       const payload = JSON.parse(message.body);
-      console.log("Received message:", payload);
+      console.log("Received message3:", payload);
       createNotification(payload.message, "INFO")();
     });
     console.log("Here again");
@@ -143,15 +143,3 @@ function App() {
 }
 
 export default App;
-
-/*
-
-<SockJsClient
-        url={"http://localhost:8080/ws-message"}
-        topics={["/secured/user/topic/private"]}
-        onConnect={onConnected}
-        onDisconnect={console.log("Disconnected!")}
-        onMessage={(msg) => onMessageReceived(msg)}
-        debug={false}
-      />
-*/

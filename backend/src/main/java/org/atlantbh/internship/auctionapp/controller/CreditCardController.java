@@ -7,6 +7,7 @@ import org.atlantbh.internship.auctionapp.request.CreditCardRequest;
 import org.atlantbh.internship.auctionapp.service.api.CreditCardService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Credit Card", description = "Credit Card APIs")
@@ -20,6 +21,7 @@ public class CreditCardController {
         this.creditCardService = creditCardService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
     public ResponseEntity<CreditCardEntity> getUserCreditCardInfo() throws Exception {
         return ResponseEntity.ok(creditCardService.getUserCreditCardInfo(Jwt.getCurrentUserId()));
@@ -29,5 +31,4 @@ public class CreditCardController {
     public ResponseEntity<CreditCardEntity> createOrUpdate(@RequestBody CreditCardRequest request) throws BadRequestException {
         return ResponseEntity.ok(creditCardService.createOrUpdate(request));
     }
-
 }

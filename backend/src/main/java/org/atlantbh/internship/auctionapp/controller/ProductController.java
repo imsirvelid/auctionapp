@@ -95,6 +95,7 @@ public class ProductController {
     public ResponseEntity<Product> setPurchased(@PathVariable Long productId){
         return ResponseEntity.ok(productService.setPurchased(productId));
     }
+
     @GetMapping(value = "/user/recommended")
     public ResponseEntity<List<RecommendedProduct>> getRecommendedProducts() {
         return ResponseEntity.ok(productService.getRecommendedProducts(Jwt.getCurrentUserId()));

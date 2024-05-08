@@ -21,7 +21,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, P
            countQuery = "select count(pe) from ProductEntity pe left join pe.images im where im.featured = true")
     Page<ProductEntity> getProductsWithThumbnails(Pageable pageable);
 
-    @Query("select pe from ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true order by random() limit 1")
+    @Query("select pe from ProductEntity pe JOIN FETCH pe.images im WHERE im.featured = true and pe.endDate > CURRENT_DATE order by random() limit 1")
     ProductEntity findOneRandom();
 
     @Query("""

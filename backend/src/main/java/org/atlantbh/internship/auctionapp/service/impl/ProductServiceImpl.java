@@ -119,7 +119,6 @@ public class ProductServiceImpl implements ProductService {
         productEntity = productRepository.save(productEntity);
         return productEntity.toDomainModel();
     }
-
     @Override
     public List<RecommendedProduct> getRecommendedProducts(Long userId) {
         return productRepository.getUserRecommendedProducts(userId);

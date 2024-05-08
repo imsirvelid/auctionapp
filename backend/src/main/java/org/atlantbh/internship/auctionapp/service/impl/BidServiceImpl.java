@@ -43,6 +43,7 @@ public class BidServiceImpl implements BidService {
         return bidRepository.getUserBids(userId);
     }
 
+
     @Override
     public BidEntity getMaxBidPriceForProduct(Long productId) throws BadRequestException {
         return bidRepository.findFirst1ByProductIdOrderByPriceDesc(productId)

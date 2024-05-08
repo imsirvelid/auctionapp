@@ -65,7 +65,7 @@ function App() {
   stompClient.connect({}, () => {
     stompClient.subscribe("/user/" + user.email + "/queue", (message) => {
       const payload = JSON.parse(message.body);
-      console.log("Received message3:", payload);
+      console.log("Received message:", payload);
       createNotification(payload.message, "INFO")();
     });
     console.log("Here again");

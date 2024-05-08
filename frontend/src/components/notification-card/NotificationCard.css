@@ -1,0 +1,41 @@
+.notification-card {
+  display: flex;
+  margin: auto;
+  color: black;
+  margin-top: 11px;
+  height: 70px;
+}
+
+.notification-card:hover {
+  cursor: pointer;
+  opacity: 0.87;
+}
+
+.notification-card-sub {
+  width: 60%;
+}
+
+.notification-card img {
+  height: 100%;
+  width: auto;
+}
+
+.received-date-notification {
+  color: gray !important;
+}
+
+.notification-card-sub .notification-message {
+  color: #8367d8 !important;
+}
+
+.notification-options {
+  font-size: 17px;
+  display: flex;
+  gap: 10px;
+  margin: auto;
+}
+
+.spinner-middle-container {
+  width: 10%;
+  margin: auto;
+}

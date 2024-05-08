@@ -9,11 +9,15 @@ import org.atlantbh.internship.auctionapp.model.Product;
 import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.projection.RecommendedProduct;
 import org.atlantbh.internship.auctionapp.request.CreateProductRequest;
+import org.atlantbh.internship.auctionapp.request.TextMessageDTO;
 import org.atlantbh.internship.auctionapp.response.SearchProductResponse;
 import org.atlantbh.internship.auctionapp.service.api.ProductService;
 import org.atlantbh.internship.auctionapp.util.Jwt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +29,10 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
+
+    @Autowired
+    SimpMessagingTemplate template;
 
     public ProductController(final ProductService productService) {
         this.productService = productService;
@@ -66,6 +74,16 @@ public class ProductController {
     public ResponseEntity<List<ProductBidsInfo>> getUserSoldProducts(){
         return ResponseEntity.ok(productService.getUserSoldProducts(Jwt.getCurrentUserId()));
     }
+
+    @PostMapping("/send")
+    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDTO textMessageDTO) {
+        //template.convertAndSend("/topic/notifications", textMessageDTO);
+        String username = Jwt.getCurrentUser().getUsername();
+        System.out.println("Send to: " + username);
+        template.convertAndSendToUser(username, "/queue", textMessageDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PreAuthorize("hasRole('USER')")
     @PostMapping(value = "/create")
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) throws BadRequestException{

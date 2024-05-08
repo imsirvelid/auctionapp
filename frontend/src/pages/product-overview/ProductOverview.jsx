@@ -16,6 +16,7 @@ import {faAngleRight, faMoneyBill1Wave} from "@fortawesome/free-solid-svg-icons"
 import {UserContext} from "context/UserContext";
 import { getErrorMessage } from "utils/ErrorHelper";
 import { getPaymentIntent } from "api/Payment";
+import { counter } from "@fortawesome/fontawesome-svg-core";
 
 function ProductOverview() {
   const params = useParams();
@@ -100,7 +101,7 @@ function ProductOverview() {
                 Starts from&nbsp;
                 <span className="purple-span">${product.startingPrice}</span>
               </p>
-              {user && product.user.id !== user.id && product.endDate < moment() && (
+              {user && product.user.id !== user.id && moment(product.endDate).format("YYYY-MM-DD") > moment().format("YYYY-MM-DD") && (
                 <div className="enter-bid-container">
                   <Input
                     value={enteredPrice}

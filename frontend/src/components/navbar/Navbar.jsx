@@ -1,14 +1,24 @@
 import React, {useContext, useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faSearch, faBell} from "@fortawesome/free-solid-svg-icons";
 import Input from "components/text-input/Input";
 import SocialMediaCard from "components/social-media-card/SocialMediaCard";
 import "./Navbar.css";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {UserContext} from "context/UserContext";
+import Notification from "components/notification/Notification";
+
+const DEFAULT_NOTIFICATION = {
+  image:
+    "https://cutshort-data.s3.amazonaws.com/cloudfront/public/companies/5809d1d8af3059ed5b346ed1/logo-1615367026425-logo-v6.png",
+  message: "Notification one.",
+  detailPage: "/events",
+  receivedTime: "12h ago"
+};
 
 function Navbar() {
   const {user, setUser} = useContext(UserContext);
+  const [data, setData] = useState([DEFAULT_NOTIFICATION]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,12 +50,15 @@ function Navbar() {
           </div>
           <div className="div-right">
             {user ? (
-              <p className="login-options">
-                {`Hi, ${user.name} ${user.surname}`} &nbsp; &nbsp;{" "}
-                <span className="custom-p-button" onClick={handleLogout}>
-                  Logout
-                </span>
-              </p>
+              <div className="login-options">
+                  <Notification></Notification>
+                <p className="login-options">
+                  {`Hi, ${user.name} ${user.surname}`} &nbsp; &nbsp;{" "}
+                  <span className="custom-p-button" onClick={handleLogout}>
+                    Logout
+                  </span>
+                </p>
+              </div>
             ) : (
               <p className="login-options">
                 <Link to="user/login">Login</Link> or{" "}

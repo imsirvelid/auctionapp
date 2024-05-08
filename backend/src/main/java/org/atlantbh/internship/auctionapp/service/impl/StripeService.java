@@ -48,6 +48,7 @@ public class StripeService implements PaymentService {
 
     public String createPaymentIntent(Long productId) throws PaymentException, BadRequestException {
         BidEntity bid = bidService.getMaxBidPriceForProduct(productId);
+        System.out.println("Ima ovaj bid: " + bid);
         UserEntity user = userService.getById(Jwt.getCurrentUserId());
         try {
             if (user.getStripeId() == null){

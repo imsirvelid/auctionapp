@@ -1,8 +1,8 @@
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/auctionapp
-        username: velid
-        password: password
+        username: postgres
+        password: root
     jpa:
         properties:
             dialect:

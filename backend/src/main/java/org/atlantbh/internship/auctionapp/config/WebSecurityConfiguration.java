@@ -85,7 +85,8 @@ public class WebSecurityConfiguration {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
+                        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+                        .allowCredentials(true);
             }
         };
     }

@@ -7,8 +7,10 @@ import org.atlantbh.internship.auctionapp.projection.ProductBidsInfo;
 import org.atlantbh.internship.auctionapp.repository.BidRepository;
 import org.atlantbh.internship.auctionapp.repository.ProductRepository;
 import org.atlantbh.internship.auctionapp.request.BidRequest;
+import org.atlantbh.internship.auctionapp.response.FailedResponseMessage;
 import org.atlantbh.internship.auctionapp.response.ProductBidResponse;
 import org.atlantbh.internship.auctionapp.response.ResponseMessage;
+import org.atlantbh.internship.auctionapp.response.SuccessResponseMessage;
 import org.atlantbh.internship.auctionapp.service.api.BidService;
 import org.atlantbh.internship.auctionapp.service.api.NotificationService;
 import org.springframework.stereotype.Service;
@@ -57,16 +59,16 @@ public class BidServiceImpl implements BidService {
         if (product.getUser().getId().equals(user.getId()))
             throw new BadRequestException("You can't bid on your own products");
         if (product.getEndDate().isBefore(LocalDateTime.now()))
-            return new ResponseMessage(false, "You can no longer bid on this product");
+            return new FailedResponseMessage("You can no longer bid on this product");
         if (bidRequest.getPrice().compareTo(product.getStartingPrice()) < 0)
-            return new ResponseMessage(false, "You can't provide value less than starting price.");
+            return new FailedResponseMessage("You can't provide value less than starting price.");
         BidEntity highestBid = bidRepository.findFirst1ByProductIdOrderByPriceDesc(bidRequest.getProductId())
                 .orElse(null);
         BigDecimal currentHighest = product.getStartingPrice();
         if (highestBid != null)
             currentHighest = highestBid.getPrice();
         if (highestBid != null && bidRequest.getPrice().compareTo(currentHighest) <= 0)
-            return new ResponseMessage(false, "There are higher bids than yours. You could give a second try.");
+            return new FailedResponseMessage("There are higher bids than yours. You could give a second try.");
         BidEntity bidEntity = new BidEntity(UserEntity.fromPersonDetails(user), product, bidRequest.getPrice(), LocalDateTime.now(), LocalDateTime.now());
         if (highestBid != null){
             NotificationEntity notification = new NotificationEntity(highestBid.getUser(), product, NotificationType.INFO,
@@ -74,6 +76,6 @@ public class BidServiceImpl implements BidService {
             notificationService.sendNotification(notification);
         }
         bidRepository.save(bidEntity);
-        return new ResponseMessage(true, "Congrats! You are the highest bidder.");
+        return new SuccessResponseMessage("Congrats! You are the highest bidder.");
     }
 }

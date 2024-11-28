@@ -1,13 +1,14 @@
 package org.atlantbh.internship.auctionapp.response;
 
-import lombok.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class ResponseMessage {
-    private Boolean successful;
     private String message;
+    private boolean success;
 }
